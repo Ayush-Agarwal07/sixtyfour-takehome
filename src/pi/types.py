@@ -72,6 +72,7 @@ class Claim(BaseModel):
 # ─────────────────────────────── understand ──────────────────────────────
 class Variant(BaseModel):
     form: str
+    kind: Literal["as_given", "diacritic_stripped", "initials", "order_swap", "nickname", "discovered"] = "as_given"
     origin: Literal["parsed", "discovered"] = "parsed"
     evidence_id: Optional[str] = None  # required when origin == "discovered"
     weight: float = 0.0
@@ -86,8 +87,10 @@ class Seed(BaseModel):
     titles: list[str] = Field(default_factory=list)
     schools: list[str] = Field(default_factory=list)
     locations: list[str] = Field(default_factory=list)
-    tense: dict[str, str] = Field(default_factory=dict)      # predicate -> current|former
+    tense: dict[str, str] = Field(default_factory=dict)      # org (lowercase) -> current|former
     role_description: Optional[str] = None
+    org_domains: dict[str, str] = Field(default_factory=dict) # org -> registrable domain (resolve_company)
+    original_regime: Optional[Regime] = None                  # set when DEFINITE_DESC is rewritten
 
 
 # ──────────────────────────────── resolve ────────────────────────────────
@@ -97,25 +100,43 @@ class AttrObservation(BaseModel):
     """
     value: str
     source_class: str
-    source_tier: float                 # anchor tier for this source (constants.ANCHOR_TIERS)
+    source_tier: float                 # identity tier for this source (constants.IDENTITY_TIER)
     url: str
     snippet: str
+    category: str = "exact_match"      # T4 category: exact_match|matches_former|partial
+    kind: Literal["snippet", "page"] = "snippet"
+
+
+class SourceText(BaseModel):
+    """Evidence text attached to a candidate: a SERP snippet or a fetched page excerpt."""
+    url: str
+    kind: Literal["snippet", "page"] = "snippet"
+    source_class: str = "unknown"
+    tier: float = 0.8
+    text: str = ""
 
 
 class Candidate(BaseModel):
     cid: str
-    urls: list[str] = Field(default_factory=list)
+    urls: list[str] = Field(default_factory=list)             # identity-bearing pages of this person only
     handles: dict[str, str] = Field(default_factory=dict)     # platform -> handle
-    attrs: dict[str, list[AttrObservation]] = Field(default_factory=dict)  # predicate -> observations
+    identity_keys: list[str] = Field(default_factory=list)    # "linkedin:slug", "github:user", "site:domain"
+    sources: list[SourceText] = Field(default_factory=list)   # evidence texts (snippets + fetched pages)
+    attrs: dict[str, list[AttrObservation]] = Field(default_factory=dict)  # predicate -> matched observations
+    negatives: list[Term] = Field(default_factory=list)       # contradictions etc. (matcher output)
     score: Confidence
     reciprocal: bool = False           # a verified mutual link merged into this candidate (§4.7)
+    anchored_one_way: bool = False     # fetched official/self-pub page links this candidate's unfetchable profile
+    hard_key: Optional[str] = None     # constants.IDENTITY_HARD_KEYS key
+    name_form: str = "exact"
+    merged_from: list[str] = Field(default_factory=list)
     rejected_reason: Optional[str] = None
 
 
 class Link(BaseModel):                 # identity links (C19 — replaces the identity graph)
     from_url: str
     to_url: str
-    mechanism: Literal["reciprocal", "anchored_one_way", "one_way"]
+    mechanism: Literal["reciprocal", "anchored_one_way", "one_way", "co_citation"]
     section: Literal["prose", "sidebar", "nav", "footer"] = "prose"
 
 
@@ -125,6 +146,9 @@ class Resolution(BaseModel):
     candidates: list[Candidate] = Field(default_factory=list)
     links: list[Link] = Field(default_factory=list)
     budget: dict[str, Any] = Field(default_factory=dict)
+    how_confirmed: str = ""
+    what_would_disambiguate: list[str] = Field(default_factory=list)
+    reason: str = ""                   # for abstained/ambiguous/failed
 
 
 # ─────────────────────────── graph / frontier ────────────────────────────

@@ -1,9 +1,8 @@
 """Regime′ classification — pure function, no I/O.
 
-plan/reference-identity-scoring.md "Regime → prior & caps" table;
-plan/design-decisions.md Regime′ row: a resolvable company domain → NAME_STRONG
-by default, downgraded to NAME_WEAK only for the huge-company stoplist or an
-unresolvable org.
+Resolvable company → NAME_STRONG; huge-company stoplist or unresolvable org →
+NAME_WEAK; role-only input → DEFINITE_DESC only when the role is definite
+(CTO, founder, head of …); otherwise BARE_NAME and the resolver abstains typed.
 """
 from __future__ import annotations
 
@@ -12,16 +11,25 @@ import re
 from .. import constants
 from ..types import Regime
 
-_WORD = re.compile(r"[a-z0-9]+")
+_WORD = re.compile(r"[a-z0-9-]+")
 
 
 def is_huge_org(org: str) -> bool:
-    """True if `org`'s slug contains a token on constants.HUGE_COMPANY_STOPLIST.
-
-    Exposed so callers (understand.parse) don't have to reimplement the check.
-    """
     tokens = set(_WORD.findall(org.lower()))
     return bool(tokens & constants.HUGE_COMPANY_STOPLIST)
+
+
+def is_definite_role(text: str | None) -> bool:
+    """True for roles that name at most one or two people at an org."""
+    if not text:
+        return False
+    t = text.lower()
+    tokens = _WORD.findall(t)
+    if any(tok in constants.DEFINITE_ROLES for tok in tokens):
+        return True
+    if re.search(r"\bchief\s+\w+\s+officer\b", t) or re.search(r"\b(head|vp|director)\s+of\b", t):
+        return True
+    return False
 
 
 def classify(
@@ -38,10 +46,13 @@ def classify(
         return "HARD_ID_EMAIL"
     if any(k in hard_ids for k in ("linkedin", "github", "x")):
         return "HARD_ID_URL"
-    if role_description and not name:
-        return "DEFINITE_DESC"
-    if name and company_resolved and not org_is_huge:
+    if not name:
+        role = role_description or title
+        if role and org and is_definite_role(role):
+            return "DEFINITE_DESC"
+        return "BARE_NAME"          # no name, no definite role → resolver abstains typed
+    if company_resolved and not org_is_huge:
         return "NAME_STRONG"
-    if name and ((org and not company_resolved) or org_is_huge):
+    if org:
         return "NAME_WEAK"
     return "BARE_NAME"

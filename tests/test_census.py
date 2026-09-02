@@ -1,13 +1,19 @@
-"""census.surname_bucket: rare/uncommon/common by per-100k frequency, else not_found."""
+"""census.surname_bucket over the full 2010 table (162k rows)."""
 from __future__ import annotations
 
 from pi.understand.census import surname_bucket
 
 
-def test_smith_is_common():
-    assert surname_bucket("Smith") == "common"
-    assert surname_bucket("smith") == "common"          # case-insensitive
+def test_common_names_are_common():
+    for n in ("Smith", "wang", "Chen", "Patel", "Nguyen"):
+        assert surname_bucket(n) == "common", n
 
 
-def test_unlisted_surname_is_not_found():
-    assert surname_bucket("Goering") == "not_found"
+def test_rare_names_are_rare():
+    for n in ("Goering", "Shalhoub", "Avci"):
+        assert surname_bucket(n) == "rare", n
+
+
+def test_uncommon_and_not_found():
+    assert surname_bucket("Kowalski") == "uncommon"
+    assert surname_bucket("Xqzvvbnm") == "not_found"

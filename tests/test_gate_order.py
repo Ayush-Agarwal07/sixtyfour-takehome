@@ -1,7 +1,7 @@
 """Gate order: math first; model vetoes a pass, never overrides a fail."""
 from __future__ import annotations
 
-from pi.resolve import gate_decision
+from pi.resolve import gate_decision, math_pass
 
 
 def test_model_abstain_overrides_math_pass():
@@ -13,8 +13,8 @@ def test_model_confirm_cannot_override_math_fail():
 
 
 def test_math_pass_and_model_confirm():
-    assert gate_decision(True, "CONFIRM") == "confirm"
+    assert gate_decision(True, "confirm") == "confirm"
 
 
-def test_continue_stays_continue():
-    assert gate_decision(True, "CONTINUE") == "continue"
+def test_margin():
+    assert math_pass(0.95, 0.20) and not math_pass(0.95, 0.70) and not math_pass(0.80, 0.0)

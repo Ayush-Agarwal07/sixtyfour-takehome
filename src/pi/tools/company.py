@@ -1,37 +1,20 @@
 """Company domain resolution — one Serper search, pick the likely official domain.
-
-ponytail: no homepage fetch, no LinkedIn slug/headcount lookup (stage-2-resolve.md
-defers those and Regime′ says headcount never gates anyway). One search + a
-slug-match heuristic over the organic results is enough to tell NAME_STRONG from
-NAME_WEAK.
-"""
+Cached. Returns {name, domain, aliases} or None."""
 from __future__ import annotations
 
 import os
 import re
 from urllib.parse import urlparse
 
+from ..constants import CACHE_TTL_S
 from ..deps import Tool, ToolUnavailable, traced
+from ..sources import classify, registrable_domain
 
-# ponytail: small fixed aggregator list per the task spec, not a general public-
-# suffix/aggregator database.
-_AGGREGATORS = {
-    "linkedin.com", "crunchbase.com", "wikipedia.org", "facebook.com",
-    "twitter.com", "x.com", "bloomberg.com",
-}
 _NON_ALNUM = re.compile(r"[^a-z0-9]+")
 
 
 def _slug(s: str) -> str:
     return _NON_ALNUM.sub("", s.lower())
-
-
-def _registrable_root(host: str) -> str:
-    host = host.lower()
-    if host.startswith("www."):
-        host = host[4:]
-    parts = host.split(".")
-    return ".".join(parts[-2:]) if len(parts) > 2 else host
 
 
 class Company(Tool):
@@ -42,6 +25,13 @@ class Company(Tool):
         key = os.getenv("SERPER_API_KEY")
         if not key:
             raise ToolUnavailable("SERPER_API_KEY")
+        cache = self.deps.cache
+        ck = name.strip().lower()
+        if cache is not None:
+            hit = cache.get("company", ck)
+            if hit is not None:
+                self._last_cache_hit = True
+                return hit or None
 
         r = await self.deps.http.post(
             "https://google.serper.dev/search",
@@ -57,19 +47,21 @@ class Company(Tool):
             link = o.get("link")
             if not link:
                 continue
-            root = _registrable_root(urlparse(link).netloc)
-            if root in _AGGREGATORS or root in roots:
+            if classify(link) in ("aggregator", "social", "professional_network", "press", "code_host"):
                 continue
-            roots.append(root)
+            root = registrable_domain(urlparse(link).netloc)
+            if root and root not in roots:
+                roots.append(root)
 
-        if not roots:
-            return None
-
-        # Prefer a root whose domain label matches a slug of the company name;
-        # fall back to the first (highest-ranked) non-aggregator result.
-        for root in roots:
-            label = _slug(root.rsplit(".", 1)[0])
-            if label and (label in target or target in label):
-                return {"name": name, "domain": root, "aliases": [x for x in roots if x != root]}
-
-        return {"name": name, "domain": roots[0], "aliases": roots[1:]}
+        result = None
+        if roots:
+            for root in roots:
+                label = _slug(root.rsplit(".", 1)[0])
+                if label and (label in target or target in label):
+                    result = {"name": name, "domain": root, "aliases": [x for x in roots if x != root]}
+                    break
+            if result is None:
+                result = {"name": name, "domain": roots[0], "aliases": roots[1:]}
+        if cache is not None:
+            cache.set("company", ck, result or {}, CACHE_TTL_S["search"])
+        return result

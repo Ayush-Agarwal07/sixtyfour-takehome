@@ -1,13 +1,11 @@
-"""Exa contents — reads a URL's text from Exa's index.
-
-The legitimate way to read LinkedIn/X experience: httpx hits a login wall, but
-Exa's index returns the profile as clean structured text (probe #1, confirmed).
-"""
+"""Exa contents — reads a URL's text from Exa's index. The legitimate way to read
+LinkedIn/X experience text (build-time check #1: confirmed). Cached by URL."""
 from __future__ import annotations
 
 import os
 
 from ..deps import Tool, ToolUnavailable, traced
+from ..sources import classify
 
 
 class Exa(Tool):
@@ -18,6 +16,12 @@ class Exa(Tool):
         key = os.getenv("EXA_API_KEY")
         if not key:
             raise ToolUnavailable("EXA_API_KEY")
+        cache = self.deps.cache
+        if cache is not None:
+            hit = cache.get_http("exa:" + url)
+            if hit is not None:
+                self._last_cache_hit = True
+                return hit
         r = await self.deps.http.post(
             "https://api.exa.ai/contents",
             headers={"x-api-key": key, "Content-Type": "application/json"},
@@ -27,4 +31,7 @@ class Exa(Tool):
         res = r.json().get("results", [])
         if not res or not res[0].get("text"):
             raise ToolUnavailable(f"exa: no contents for {url}")
-        return {"url": url, "html": "", "text": res[0]["text"]}
+        out = {"url": url, "html": "", "text": res[0]["text"], "via": "exa"}
+        if cache is not None:
+            cache.set_http("exa:" + url, out, classify(url))
+        return out

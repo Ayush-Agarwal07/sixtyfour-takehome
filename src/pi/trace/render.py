@@ -43,6 +43,20 @@ def render_trace(run_dir: str | Path) -> str:
             lines.append(f"## Phase: {e['from_phase']} → {e['to_phase']}")
             lines.append("")
 
+        elif et == "candidate_score":
+            terms = ", ".join(f"{t['factor']}={t['weight']:+.2f}" for t in e.get("terms", []))
+            lines.append(f"- candidate `{e['cid']}`: P={e['score']:.3f} (LO {e['logodds']:+.2f}) — {terms}")
+
+        elif et == "merge":
+            lines.append(f"- **merge** `{e['from_cid']}` → `{e['to_cid']}`: {e.get('reason','')}")
+
+        elif et == "rejection":
+            lines.append(f"- **rejected** `{e['cid']}`: {e.get('reason','')}")
+
+        elif et == "budget_update":
+            lines.append(f"- budget: tool_calls={e.get('tool_calls')} llm_calls={e.get('llm_calls')} "
+                         f"usd={e.get('usd', 0):.4f} seconds={e.get('seconds', 0):.0f}")
+
         elif et == "gate_test":
             verdict = "PASS" if e["math_pass"] else "FAIL"
             lines.append(
@@ -83,6 +97,13 @@ def render_trace(run_dir: str | Path) -> str:
             lines.append(f"  - result: {e.get('result','')}")
             lines.append("")
 
+        elif et == "role_resolution":
+            lines.append(f"### Role resolution @ {e['company']} → "
+                         f"{e.get('resolved_holder') or '(unresolved)'}")
+            if e.get("note"):
+                lines.append(f"  - {e['note']}")
+            lines.append("")
+
         elif et == "reinforce":
             lines.append(f"- **reinforce** node `{e['node_id']}` "
                          f"(descendants={e['descendants']}, attachment={e['attachment']:.2f})")
@@ -107,18 +128,22 @@ def render_trace(run_dir: str | Path) -> str:
     if tool_rows:
         lines.append("## Calls")
         lines.append("")
-        lines.append("| # | kind | name | latency_ms | cost_usd | cache | ok |")
-        lines.append("|---|---|---|---|---|---|---|")
+        lines.append("| # | kind | name | args | latency_ms | cost_usd | cache | ok |")
+        lines.append("|---|---|---|---|---|---|---|---|")
         for i, e in enumerate(tool_rows, 1):
             if e["event_type"] == "tool_call":
                 name, cost = e.get("tool", ""), ""
-                ok = "ok" if e.get("ok", True) else f"ERR:{e.get('error','')[:30]}"
+                args = ", ".join(f"{k}={str(v)[:70]}" for k, v in (e.get("args") or {}).items())
+                ok = "ok" if e.get("ok", True) else f"ERR:{e.get('error','')[:40]}"
             else:
                 name = f"{e.get('tier','')}/{e.get('model','')}"
+                u = e.get("usage") or {}
+                args = f"in={u.get('in', 0)} out={u.get('out', 0)}" + (f" — {e['note'][:60]}" if e.get("note") else "")
                 cost = f"{e.get('cost_usd', 0):.4f}"
                 ok = "ok"
+            args = args.replace("|", "\\|")
             lines.append(
-                f"| {i} | {e['event_type']} | {name} | "
+                f"| {i} | {e['event_type']} | {name} | {args} | "
                 f"{e.get('latency_ms', 0):.0f} | {cost} | "
                 f"{'hit' if e.get('cache_hit') else '—'} | {ok} |"
             )

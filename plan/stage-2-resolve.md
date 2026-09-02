@@ -64,16 +64,38 @@ resolve/{enumerate.py, cluster.py, identity_score.py, fetch_order.py,
 - `test_cluster.py` — `jsmith` on GitHub vs X stay separate; a rare handle merges; **two same-name candidates sharing only an employer token stay separate** (Cluster′).
 - `test_gate_order.py` — model ABSTAIN overrides a math pass; model CONFIRM cannot override a math fail.
 
-## Checkpoints (binary) — core met; DEFINITE_DESC + hardening open
+## Checkpoints (binary) — re-audited 2026-09-02
 
-- [x] `test_identity_table` (8 worked rows), `test_variants_no_fabrication`, `test_regime`, `test_cluster`, `test_gate_order` all green (47 total).
-- [x] 3 of the 4 PDF inputs: **Henry Wang → confirmed** (right founder), **`andrew.goering@ramp.com` → confirmed** (HARD_ID path), **sarah chen → abstained** (T1 read the real profile, refused the Epic-Systems mismatch). **CTO of Ariglad → NOT built** (DEFINITE_DESC / `role_resolve` is the next increment).
-- [x] Trace shows a **disconfirmation fetch executed** and a **runner-up rejected with a reason** (sarah chen run).
-- [x] Tools degrade to `ToolUnavailable` when a key is missing (worker-tested for company; pattern shared).
-- [x] Gate runs ≤2 cycles (one disconfirm cycle, then decide) — enforced structurally.
-- [ ] **Open / hardening:** DEFINITE_DESC role-resolve; T4 batched attribute match (string-match today, mitigated by profile-grounded T1); 2 extra hand-checked common-name targets; recall when the real person isn't in the fetched top-2.
+Audit found two earlier runs (`runs/01822fb4688e`, `runs/5d2837983dcf`) that CONFIRMED
+a Technical Solutions Engineer at Epic Systems as "sarah chen, product designer,
+ex-figma" at P=0.964. Root causes fixed: substring anchor matching with no
+`contradicts` path → T4 categorical matcher (`resolve/match.py`); LinkedIn text
+tiered 2.0 → one classifier (`pi/sources.py`); 98-row census bucketing Chen/Wang as
+uncommon → full 2010 table; fetch-order-dependent uniqueness → snippet-level only;
+surname-based cluster merging → identity keys + verified links (`resolve/links.py`);
+canned "disconfirmation" → executed T1 call on math pass (`resolve/disconfirm.py`).
 
-**Key design outcome:** the gate is now math-first → **gpt-4o T1 veto with the candidate's real profile always fetched first**. That combination is what produces correct-or-abstain: eager snippet anchors can pass the math, but the model reading the actual profile catches the mismatch. gpt-4o-mini confabulated here and was not enough.
+Rule for every checkpoint below: a target ends **confirmed on the right person OR
+ambiguous/abstained**. Never confirmed on the wrong person. Do not change weights
+to make a target confirm; weight changes must keep `test_identity_table` green
+and be recorded in DESIGN.md.
+
+- [x] `test_identity_table` (incl. the Epic-Systems regression row), `test_match`,
+  `test_cluster`, `test_links`, `test_sources`, `test_census`, `test_regime`,
+  `test_gate_order`, `test_traced_args`, `test_llm_client` green.
+- [x] The 4 PDF inputs run with the fixed pipeline (2026-09-02):
+  `andrew.goering@ramp.com` → confirmed (`runs/3f07d4e7846a`, P=0.987, $0.016);
+  `Henry wang, sixtyfour ai` → confirmed via self-published links henrywa.ng → GitHub/LinkedIn
+  (`runs/ebbf8e8db714`, P=0.973, 3 namesakes rejected with reasons, $0.026);
+  `sarah chen, product designer, ex-figma` → ambiguous with per-candidate reasons and specific
+  disambiguation inputs (`runs/6c0ed8c8c30f`, top P=0.495, $0.020);
+  `CTO of Ariglad` → role resolved to Ali Avci, LinkedIn confirmed, GitHub namesake rejected
+  (`runs/1cd743907433`, P=0.937, $0.028).
+- [ ] 2 additional verifiable common-name targets → correct or abstain.
+- [x] Trace shows a T1 disconfirmation with an executed action (search or fetch),
+  a `candidate_score` block with terms, and every tool call with its arguments.
+- [ ] Every tool degrades to `ToolUnavailable` when its key is missing.
+- [ ] Gate never runs more than `GATE_MAX_CYCLES` evidence cycles.
 
 ## Degrade / cut behavior
 

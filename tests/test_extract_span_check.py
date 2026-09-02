@@ -6,6 +6,12 @@ from pi.expand.expander import _assemble
 TEXT = "Andrew is a product designer at Ramp in New York."
 
 
+def test_fuzzy_span_kept():
+    kept = _assemble([("title", "product designer", "product  designer at Ramp")],
+                     "https://example.com/a", TEXT, "c1", "prose_llm", "ramp.com")
+    assert len(kept) == 1
+
+
 def test_prose_span_in_text_is_kept():
     kept = _assemble([("title", "product designer", "product designer at Ramp")],
                      "https://example.com/a", TEXT, "c1", "prose_llm", "ramp.com")

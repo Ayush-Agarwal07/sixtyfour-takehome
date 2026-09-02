@@ -1,16 +1,9 @@
 """Phase 1 UNDERSTAND.
 
-`parse_input` — Stage 1 slice, unchanged: hard-ID regex only (email / profile
-URL), bare-name fallthrough, no network, no LLM.
-
-`understand` — Stage 2: the full path. Hard IDs still short-circuit (fast path,
-no LLM/network); everything else goes through the T5 parse + company resolution
-+ regime classification.
-
-one-line run.py change needed (owned by someone else, not made here):
-    cf.seed = parse_input(text)          ->  cf.seed = await understand(text, deps, llm)
-and, alongside the other tool construction in investigate():
-    deps.company = Company(deps)
+`parse_input` — hard-ID regex only (email / profile URL), no network, no LLM.
+`understand`  — full path: hard IDs short-circuit; everything else goes through
+the T5 parse, company resolution (domain stored on the seed), and regime
+classification.
 """
 from __future__ import annotations
 
@@ -24,13 +17,18 @@ from ..deps import ToolUnavailable
 from ..types import Seed, Variant
 from .email_derive import derive_from_email
 from . import regime as regime_mod
+from .variants import generate_variants
 
 EMAIL = re.compile(r"[\w.+-]+@[\w-]+\.[\w.-]+")
 LINKEDIN = re.compile(r"(?:https?://)?(?:www\.)?linkedin\.com/in/[\w%-]+", re.I)
 GITHUB = re.compile(r"(?:https?://)?(?:www\.)?github\.com/[\w-]+", re.I)
 XURL = re.compile(r"(?:https?://)?(?:www\.)?(?:x|twitter)\.com/[A-Za-z0-9_]+", re.I)
 
-_PARSE_PROMPT_PATH = Path(__file__).resolve().parent.parent / "llm" / "prompts" / "parse.md"
+_PROMPT = (Path(__file__).resolve().parent.parent / "llm" / "prompts" / "parse.md").read_text()
+
+
+def _https(u: str) -> str:
+    return u if u.startswith("http") else "https://" + u
 
 
 def parse_input(text: str) -> Seed:
@@ -40,30 +38,28 @@ def parse_input(text: str) -> Seed:
     if m:
         email = m.group(0)
         d = derive_from_email(email)
-        names = []
+        names: list[Variant] = []
         for h in d.hypotheses:
             first = h.first or (f"{h.first_initial}." if h.first_initial else None)
             form = " ".join(x for x in (first, h.last) if x).title()
             if form:
                 names.append(Variant(form=form, weight=h.confidence))
         return Seed(input=text, regime="HARD_ID_EMAIL", names=names,
-                    hard_ids={"email": email}, orgs=[d.domain])
+                    hard_ids={"email": email}, orgs=[d.domain], org_domains={d.domain: d.domain},
+                    tense={d.domain: "current"})
 
     for rx, key in ((LINKEDIN, "linkedin"), (GITHUB, "github"), (XURL, "x")):
         m = rx.search(text)
         if m:
-            return Seed(input=text, regime="HARD_ID_URL",
-                        hard_ids={key: _https(m.group(0))})
+            url = _https(m.group(0))
+            slug = url.rstrip("/").rsplit("/", 1)[-1]
+            words = [w for w in re.split(r"[-_.]+", slug) if w and not w.isdigit()]
+            names = [Variant(form=" ".join(words).title())] if words else []
+            return Seed(input=text, regime="HARD_ID_URL", hard_ids={key: url}, names=names)
 
-    # ponytail: name/org/title parse is Stage 2 (T5). Fall through as a bare name.
-    return Seed(input=text, regime="BARE_NAME", names=[Variant(form=text)])
-
-
-def _https(u: str) -> str:
-    return u if u.startswith("http") else "https://" + u
+    return Seed(input=text, regime="BARE_NAME", names=[Variant(form=text)] if text else [])
 
 
-# ─────────────────────────────── Stage 2 ──────────────────────────────────
 class ParseModel(BaseModel):
     """T5 structured-output contract (see llm/prompts/parse.md)."""
     names: list[str] = Field(default_factory=list)
@@ -73,43 +69,45 @@ class ParseModel(BaseModel):
     locations: list[str] = Field(default_factory=list)
     role_description: Optional[str] = None
     tense: dict[str, str] = Field(default_factory=dict)
+    reasoning: str = ""
 
 
-def _variants_for(name: str) -> list[Variant]:
-    # ponytail: variants.py is Worker A's module and may not exist yet. Degrade
-    # to a single as-given Variant rather than fail the whole parse.
-    try:
-        from .variants import generate_variants
-    except ImportError:
-        return [Variant(form=name)]
-    return generate_variants(name) or [Variant(form=name)]
+def _clean_tense(tense: dict[str, str], orgs: list[str]) -> dict[str, str]:
+    out: dict[str, str] = {}
+    lower = {o.lower(): o.lower() for o in orgs}
+    for k, v in (tense or {}).items():
+        v = "former" if str(v).lower().startswith("form") or "ex" == str(v).lower() else "current"
+        key = k.lower().strip()
+        if key in lower:
+            out[key] = v
+        elif len(orgs) == 1:
+            out[orgs[0].lower()] = v
+    for o in orgs:
+        out.setdefault(o.lower(), "current")
+    return out
 
 
 async def understand(text: str, deps, llm) -> Seed:
-    """Full UNDERSTAND path: hard-ID fast path, else T5 parse + company
-    resolution + regime classification.
-
-    one-line run.py change needed (owned by someone else, not made here):
-        cf.seed = parse_input(text)     ->   cf.seed = await understand(text, deps, llm)
-    and, alongside the other tool construction in investigate():
-        deps.company = Company(deps)
-    """
     seed = parse_input(text)
     if seed.regime.startswith("HARD_ID"):
-        return seed  # fast path — no LLM, no network
+        return seed
+    if not text.strip():
+        return Seed(input=text, regime="BARE_NAME", names=[])
 
-    prompt = _PARSE_PROMPT_PATH.read_text() + f"\n\nInput: {text}"
-    parsed = llm.complete("T5", prompt, ParseModel, phase="understand")
+    parsed = await llm.complete("T5", f"Input: {text}", ParseModel, phase="understand", system=_PROMPT)
 
     org = parsed.orgs[0] if parsed.orgs else None
+    org_domains: dict[str, str] = {}
     company_resolved = False
     org_is_huge = regime_mod.is_huge_org(org) if org else False
-    if org:
+    for o in parsed.orgs[:2]:
         try:
-            resolved = await deps.company.resolve(org)
-        except ToolUnavailable:
+            resolved = await deps.company.resolve(o)
+        except (ToolUnavailable, Exception):  # noqa: BLE001 — degrade, never crash
             resolved = None
-        company_resolved = bool(resolved and resolved.get("domain"))
+        if resolved and resolved.get("domain"):
+            org_domains[o] = resolved["domain"]
+    company_resolved = bool(org and org in org_domains)
 
     name = parsed.names[0] if parsed.names else None
     title = parsed.titles[0] if parsed.titles else None
@@ -123,17 +121,11 @@ async def understand(text: str, deps, llm) -> Seed:
 
     names: list[Variant] = []
     for n in parsed.names:
-        names.extend(_variants_for(n))
+        names.extend(generate_variants(n) or [Variant(form=n)])
 
     return Seed(
-        input=text,
-        regime=regime,
-        names=names,
-        hard_ids=seed.hard_ids,
-        orgs=parsed.orgs,
-        titles=parsed.titles,
-        schools=parsed.schools,
-        locations=parsed.locations,
-        tense=parsed.tense,
-        role_description=parsed.role_description,
+        input=text, regime=regime, names=names, hard_ids=seed.hard_ids,
+        orgs=parsed.orgs, titles=parsed.titles, schools=parsed.schools,
+        locations=parsed.locations, tense=_clean_tense(parsed.tense, parsed.orgs),
+        role_description=parsed.role_description, org_domains=org_domains,
     )

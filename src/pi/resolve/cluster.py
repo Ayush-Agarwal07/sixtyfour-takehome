@@ -1,93 +1,110 @@
-"""Cluster′ — SERP results → candidate people.
+"""Cluster′ — SERP results → candidate people + floating evidence.
 
-A person is keyed by their LinkedIn slug (one LinkedIn per person). Distinct slugs
-= distinct people, so two same-name strangers stay split. But a single person's
-other sites merge into them, and with no LinkedIn at all the name-matching results
-are treated as one person — so we confirm someone with many sites instead of
-tying their own profiles against each other. Attrs are string-matched from the
-snippet (ponytail; a batched T4 match replaces this if string-matching proves crude).
+A candidate is seeded by an identity-bearing URL (linkedin.com/in/{slug},
+github.com/{user}, x.com/{handle}, a personal site). Distinct keys are distinct
+people until a verified link (reciprocal, co-citation, rare shared handle) says
+otherwise. Press, company, academic, aggregator and unknown pages are NOT people;
+they are floating evidence, attached to a candidate only by a link on a fetched
+page, or to the sole candidate when there is exactly one. Never by surname.
 """
 from __future__ import annotations
 
-from urllib.parse import urlsplit
+import re
 
-from .. import constants
-from ..types import AttrObservation, Candidate, Confidence
+from ..sources import classify, identity_key, identity_tier, is_rare_handle
+from ..types import Candidate, Confidence, SourceText
 
-AGGREGATORS = {
-    "linkedin.com", "x.com", "twitter.com", "facebook.com", "instagram.com",
-    "crunchbase.com", "zoominfo.com", "whitepages.com", "rocketreach.co",
-    "wikipedia.org", "threads.net", "bloomberg.com",
-}
+_TOKEN = re.compile(r"[a-z0-9]+")
+_IDENTITY_CLASSES = {"professional_network", "code_host", "social", "personal_site"}
 
 
-def _host(u: str) -> str:
-    return (urlsplit(u).hostname or "").lower().removeprefix("www.")
+def _name_forms(seed) -> list[str]:
+    return [v.form for v in seed.names]
 
 
-def _tier(url: str, employer_domain: str) -> tuple[str, float]:
-    h = _host(url)
-    if employer_domain and h.endswith(employer_domain):
-        return "official_org", constants.ANCHOR_TIERS["official_org"]
-    if h in ("linkedin.com", "x.com", "twitter.com"):
-        return "professional_network_snippet", constants.ANCHOR_TIERS["professional_network_snippet"]
-    if h == "github.com":
-        return "self_published", constants.ANCHOR_TIERS["self_published"]
-    if h in AGGREGATORS:
-        return "aggregator", constants.ANCHOR_TIERS["aggregator"]
-    return "self_published", constants.ANCHOR_TIERS["self_published"]   # personal-ish
+def _surname_tokens(seed) -> set[str]:
+    toks: set[str] = set()
+    for form in _name_forms(seed):
+        parts = _TOKEN.findall(form.lower())
+        if parts:
+            toks.add(parts[-1])
+            if len(parts) >= 2:
+                toks.add(parts[0])      # order-swapped forms put the surname first
+    return {t for t in toks if len(t) >= 3}
 
 
-def _mk_candidate(cid: str, group: dict, orgs: list[str], titles: list[str], emp_domain: str) -> Candidate:
-    snip = " ".join(group["snips"]).lower()
-    best_url = max(group["urls"], key=lambda u: _tier(u, emp_domain)[1])
-    source_class, tier = _tier(best_url, emp_domain)
-    attrs: dict[str, list[AttrObservation]] = {}
-    for o in orgs:
-        token = o.replace(".", " ").split()[0] if o else ""     # "ramp.com"/"sixtyfour ai" → "ramp"/"sixtyfour"
-        if token and token in snip:
-            attrs.setdefault("employer", []).append(AttrObservation(
-                value=o, source_class=source_class, source_tier=tier,
-                url=best_url, snippet=group["snips"][0][:200]))
-            break
-    for t in titles:
-        if t and t in snip:
-            attrs.setdefault("title", []).append(AttrObservation(
-                value=t, source_class=source_class, source_tier=tier,
-                url=best_url, snippet=group["snips"][0][:200]))
-            break
-    return Candidate(cid=cid, urls=group["urls"], attrs=attrs,
-                     score=Confidence(score=0.0, logodds=0.0))
+def _anchor_domains(seed) -> set[str]:
+    out = set(seed.org_domains.values())
+    out |= {o.lower() for o in seed.orgs if "." in o}
+    return out
 
 
-def cluster(results: list[dict], seed) -> list[Candidate]:
-    surname = seed.names[0].form.split()[-1].lower() if seed.names else ""
-    orgs = [o.lower() for o in seed.orgs]
-    emp_domain = orgs[0] if (orgs and "." in orgs[0]) else ""
-    titles = [t.lower() for t in seed.titles]
+def cluster(results: list[dict], seed) -> tuple[list[Candidate], list[SourceText]]:
+    names = _name_forms(seed)
+    surnames = _surname_tokens(seed)
+    anchors = _anchor_domains(seed)
+    groups: dict[str, dict] = {}
+    floating: list[SourceText] = []
 
-    linkedins: dict[str, dict] = {}
-    main = {"urls": [], "snips": []}
     for r in results:
-        blob = f"{r['title']} {r['snippet']}"
-        if surname and surname not in blob.lower():          # relevance floor
-            continue
-        h, path = _host(r["url"]), urlsplit(r["url"]).path.strip("/")
-        if h == "linkedin.com" and path.startswith("in/"):
-            bucket = linkedins.setdefault(path.split("/", 2)[1], {"urls": [], "snips": []})
+        url = r["url"]
+        blob = f"{r.get('title', '')} — {r.get('snippet', '')}"
+        if surnames and not r.get("force") and not any(t in blob.lower() for t in surnames):
+            continue                                  # relevance floor (forced results bypass it)
+        cls = classify(url, anchor_domains=anchors, names=names)
+        src = SourceText(url=url, kind="snippet", source_class=cls, tier=identity_tier(cls), text=blob[:600])
+        key = identity_key(url, names=names)
+        if key and cls in _IDENTITY_CLASSES:
+            ks = f"{key[0]}:{key[1]}"
+            g = groups.setdefault(ks, {"urls": [], "sources": [], "keys": [ks], "handles": {key[0]: key[1]}})
+            if url not in g["urls"]:
+                g["urls"].append(url)
+                g["sources"].append(src)
         else:
-            bucket = main
-        bucket["urls"].append(r["url"])
-        bucket["snips"].append(blob)
+            floating.append(src)
 
-    if len(linkedins) == 1:                                   # one person: LinkedIn + their other sites
-        _, lb = next(iter(linkedins.items()))
-        groups = [{"urls": lb["urls"] + main["urls"], "snips": lb["snips"] + main["snips"]}]
-    elif len(linkedins) >= 2:                                 # distinct people; ambiguous `main` dropped
-        groups = list(linkedins.values())
-    elif main["urls"]:                                        # no LinkedIn: name-matching sites are one person
-        groups = [main]
-    else:
-        groups = []
+    # C17: merge groups that share a RARE handle across platforms
+    by_handle: dict[str, list[str]] = {}
+    for ks, g in groups.items():
+        for platform, handle in g["handles"].items():
+            if platform != "site" and is_rare_handle(handle, names):
+                by_handle.setdefault(handle, []).append(ks)
+    merged_into: dict[str, str] = {}
+    for handle, keys in by_handle.items():
+        root = keys[0]
+        for other in keys[1:]:
+            root, other = merged_into.get(root, root), merged_into.get(other, other)
+            if root == other:
+                continue
+            g, o = groups[root], groups[other]
+            g["urls"] += [u for u in o["urls"] if u not in g["urls"]]
+            g["sources"] += o["sources"]
+            g["keys"] += o["keys"]
+            g["handles"].update(o["handles"])
+            merged_into[other] = root
+            del groups[other]
 
-    return [_mk_candidate(f"c{i}", g, orgs, titles, emp_domain) for i, g in enumerate(groups, 1)]
+    cands: list[Candidate] = []
+    for i, (ks, g) in enumerate(groups.items(), 1):
+        cands.append(Candidate(cid=f"c{i}", urls=g["urls"], identity_keys=g["keys"], handles=g["handles"],
+                               sources=g["sources"], score=Confidence(score=0.0, logodds=0.0)))
+    return cands, floating
+
+
+def attach_floating(cands: list[Candidate], floating: list[SourceText]) -> list[SourceText]:
+    """With exactly one candidate, floating evidence describes that person-hypothesis:
+    attach it as evidence (never as a URL to expand). Otherwise keep it floating for
+    co-citation after fetching. Returns what is still floating."""
+    if len(cands) == 1:
+        cands[0].sources.extend(floating)
+        return []
+    return floating
+
+
+def candidate_from_floating(floating: list[SourceText]) -> Candidate | None:
+    """No identity-bearing URL at all: the person may exist only on press/company
+    pages. One candidate with no urls; evidence only."""
+    ev = [s for s in floating if s.source_class != "aggregator"]
+    if not ev:
+        return None
+    return Candidate(cid="c1", urls=[], identity_keys=[], sources=ev, score=Confidence(score=0.0, logodds=0.0))

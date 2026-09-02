@@ -1,15 +1,15 @@
-"""The §3 identity log-odds table (plan/reference-identity-scoring.md).
+"""The identity log-odds table (plan/reference-identity-scoring.md).
 
-Pure: takes decided signals, sums weighted terms, sigmoids. The clustering /
-matching upstream decides *which* signals hold; this only prices them. Every
-worked row in reference-identity-scoring.md is asserted in tests/test_identity_table.py.
+Pure: takes decided signals, sums weighted terms, sigmoids. Matching upstream
+decides *which* signals hold; this only prices them. Every worked row in the
+reference is asserted in tests/test_identity_table.py.
 """
 from __future__ import annotations
 
 import math
-from urllib.parse import urlsplit
 
 from .. import constants
+from ..sources import host_of, registrable_domain
 from ..types import AttrObservation, Confidence, Term
 
 
@@ -22,8 +22,20 @@ def to_confidence(terms: list[Term]) -> Confidence:
     return Confidence(score=sigmoid(lo), logodds=lo, terms=terms)
 
 
-def _host(url: str) -> str:
-    return (urlsplit(url).hostname or "").lower().removeprefix("www.")
+def _mult(o: AttrObservation) -> float:
+    return constants.T4_CATEGORY_MULT.get(getattr(o, "category", "exact_match"), 1.0)
+
+
+def anchor_weight(anchors: dict[str, list[AttrObservation]] | None, *, kinds: set[str] | None = None) -> float:
+    """Σ over attributes of the best single-source weight (tier × attr × category)."""
+    total = 0.0
+    for pred, obs in (anchors or {}).items():
+        obs = [o for o in obs if kinds is None or getattr(o, "kind", "snippet") in kinds]
+        if not obs:
+            continue
+        attr = constants.ATTR_FACTORS.get(pred, 0.0)
+        total += max(o.source_tier * attr * _mult(o) for o in obs)
+    return total
 
 
 def score(
@@ -35,11 +47,10 @@ def score(
     is_unique: bool = False,
     reciprocal: bool = False,
     anchored_one_way: bool = False,
+    dominant: bool = False,
     hard_key: str | None = None,
     negatives: list[Term] | None = None,
 ) -> Confidence:
-    """Price one candidate. `anchors` maps a predicate → the observations that
-    matched the seed for it, each carrying its own source tier (Types′)."""
     terms: list[Term] = [Term(factor="prior", weight=constants.REGIME_PRIORS[regime])]
 
     if hard_key:
@@ -50,16 +61,18 @@ def score(
         terms.append(Term(factor="anchored_one_way", weight=constants.ANCHORED_ONE_WAY))
 
     for pred, obs in (anchors or {}).items():
+        obs = [o for o in obs if _mult(o) > 0]
         if not obs:
             continue
         attr = constants.ATTR_FACTORS.get(pred, 0.0)
-        base = max(o.source_tier for o in obs) * attr
-        terms.append(Term(factor=f"anchor:{pred}", weight=round(base, 3)))
-        # ponytail: independence keyed by host only (registrable_domain deferred to Stage 3).
-        n_independent = len({_host(o.url) for o in obs})
-        if n_independent > 1:
-            corr = min(constants.CORROBORATION_CAP, constants.CORROBORATION_PER_SOURCE * (n_independent - 1))
-            terms.append(Term(factor=f"corroboration:{pred}:{n_independent}src", weight=round(corr, 3)))
+        best = max(obs, key=lambda o: o.source_tier * attr * _mult(o))
+        base = best.source_tier * attr * _mult(best)
+        terms.append(Term(factor=f"anchor:{pred}:{best.source_class}", weight=round(base, 3)))
+        keys = {(o.source_class if o.source_class != "aggregator" else "aggregator",
+                 registrable_domain(host_of(o.url)) if o.source_class != "aggregator" else "*") for o in obs}
+        if len(keys) > 1:
+            corr = min(constants.CORROBORATION_CAP, constants.CORROBORATION_PER_SOURCE * (len(keys) - 1))
+            terms.append(Term(factor=f"corroboration:{pred}:{len(keys)}src", weight=round(corr, 3)))
 
     if surname_bucket:
         terms.append(Term(factor=f"surname:{surname_bucket}", weight=constants.SURNAME_RARITY[surname_bucket]))
@@ -68,34 +81,34 @@ def score(
         terms.append(Term(factor=f"name_form:{name_form}", weight=form_w))
     if is_unique:
         terms.append(Term(factor="uniqueness", weight=constants.UNIQUENESS_BONUS))
+    if dominant:
+        terms.append(Term(factor="dominant_cluster", weight=constants.DOMINANT_CLUSTER_BONUS))
 
     terms += negatives or []
     return to_confidence(terms)
 
 
-def _n_anchors(cand) -> int:
-    return sum(1 for obs in cand.attrs.values() if obs)
-
-
-def _max_tier(cand) -> float:
-    return max((o.source_tier for obs in cand.attrs.values() for o in obs), default=0.0)
-
-
 def compute_unique(cands) -> set[str]:
-    """Unique′: a candidate is unique iff it is the ONLY one with any ≥prof-tier
-    anchor, OR the only one with ≥2 anchors, OR the only one with an official-tier
-    match. Two same-name candidates that tie satisfy none → neither is unique."""
-    prof = [c for c in cands if _max_tier(c) >= constants.ANCHOR_MIN_PROF_TIER]
-    ge2 = [c for c in cands if _n_anchors(c) >= 2]
-    official = [c for c in cands if _max_tier(c) >= constants.ANCHOR_TIERS["official_org"]]
-    uniq: set[str] = set()
-    for c in cands:
-        if (len(prof) == 1 and c in prof) or (len(ge2) == 1 and c in ge2) or (len(official) == 1 and c in official):
-            uniq.add(c.cid)
-    return uniq
+    """A2: +0.8 iff exactly one candidate reaches UNIQUENESS_MIN_ANCHOR on
+    enumeration-time (snippet) evidence. Fetch order cannot manufacture it."""
+    strong = [c for c in cands if anchor_weight(c.attrs, kinds={"snippet"}) >= constants.UNIQUENESS_MIN_ANCHOR]
+    return {strong[0].cid} if len(strong) == 1 else set()
 
 
-def score_candidate(seed, cand, surname_bucket: str | None, is_unique: bool):
-    return score(regime=seed.regime, surname_bucket=surname_bucket,
-                 anchors=cand.attrs, is_unique=is_unique,
-                 reciprocal=getattr(cand, "reciprocal", False))
+def compute_dominant(cands, regime: str) -> set[str]:
+    """A5: public-figure signal for name-only regimes — one cluster holds most of the
+    identity-bearing SERP urls."""
+    if regime not in ("BARE_NAME", "NAME_WEAK"):
+        return set()
+    total = sum(len(c.urls) for c in cands)
+    if total < constants.DOMINANT_CLUSTER_MIN_URLS:
+        return set()
+    top = max(cands, key=lambda c: len(c.urls))
+    return {top.cid} if len(top.urls) / total >= constants.DOMINANT_CLUSTER_SHARE else set()
+
+
+def score_candidate(seed, cand, surname_bucket: str | None, is_unique: bool, dominant: bool = False) -> Confidence:
+    return score(regime=seed.regime, surname_bucket=surname_bucket, name_form=getattr(cand, "name_form", "exact"),
+                 anchors=cand.attrs, is_unique=is_unique, reciprocal=cand.reciprocal,
+                 anchored_one_way=cand.anchored_one_way, dominant=dominant,
+                 hard_key=cand.hard_key, negatives=cand.negatives)

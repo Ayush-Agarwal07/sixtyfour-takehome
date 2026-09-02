@@ -1,10 +1,10 @@
-"""HTTP + LLM disk caches.
+"""HTTP + LLM disk caches (diskcache, lazy).
 
 - http: keyed by normalized url, TTL by source class.
+- generic namespaces (search results, api responses): keyed by (ns, key).
 - llm: keyed by (model, sha256(prompt+schema)), no TTL.
-PI_NO_CACHE=1 disables both (honest variance runs); PI_OFFLINE=1 makes a miss
-raise (replay mode). diskcache is imported lazily so importing this module is
-cheap and Stage 0 tests don't need the dep.
+PI_NO_CACHE=1 disables all (honest variance runs); PI_OFFLINE=1 makes a miss raise
+(replay mode).
 """
 from __future__ import annotations
 
@@ -35,51 +35,39 @@ class Cache:
         self.root = Path(root)
         self.no_cache = _flag("PI_NO_CACHE")
         self.offline = _flag("PI_OFFLINE")
-        self._http: Any = None
-        self._llm: Any = None
+        self._stores: dict[str, Any] = {}
 
     def _open(self, sub: str) -> Any:
-        import diskcache  # lazy: only when caching is actually used
+        import diskcache  # lazy
+        if sub not in self._stores:
+            self._stores[sub] = diskcache.Cache(str(self.root / sub))
+        return self._stores[sub]
 
-        return diskcache.Cache(str(self.root / sub))
+    # ---- generic ----
+    def get(self, ns: str, key: str) -> Optional[Any]:
+        if self.no_cache:
+            return None
+        val = self._open(ns).get(key)
+        if val is None and self.offline:
+            raise CacheMiss(f"offline: no cached {ns} for {key[:80]}")
+        return val
 
-    @property
-    def http(self) -> Any:
-        if self._http is None:
-            self._http = self._open("http")
-        return self._http
-
-    @property
-    def llm(self) -> Any:
-        if self._llm is None:
-            self._llm = self._open("llm")
-        return self._llm
+    def set(self, ns: str, key: str, value: Any, ttl: Optional[float] = None) -> None:
+        if self.no_cache:
+            return
+        self._open(ns).set(key, value, expire=ttl)
 
     # ---- http ----
     def get_http(self, url: str) -> Optional[Any]:
-        if self.no_cache:
-            return None
-        val = self.http.get(normalize_url(url))
-        if val is None and self.offline:
-            raise CacheMiss(f"offline: no cached http for {url}")
-        return val
+        return self.get("http", normalize_url(url))
 
-    def set_http(self, url: str, value: Any, source_class: str = "aggregator") -> None:
-        if self.no_cache:
-            return
-        ttl = CACHE_TTL_S.get(source_class, CACHE_TTL_S["aggregator"])
-        self.http.set(normalize_url(url), value, expire=ttl)
+    def set_http(self, url: str, value: Any, source_class: str = "unknown") -> None:
+        ttl = CACHE_TTL_S.get(source_class, CACHE_TTL_S["unknown"])
+        self.set("http", normalize_url(url), value, ttl)
 
     # ---- llm ----
     def get_llm(self, model: str, prompt: str, schema: str = "") -> Optional[Any]:
-        if self.no_cache:
-            return None
-        val = self.llm.get(llm_key(model, prompt, schema))
-        if val is None and self.offline:
-            raise CacheMiss("offline: no cached llm response")
-        return val
+        return self.get("llm", llm_key(model, prompt, schema))
 
     def set_llm(self, model: str, prompt: str, value: Any, schema: str = "") -> None:
-        if self.no_cache:
-            return
-        self.llm.set(llm_key(model, prompt, schema), value)  # no TTL
+        self.set("llm", llm_key(model, prompt, schema), value, None)
