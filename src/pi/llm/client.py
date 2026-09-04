@@ -4,7 +4,10 @@
 - Structured output: JSON schema in the system prompt; `response_format=json_object`
   only for models that accept it (JSON_MODE_PREFIXES); lenient JSON extraction and
   up to RETRIES["validation"] re-asks with the validation error.
-- Reasoning tiers (T1/T2) send `reasoning` and no temperature; reasoning text is
+- Reasoning tiers (REASONING_TIERS) send `reasoning: {effort}` and no temperature;
+  other tiers send `reasoning: {enabled: False}` explicitly — some models on
+  OpenRouter default to thinking on, so omitting the param does not turn it off —
+  plus `temperature` and a per-tier `max_tokens` (MAX_TOKENS). Reasoning text is
   stored in the sidecar and referenced from the llm_call event.
 - Cost from OpenRouter `usage.cost`, else MODEL_PRICES; accumulated in counters.
 - Same-tier secondary model on failure (C15).
@@ -88,12 +91,19 @@ class LLM:
 
         reasoning_on = tier in constants.REASONING_TIERS
         kwargs: dict[str, Any] = dict(model=model, messages=[
-            {"role": "system", "content": sys_msg}, {"role": "user", "content": prompt}])
+            {"role": "system", "content": sys_msg}, {"role": "user", "content": prompt}],
+            max_tokens=constants.MAX_TOKENS.get(tier, 1500))
         extra: dict[str, Any] = {"usage": {"include": True}}
         if reasoning_on:
             extra["reasoning"] = {"effort": constants.REASONING_EFFORT}
         else:
             kwargs["temperature"] = constants.TEMPERATURE
+            if model.startswith("anthropic/"):
+                # OpenRouter runs Anthropic models with thinking on by default;
+                # omitting `reasoning` does not turn it off. (Scoped to this family:
+                # the Gemini endpoint used for T3-T5 400s on an explicit
+                # `enabled: False` — "Reasoning is mandatory for this endpoint".)
+                extra["reasoning"] = {"enabled": False}
         if model.startswith(constants.JSON_MODE_PREFIXES):
             kwargs["response_format"] = {"type": "json_object"}
         kwargs["extra_body"] = extra
@@ -118,8 +128,10 @@ class LLM:
                                                                    "Return ONLY the corrected JSON object."}]
                 kwargs["messages"] = messages
                 continue
+            finish_reason = getattr(resp.choices[0], "finish_reason", None)
             self._emit(model, tier, phase, obj, usage=getattr(resp, "usage", None), latency_ms=latency,
-                       cache_hit=False, reasoning=reasoning)
+                       cache_hit=False, reasoning=reasoning,
+                       note=f"finish_reason={finish_reason}" if finish_reason and finish_reason != "stop" else None)
             if self.cache is not None:
                 self.cache.set_llm(model, cache_key, obj.model_dump(mode="json"))
             return obj
@@ -131,7 +143,7 @@ class LLM:
             try:
                 async with self._sem:
                     return await asyncio.wait_for(self._client.chat.completions.create(**kwargs),
-                                                  timeout=constants.TIMEOUTS_S["llm"])
+                                                  timeout=constants.LLM_TIMEOUT_S)
             except Exception as e:  # noqa: BLE001
                 status = getattr(e, "status_code", None)
                 if status in (429, 502, 503) and attempt < constants.RETRIES["rate_limit"]:

@@ -23,14 +23,14 @@ def to_confidence(terms: list[Term]) -> Confidence:
 
 
 def _mult(o: AttrObservation) -> float:
-    return constants.T4_CATEGORY_MULT.get(getattr(o, "category", "exact_match"), 1.0)
+    return constants.T4_CATEGORY_MULT.get(o.category, 1.0)
 
 
 def anchor_weight(anchors: dict[str, list[AttrObservation]] | None, *, kinds: set[str] | None = None) -> float:
     """Σ over attributes of the best single-source weight (tier × attr × category)."""
     total = 0.0
     for pred, obs in (anchors or {}).items():
-        obs = [o for o in obs if kinds is None or getattr(o, "kind", "snippet") in kinds]
+        obs = [o for o in obs if kinds is None or o.kind in kinds]
         if not obs:
             continue
         attr = constants.ATTR_FACTORS.get(pred, 0.0)
@@ -95,20 +95,19 @@ def compute_unique(cands) -> set[str]:
     return {strong[0].cid} if len(strong) == 1 else set()
 
 
-def compute_dominant(cands, regime: str) -> set[str]:
-    """A5: public-figure signal for name-only regimes — one cluster holds most of the
-    identity-bearing SERP urls."""
-    if regime not in ("BARE_NAME", "NAME_WEAK"):
+def compute_dominant(cands, regime: str, n_results: int) -> set[str]:
+    """A5: public-figure signal for name-only regimes — a single candidate holds
+    most of the enumeration results as attached sources (e.g. a famous bare name)."""
+    if regime not in ("BARE_NAME", "NAME_WEAK") or len(cands) != 1:
         return set()
-    total = sum(len(c.urls) for c in cands)
-    if total < constants.DOMINANT_CLUSTER_MIN_URLS:
+    c = cands[0]
+    if len(c.sources) < constants.DOMINANT_CLUSTER_MIN_URLS:
         return set()
-    top = max(cands, key=lambda c: len(c.urls))
-    return {top.cid} if len(top.urls) / total >= constants.DOMINANT_CLUSTER_SHARE else set()
+    return {c.cid} if len(c.sources) / max(1, n_results) >= constants.DOMINANT_CLUSTER_SHARE else set()
 
 
 def score_candidate(seed, cand, surname_bucket: str | None, is_unique: bool, dominant: bool = False) -> Confidence:
-    return score(regime=seed.regime, surname_bucket=surname_bucket, name_form=getattr(cand, "name_form", "exact"),
+    return score(regime=seed.regime, surname_bucket=surname_bucket, name_form=cand.name_form,
                  anchors=cand.attrs, is_unique=is_unique, reciprocal=cand.reciprocal,
                  anchored_one_way=cand.anchored_one_way, dominant=dominant,
                  hard_key=cand.hard_key, negatives=cand.negatives)

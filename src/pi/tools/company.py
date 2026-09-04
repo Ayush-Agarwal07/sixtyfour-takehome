@@ -11,6 +11,7 @@ from ..deps import Tool, ToolUnavailable, traced
 from ..sources import classify, registrable_domain
 
 _NON_ALNUM = re.compile(r"[^a-z0-9]+")
+_ORG_SUFFIXES = ("ai", "hq", "app", "labs", "io", "co", "inc", "tech")
 
 
 def _slug(s: str) -> str:
@@ -18,50 +19,58 @@ def _slug(s: str) -> str:
 
 
 class Company(Tool):
-    name = "company.resolve"
-
     @traced("company.resolve", provider="serper", timeout=15)
     async def resolve(self, name: str) -> dict | None:
         key = os.getenv("SERPER_API_KEY")
         if not key:
             raise ToolUnavailable("SERPER_API_KEY")
-        cache = self.deps.cache
         ck = name.strip().lower()
-        if cache is not None:
-            hit = cache.get("company", ck)
-            if hit is not None:
-                self._last_cache_hit = True
-                return hit or None
 
-        r = await self.deps.http.post(
-            "https://google.serper.dev/search",
-            headers={"X-API-KEY": key, "Content-Type": "application/json"},
-            json={"q": f"{name} official website", "num": 10},
-        )
-        r.raise_for_status()
-        organic = r.json().get("organic", [])
+        async def _fetch() -> dict:
+            r = await self.deps.http.post(
+                "https://google.serper.dev/search",
+                headers={"X-API-KEY": key, "Content-Type": "application/json"},
+                json={"q": f"{name} official website", "num": 10},
+            )
+            r.raise_for_status()
+            organic = r.json().get("organic", [])
 
-        target = _slug(name)
-        roots: list[str] = []
-        for o in organic:
-            link = o.get("link")
-            if not link:
-                continue
-            if classify(link) in ("aggregator", "social", "professional_network", "press", "code_host"):
-                continue
-            root = registrable_domain(urlparse(link).netloc)
-            if root and root not in roots:
-                roots.append(root)
+            target = _slug(name)
+            name_l = name.strip().lower()
+            entries: list[tuple[str, str]] = []  # (root, "title snippet" lowercased), one per unique root
+            seen: set[str] = set()
+            for o in organic:
+                link = o.get("link")
+                if not link:
+                    continue
+                if classify(link) in ("aggregator", "social", "professional_network", "press", "code_host"):
+                    continue
+                root = registrable_domain(urlparse(link).netloc)
+                if not root or root in seen:
+                    continue
+                seen.add(root)
+                entries.append((root, f"{o.get('title', '')} {o.get('snippet', '')}".lower()))
 
-        result = None
-        if roots:
-            for root in roots:
-                label = _slug(root.rsplit(".", 1)[0])
-                if label and (label in target or target in label):
-                    result = {"name": name, "domain": root, "aliases": [x for x in roots if x != root]}
-                    break
-            if result is None:
-                result = {"name": name, "domain": roots[0], "aliases": roots[1:]}
-        if cache is not None:
-            cache.set("company", ck, result or {}, CACHE_TTL_S["search"])
-        return result
+            roots = [r for r, _ in entries]
+            result = None
+            if entries:
+                chosen = next((r for r, _ in entries if _slug(r.rsplit(".", 1)[0]) == target), None)
+                if chosen is None:
+                    for r, _ in entries:
+                        label = _slug(r.rsplit(".", 1)[0])
+                        if any(label == target + s or target == label + s for s in _ORG_SUFFIXES):
+                            chosen = r
+                            break
+                if chosen is None:
+                    for r, blob in entries:
+                        label = _slug(r.rsplit(".", 1)[0])
+                        if label and target in label and name_l in blob:
+                            chosen = r
+                            break
+                if chosen is None:
+                    chosen = roots[0]
+                result = {"name": name, "domain": chosen, "aliases": [x for x in roots if x != chosen]}
+            return result or {}
+
+        result = await self.cached("company", ck, CACHE_TTL_S["search"], _fetch)
+        return result or None

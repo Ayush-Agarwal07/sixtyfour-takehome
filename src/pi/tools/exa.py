@@ -9,8 +9,6 @@ from ..sources import classify
 
 
 class Exa(Tool):
-    name = "exa.contents"
-
     @traced("exa.contents", provider="exa", timeout=30)
     async def contents(self, url: str) -> dict:
         key = os.getenv("EXA_API_KEY")

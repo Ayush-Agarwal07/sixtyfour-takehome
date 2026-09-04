@@ -1,0 +1,4 @@
+**Analyzing Candidate Match**
+
+I'm currently evaluating candidate c11. While the name "Sarah Chen" is an exact match, their listed employer, @facebook, conflicts with the seed's former employer, Figma. I need to investigate this discrepancy further as the seed doesn't specify a current employer.
+

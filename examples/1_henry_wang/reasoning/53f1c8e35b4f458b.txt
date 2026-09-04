@@ -1,0 +1,1 @@
+The gate already passed with strong personal-site corroboration, so the most plausible failure mode is temporal drift (stale bio) rather than identity mismatch, since the name+site+github+linkedin cluster is tightly merged. Checking LinkedIn (an independent, typically more current source) for employment dates is the cheapest way to disconfirm.

@@ -1,0 +1,12 @@
+**Refining Seed Identifiers**
+
+I'm currently exploring variations and potential aliases for "Henry wang," aiming to broaden the search scope while maintaining accuracy. The connection to "sixtyfour ai" is a key anchor in this process.
+
+**Investigating Candidate Identifiers**
+
+I'm delving into the meaning of 'cid' within the candidate output, especially when URLs are absent. My current hypothesis suggests it might refer to a candidate index or a generic page identifier, which seems to be the case here.
+
+**Clarifying Identifier Meanings**
+
+I've confirmed that 'cid' indeed signifies 'page' based on the schema provided. This also clarifies why the employer is marked as 'unrelated' if the source, like Sixtyfour.ai, doesn't explicitly mention the individual.
+

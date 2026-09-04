@@ -6,8 +6,6 @@ See plan/design-decisions.md and plan/reference-*.md for rationale.
 """
 from __future__ import annotations
 
-import math
-
 # ─────────────────────────── identity log-odds ───────────────────────────
 LOGODDS_PRIOR = -1.5            # (judgment) p≈0.18 unsupported, name regimes
 HARD_ID_PRIOR = 0.0             # (judgment) email/url inputs start neutral
@@ -20,7 +18,6 @@ IDENTITY_HARD_KEYS = {          # (judgment) near-unique identifiers
     "reciprocal_link": 3.0,
 }
 ANCHORED_ONE_WAY = 1.5          # (judgment, C21) fetched official/self-pub page → unfetchable profile
-PLAIN_ONE_WAY = 0.5             # (judgment)
 UNIQUENESS_BONUS = 0.8          # (judgment, A2) sole candidate with anchor weight ≥ UNIQUENESS_MIN_ANCHOR
 UNIQUENESS_MIN_ANCHOR = 1.2     # (judgment, A2) computed on enumeration-time (snippet) evidence only
 DOMINANT_CLUSTER_BONUS = 2.0    # (judgment, A5) one cluster holds most SERP urls (public figure)
@@ -74,9 +71,6 @@ NAME_MISMATCH = -2.0            # (judgment) matcher says the page is about a di
 # negatives — (judgment)
 CONTRADICT_PAGE_MULT = 0.6      # −(tier × 0.6) when the contradicting source is a fetched page
 CONTRADICT_SNIPPET = -0.5
-TENSE_CONTRADICTION = -1.5      # (C3) fetched page with context date only
-HARD_TIMELINE_CONFLICT = -2.5
-GEOGRAPHIC_IMPOSSIBILITY = -2.0
 
 T4_CATEGORY_MULT = {            # (judgment) matcher category → multiplier on tier×attr
     "exact_match": 1.0,
@@ -89,7 +83,6 @@ T4_CATEGORY_MULT = {            # (judgment) matcher category → multiplier on 
 # ───────────────────────────── the gate ──────────────────────────────────
 GATE_P_THRESHOLD = 0.85         # (judgment)
 GATE_MARGIN = 0.30              # (judgment)
-GATE_LOGODDS_THRESHOLD = math.log(GATE_P_THRESHOLD / (1 - GATE_P_THRESHOLD))  # ≈1.735
 GATE_MAX_CYCLES = 2             # (Gate-loop′)
 GATE_PROMPT_CANDIDATES = 3
 
@@ -126,7 +119,6 @@ RECENCY_DECAY = {               # (judgment) per year, by predicate class
 }
 NO_CONTEXT_DATE_PENALTY = -0.3
 CONFLICT_WEIGHTS = {"soft": -0.3, "hard": -1.5, "identity": -3.0}
-TEMPORAL_HARD_CONFLICT_DAYS = 60
 
 # ───────────────────────────── regimes ───────────────────────────────────
 REGIME_PRIORS = {
@@ -160,20 +152,15 @@ DEFINITE_ROLES = {              # (judgment) roles unique enough for DEFINITE_DE
 RESOLVE_BUDGET_BASE = 4         # (reasoned) resolve_budget = min(enum_spent + 4 + 2n, cap)
 RESOLVE_BUDGET_PER_CANDIDATE = 2
 ENUMERATION_MAX_QUERIES = 5     # (judgment; free-tier keys) plan says ≤8
-VARIANTS_MAX = 3
 DISCONFIRM_MAX_ACTIONS = 2
 FETCH_K = 2                     # RESOLVE verification fetches per cycle
 
 EXPAND_CAP = 40
+EXPAND_MAX_BATCHES = 12          # (round-3) hard cap on planner batches; low-yield tail runs long after this
 S3_TOTAL_TOOL_CALLS = 60
 S3_SOFT_SECONDS = 180
-S3_HARD_SECONDS = 300
-S3_HARD_USD = 0.75
 S3_SOFT_USD = 0.50
-S2_YIELD_THRESHOLD = 0.25
-S2_WINDOW = 8
-S2_MIN_EXPAND_CALLS = 16
-FRONTIER_RELEVANCE_FLOOR = 0.2
+FRONTIER_RELEVANCE_FLOOR = 0.3
 
 SECTION_MULT = {"prose": 1.0, "sidebar": 0.6, "nav": 0.2, "footer": 0.2, "nav_footer": 0.2}
 REINFORCE_MIN_DESCENDANTS = 3
@@ -229,13 +216,12 @@ RARE_HANDLE_MIN_LEN = 6         # (judgment, C17)
 COMMON_HANDLE_WORDS = {"admin", "info", "hello", "contact", "team", "official", "profile", "user"}
 
 # ───────────────────────── infra & concurrency ───────────────────────────
-SEMAPHORES = {"serper": 5, "exa": 3, "firecrawl": 2, "openrouter": 8, "fetch": 10}
-TIMEOUTS_S = {"fetch": 8, "firecrawl": 20, "wayback": 15, "llm": 60, "serper": 15, "exa": 30}
+SEMAPHORES = {"serper": 5, "exa": 3, "openrouter": 8, "fetch": 10}
+LLM_TIMEOUT_S = 60
 MAX_RUNNING_JOBS = 3
 MAX_INFLIGHT_DEFAULT = 10
 
 CACHE_TTL_S = {                 # (judgment) by source class; None = no expiry
-    "structured_api": 6 * 3600,
     "search": 24 * 3600,
     "company_site": 7 * 86400,
     "personal_site": 7 * 86400,
@@ -264,8 +250,9 @@ TASK_MODELS = {                 # tier -> (primary_slug, secondary_slug)
     "T4": (_CHEAP, None),        # attribute-match categorical
     "T5": (_CHEAP, None),        # parse, role_resolve
 }
-REASONING_TIERS = {"T1", "T2"}
+REASONING_TIERS = {"T1"}
 REASONING_EFFORT = "medium"
+MAX_TOKENS = {"T1": 1500, "T2": 900, "T3": 1500, "T4": 1200, "T5": 600}  # per-tier cap; reasoning tokens count toward it
 JSON_MODE_PREFIXES = ("openai/", "google/")   # models that accept response_format=json_object
 MODEL_PRICES = {                # USD per 1M tokens (verified 2026-09-02); fallback when usage.cost is absent
     "anthropic/claude-sonnet-5": {"in": 2.0, "out": 10.0},
@@ -273,3 +260,80 @@ MODEL_PRICES = {                # USD per 1M tokens (verified 2026-09-02); fallb
     "google/gemini-3.8-flash": {"in": 0.75, "out": 3.75},
 }
 RETRIES = {"validation": 3, "rate_limit": 2, "refusal": 0}
+
+# ───────────────────────── EXPAND: slots & frontier ──────────────────────
+SLOT_TARGETS = {"identity_anchors": 1, "current_role": 1, "employment_history": 3, "education": 1,
+                "contact": 1, "public_output": 3, "social_graph": 3, "notable_artifacts": 2}
+PREDICATE_SLOTS = {
+    "employer": ["current_role", "employment_history"], "employment": ["current_role", "employment_history"],
+    "title": ["current_role"], "education": ["education"],
+    "email": ["contact", "identity_anchors"], "phone": ["contact"], "website": ["contact", "identity_anchors"],
+    "handle": ["contact", "identity_anchors"], "repo": ["public_output"], "publication": ["public_output"],
+    "talk": ["public_output"], "relationship": ["social_graph"], "award": ["notable_artifacts"],
+    "funding_event": ["notable_artifacts"], "founded": ["notable_artifacts"], "board_or_advisor": ["notable_artifacts"],
+}
+CLASS_SLOTS = {                 # (judgment, plan B3) what a source class usually fills
+    "code_host": ["identity_anchors", "public_output", "contact", "employment_history"],
+    "professional_network": ["current_role", "employment_history", "education"],
+    "personal_site": ["identity_anchors", "contact", "public_output", "notable_artifacts", "employment_history"],
+    "company_site": ["current_role", "identity_anchors", "social_graph"],
+    "academic": ["education", "public_output"], "press": ["notable_artifacts", "current_role", "social_graph"],
+    "social": ["identity_anchors", "social_graph"], "government_registry": ["notable_artifacts"],
+    "aggregator": ["employment_history"], "unknown": ["notable_artifacts"], "company_site_other": ["notable_artifacts"],
+}
+CLASS_PRIOR = {                 # (judgment, plan B4) expected yield per fetch
+    "personal_site": 0.9, "code_host": 0.8, "company_site": 0.7, "academic": 0.6, "professional_network": 0.6,
+    "press": 0.5, "government_registry": 0.4, "unknown": 0.4, "company_site_other": 0.4, "social": 0.3, "aggregator": 0.15,
+}
+ACTION_COST = {                 # (judgment) (seconds, usd) per action
+    "search": (1.5, 0.002), "fetch": (3.0, 0.0), "exa_contents": (3.0, 0.005), "github": (1.0, 0.0),
+    "github_emails": (1.5, 0.0), "gravatar": (0.5, 0.0), "wayback": (8.0, 0.0), "verify": (6.0, 0.0),
+    "username_probe": (4.0, 0.0), "github_code": (2.0, 0.0), "openalex": (2.0, 0.0),
+}
+COST_LAMBDA = 100.0             # $0.01 ≈ 1 s
+FRONTIER_TOP_N = 12
+PLANNER_MAX_PICKS = 4
+PLANNER_MAX_NEW = 2
+REINFORCE_FORCE_AFTER_SKIPS = 2
+
+# ─────────────────────── username probe (Task A) ─────────────────────────
+# (judgment) platforms whose absence check is reliable without auth. name → (url template, rule)
+# rule: "404" = HTTP 200 exists / 404 missing; "json_nonnull" = body is JSON and not null/empty;
+# "json_list" = JSON array non-empty; "reddit" = about.json with data.name; "keybase" = them[0] non-null.
+PROBE_PLATFORMS = {
+    "github":      ("https://api.github.com/users/{h}", "404"),
+    "gitlab":      ("https://gitlab.com/api/v4/users?username={h}", "json_list"),
+    "reddit":      ("https://www.reddit.com/user/{h}/about.json", "reddit"),
+    "hackernews":  ("https://hacker-news.firebaseio.com/v0/user/{h}.json", "json_nonnull"),
+    "keybase":     ("https://keybase.io/_/api/1.0/user/lookup.json?usernames={h}", "keybase"),
+    "devto":       ("https://dev.to/api/users/by_username?url={h}", "404"),
+    "huggingface": ("https://huggingface.co/{h}", "404"),
+    "kaggle":      ("https://www.kaggle.com/{h}", "404"),
+    "devpost":     ("https://devpost.com/{h}", "404"),
+    "behance":     ("https://www.behance.net/{h}", "404"),
+    "dribbble":    ("https://dribbble.com/{h}", "404"),
+    # "medium" removed: its 404 rule is a soft-404, every handle "hits"
+    "youtube":     ("https://www.youtube.com/@{h}", "404"),
+    "producthunt": ("https://www.producthunt.com/@{h}", "404"),
+    "linktree":    ("https://linktr.ee/{h}", "404"),
+    "academia":    ("https://independent.academia.edu/{h}", "404"),
+}
+PROBE_TIMEOUT_S = 6
+PROBE_MAX_HANDLES_PER_RUN = 4
+OPENALEX_MAILTO = "people-research-agent@example.com"
+
+# ── same-person test (EXPAND attachment; DESIGN.md §13) ──
+ATTACH_PRIOR = -1.0
+ATTACH_NAME = 1.5                 # a name variant (all tokens) appears in the source text
+ATTACH_NO_NAME = -2.0
+ATTACH_PER_CATEGORY = 1.2         # per distinct matched anchor category
+ATTACH_PER_CATEGORY_WEAK = 0.6     # school/location, or an org value naming a university/college/institute/school/hospital: shared by thousands of namesakes
+ATTACH_CATEGORY_CAP = 3
+ATTACH_LINKED_FROM_TRUSTED = 2.0  # reached by a link on a trusted page
+ATTACH_OWNED = 3.0                # the confirmed candidate's own identity-bearing page
+ATTACH_SKIP = 0.5                 # below: no extraction, no claims
+ATTACH_PROFILE = 0.8              # at/above: profile, summary, timeline, slots. Below: unverified[]
+ATTACH_NO_IDENTITY_CAP = 0.75     # no name/email/domain in the body → at most unverified, whatever the anchors say
+ATTACH_TRUSTED = 0.9              # at/above: claims grow the anchor set; its links earn ATTACH_LINKED_FROM_TRUSTED
+ATTACH_CONTRADICTED = 0.2         # middle band + T4 `contradicts` on employer/education/location
+ATTACH_T4_MAX = 6                 # middle-band T4 checks per run

@@ -1,0 +1,4 @@
+**Analyzing GitLab Profile**
+
+I'm currently examining Ali Avci's GitLab profile, specifically focusing on extracting activity data. The page seems to have a loading issue with the activity calendar, and I'm working to resolve that to get the most recent information.
+

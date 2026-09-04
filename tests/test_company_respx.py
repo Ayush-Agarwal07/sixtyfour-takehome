@@ -31,6 +31,31 @@ async def test_resolve_skips_aggregator_picks_official_domain(monkeypatch):
 
 
 @respx.mock
+async def test_resolve_prefers_exact_label_match_over_substring(monkeypatch):
+    """'Sixtyfour' must pick sixtyfour.ai (exact label) over sixtyfourapartments.com
+    (label merely contains the slug) even though the latter is listed first."""
+    monkeypatch.setenv("SERPER_API_KEY", "test-key")
+    respx.post("https://google.serper.dev/search").mock(
+        return_value=httpx.Response(200, json={
+            "organic": [
+                {"link": "https://sixtyfourapartments.com", "title": "Sixty Four Apartments",
+                 "snippet": "Luxury apartments for rent"},
+                {"link": "https://sixtyfour.ai", "title": "Sixtyfour AI",
+                 "snippet": "AI-powered people search"},
+            ]
+        })
+    )
+
+    async with httpx.AsyncClient() as client:
+        company = Company(Deps(http=client))
+        result = await company.resolve("Sixtyfour")
+
+    assert result is not None
+    assert result["domain"] == "sixtyfour.ai"
+    assert "sixtyfourapartments.com" in result["aliases"]
+
+
+@respx.mock
 async def test_missing_key_raises_tool_unavailable(monkeypatch):
     monkeypatch.delenv("SERPER_API_KEY", raising=False)
 

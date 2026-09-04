@@ -5,7 +5,7 @@ from pi.trace.events import (
     BaseEvent, BudgetUpdate, CandidateScore, ConflictDetected, Disconfirmation,
     FrontierUpdate, GateDecision, GateTest, LLMCall, Merge, PhaseTransition,
     PlannerDecision, Reinforce, Rejection, RoleResolution, SlotUpdate, Stop,
-    ToolCall, VariantDiscovered,
+    ToolCall,
 )
 from pi.types import Term
 
@@ -25,8 +25,6 @@ def all_sample_events() -> list[BaseEvent]:
                               Term(factor="prior", weight=-1.5)]),
         Merge(event_id="e05", from_cid="c9", to_cid="c1", reason="verified reciprocal link"),
         Rejection(event_id="e06", cid="c2", reason="employer contradicts on official page"),
-        VariantDiscovered(event_id="e07", form="Henry T. Wang", origin="discovered",
-                          evidence_id="ev_44"),
         RoleResolution(event_id="e08", company="ariglad", resolved_holder="Jane Roe",
                        method="team page + linkedin serp"),
         Disconfirmation(event_id="e09", hypothesis="could be a different Henry Wang",

@@ -12,13 +12,6 @@ def _primary_name(seed) -> str:
     return seed.names[0].form if seed.names else ""
 
 
-def _nickname_variant(seed) -> str | None:
-    for v in seed.names[1:constants.VARIANTS_MAX + 1]:
-        if getattr(v, "kind", "") == "nickname":
-            return v.form
-    return None
-
-
 def build_queries(seed) -> list[str]:
     name = _primary_name(seed)
     org = seed.orgs[0] if seed.orgs else ""

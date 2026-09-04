@@ -8,7 +8,7 @@ later fetch can revise an earlier snippet-level judgement.
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Optional
+from typing import Literal, Optional
 
 from pydantic import BaseModel, Field
 
@@ -17,18 +17,18 @@ from ..sources import host_of
 from ..types import AttrObservation, Candidate, Term
 
 _PROMPT = (Path(__file__).resolve().parent.parent / "llm" / "prompts" / "match.md").read_text()
-_ATTRS = ("employer", "title", "education", "location")
 _PAGE_CLASSES = {"company_site", "personal_site", "code_host", "professional_network", "academic", "government_registry"}
+_MAX_SOURCES = 6  # sources[:_MAX_SOURCES] is what the model is shown; citations bind to that prefix
 
 
 class AttrCat(BaseModel):
-    category: str = "unrelated"
+    category: Literal["exact_match", "matches_former", "partial", "unrelated", "contradicts"] = "unrelated"
     sources: list[int] = Field(default_factory=list)
 
 
 class MatchRow(BaseModel):
     cid: str
-    name: str = "exact"                          # exact | variant | mismatch
+    name: Literal["exact", "variant", "mismatch"] = "exact"
     employer: Optional[AttrCat] = None
     title: Optional[AttrCat] = None
     education: Optional[AttrCat] = None
@@ -61,9 +61,9 @@ def _seed_block(seed, anchors: dict[str, str]) -> str:
     return "\n".join(lines)
 
 
-def _cand_block(c: Candidate, max_sources: int = 6) -> str:
+def _cand_block(c: Candidate) -> str:
     lines = [f"Candidate {c.cid} — urls: {', '.join(c.urls[:3]) or '(none)'}"]
-    for i, s in enumerate(c.sources[:max_sources], 1):
+    for i, s in enumerate(c.sources[:_MAX_SOURCES], 1):
         lines.append(f"  [{i}] ({s.kind}, {s.source_class}, {host_of(s.url)}) {s.text[:900]}")
     return "\n".join(lines)
 
@@ -77,25 +77,26 @@ def _apply(c: Candidate, row: MatchRow, anchors: dict[str, str], seed) -> None:
         c.name_form = "nickname"
     else:
         c.name_form = "exact"
-    n_src = len(c.sources)
+    shown = c.sources[:_MAX_SOURCES]
+    n_shown = len(shown)
     for attr, anchor in anchors.items():
         cat: AttrCat | None = getattr(row, attr, None)
         if not cat:
             continue
-        idxs = [i for i in cat.sources if 1 <= i <= n_src][:6]
+        idxs = [i for i in cat.sources if 1 <= i <= n_shown][:_MAX_SOURCES]
         category = cat.category
         if category == "matches_former" and seed.tense.get(anchor.lower(), "current") != "former":
             category = "partial"
         if category in constants.T4_CATEGORY_MULT and constants.T4_CATEGORY_MULT[category] > 0:
             for i in idxs:
-                s = c.sources[i - 1]
+                s = shown[i - 1]
                 c.attrs.setdefault(attr, []).append(AttrObservation(
                     value=anchor, source_class=s.source_class, source_tier=s.tier, url=s.url,
                     snippet=s.text[:200], category=category, kind=s.kind))
         elif category == "contradicts":
             worst = 0.0
             for i in idxs:
-                s = c.sources[i - 1]
+                s = shown[i - 1]
                 w = -(s.tier * constants.CONTRADICT_PAGE_MULT) if (s.kind == "page" and s.source_class in _PAGE_CLASSES) \
                     else constants.CONTRADICT_SNIPPET
                 worst = min(worst, w)

@@ -1,0 +1,4 @@
+**Matching Categorical Attributes**
+
+I'm focusing on how to best match categorical attributes for candidate c1 against the provided seed. This involves considering variations in names, employers, and titles to ensure accurate identification.
+

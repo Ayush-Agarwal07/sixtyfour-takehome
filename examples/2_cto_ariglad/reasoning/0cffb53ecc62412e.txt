@@ -1,0 +1,4 @@
+**Processing GitHub Profile Data**
+
+I'm currently trying to extract meaningful data from Ali Avci's GitHub profile. Unfortunately, the publicly accessible page only provides blocking functionality text, so I can't retrieve the expected user information directly from there. I'll need to explore alternative methods.
+

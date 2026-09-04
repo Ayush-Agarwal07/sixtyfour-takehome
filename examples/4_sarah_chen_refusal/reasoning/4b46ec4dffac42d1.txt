@@ -1,0 +1,1 @@
+No candidate's evidence mentions Figma at all, the seed's core anchor. c3 shows 'Tech Consulting' employer, not Figma. c1 shows a student in Columbia, SC with no design employer history matching Figma. c6 has no attribute evidence shown. None can be tied to the seed's stated ex-Figma product designer identity.

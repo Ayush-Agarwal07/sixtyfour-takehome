@@ -1,0 +1,289 @@
+{
+  "status": "abstained",
+  "input": "sarah chen, product designer, ex-figma",
+  "seed": {
+    "input": "sarah chen, product designer, ex-figma",
+    "regime": "NAME_STRONG",
+    "names": [
+      {
+        "form": "sarah chen",
+        "kind": "as_given",
+        "weight": 0.0
+      },
+      {
+        "form": "s. chen",
+        "kind": "initials",
+        "weight": 0.0
+      },
+      {
+        "form": "chen sarah",
+        "kind": "order_swap",
+        "weight": 0.0
+      },
+      {
+        "form": "Sadie chen",
+        "kind": "nickname",
+        "weight": 0.0
+      },
+      {
+        "form": "Sally chen",
+        "kind": "nickname",
+        "weight": 0.0
+      },
+      {
+        "form": "Sara chen",
+        "kind": "nickname",
+        "weight": 0.0
+      }
+    ],
+    "hard_ids": {},
+    "orgs": [
+      "figma"
+    ],
+    "titles": [
+      "product designer"
+    ],
+    "schools": [],
+    "locations": [],
+    "tense": {
+      "figma": "former"
+    },
+    "role_description": null,
+    "org_domains": {
+      "figma": "figma.com"
+    },
+    "original_regime": null
+  },
+  "regime": "NAME_STRONG",
+  "identity": {
+    "confidence": {
+      "score": 0.0,
+      "logodds": 0.0,
+      "terms": []
+    },
+    "cid": null,
+    "hard_keys": [],
+    "how_confirmed": "gate math not met after evidence cycles",
+    "public_figure": false,
+    "footprint_since": null,
+    "accounts_found": 0
+  },
+  "summary": [],
+  "profile": {
+    "current_role": null,
+    "employment": [],
+    "education": [],
+    "location": null,
+    "contact": [],
+    "accounts": [],
+    "public_output": [],
+    "relationships": [],
+    "notable": []
+  },
+  "unverified": [],
+  "graph": {
+    "nodes": [],
+    "edges": []
+  },
+  "conflicts": [],
+  "negative_findings": [],
+  "inferences": [],
+  "identity_resolution": {
+    "candidates": [
+      {
+        "cid": "c5",
+        "score": 0.4950001666600003,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "anchor:employer:professional_network",
+            "weight": 1.2
+          },
+          {
+            "factor": "surname:common",
+            "weight": 0.2
+          },
+          {
+            "factor": "uniqueness",
+            "weight": 0.8
+          },
+          {
+            "factor": "contradicts:title",
+            "weight": -0.72
+          }
+        ],
+        "urls": [
+          "https://ca.linkedin.com/in/sarah-y-chen"
+        ]
+      },
+      {
+        "cid": "c2",
+        "score": 0.23147521650098238,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "anchor:title:personal_site",
+            "weight": 0.5
+          },
+          {
+            "factor": "surname:common",
+            "weight": 0.2
+          },
+          {
+            "factor": "name_form:nickname",
+            "weight": -0.4
+          }
+        ],
+        "urls": [
+          "https://sarahchen.design/aboutme"
+        ]
+      },
+      {
+        "cid": "c1",
+        "score": 0.2141650169574414,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "surname:common",
+            "weight": 0.2
+          }
+        ],
+        "urls": [
+          "https://www.linkedin.com/in/sarahchenn"
+        ]
+      },
+      {
+        "cid": "c6",
+        "score": 0.2141650169574414,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "surname:common",
+            "weight": 0.2
+          }
+        ],
+        "urls": [
+          "https://ca.linkedin.com/in/sarah-chen-604a03290"
+        ]
+      },
+      {
+        "cid": "c8",
+        "score": 0.2141650169574414,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "surname:common",
+            "weight": 0.2
+          }
+        ],
+        "urls": [
+          "https://github.com/sarahchen"
+        ]
+      }
+    ],
+    "rejected": [
+      {
+        "cid": "c5",
+        "reason": "University of Toronto engineering student profile; title contradicts 'product designer', evidence weak/aggregator-derived"
+      },
+      {
+        "cid": "c2",
+        "reason": "Currently Product Design Manager at Protiviti, no Figma mention; nickname mismatch (Shuang)"
+      },
+      {
+        "cid": "c1",
+        "reason": "Bare LinkedIn URL with no matching employer, title, or other corroborating evidence"
+      },
+      {
+        "cid": "c6",
+        "reason": "below gate margin"
+      },
+      {
+        "cid": "c8",
+        "reason": "below gate margin"
+      },
+      {
+        "cid": "c9",
+        "reason": "below gate margin"
+      },
+      {
+        "cid": "c10",
+        "reason": "below gate margin"
+      },
+      {
+        "cid": "c13",
+        "reason": "below gate margin"
+      },
+      {
+        "cid": "c14",
+        "reason": "below gate margin"
+      },
+      {
+        "cid": "c12",
+        "reason": "below gate margin"
+      },
+      {
+        "cid": "c3",
+        "reason": "below gate margin"
+      },
+      {
+        "cid": "c4",
+        "reason": "below gate margin"
+      },
+      {
+        "cid": "c11",
+        "reason": "below gate margin"
+      },
+      {
+        "cid": "c7",
+        "reason": "below gate margin"
+      }
+    ],
+    "what_would_disambiguate": [
+      "Figma tenure dates and role title",
+      "Current employer/city",
+      "School attended",
+      "LinkedIn profile URL confirmed by seed"
+    ]
+  },
+  "specialization_payoff": [],
+  "timeline": [],
+  "run_metadata": {
+    "job_id": "sarah-chen-5",
+    "budget": {
+      "tool_calls": 9,
+      "llm_calls": 12,
+      "usd": 0.05223125000000001,
+      "resolve": {
+        "tool_calls": 8
+      },
+      "seconds": 73.0
+    },
+    "stop_reason": "no_expand:abstained",
+    "models": {
+      "T1": "anthropic/claude-sonnet-5",
+      "T2": "anthropic/claude-sonnet-5",
+      "T3": "google/gemini-3.8-flash",
+      "T4": "google/gemini-3.8-flash",
+      "T5": "google/gemini-3.8-flash"
+    },
+    "timings": {
+      "seconds": 73.0364049589989
+    }
+  }
+}

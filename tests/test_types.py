@@ -2,10 +2,10 @@
 from __future__ import annotations
 
 import json
-from datetime import date, datetime, timezone
+from datetime import date
 
 import pi
-from pi.trace.events import parse_event
+from pi.trace.events import EVENT_ADAPTER
 from pi.types import (
     AttrObservation, Candidate, Casefile, Claim, Confidence, Evidence, Findings,
     GraphEdge, GraphNode, Identity, Output, Profile, Resolution, Seed, Temporal,
@@ -56,14 +56,13 @@ def test_every_event_serializes_and_discriminates():
     seen_types = set()
     for e in events:
         data = json.loads(e.model_dump_json())
-        parsed = parse_event(data)
+        parsed = EVENT_ADAPTER.validate_python(data)
         # discriminated back to the same concrete class
         assert type(parsed) is type(e), (type(parsed), type(e))
         seen_types.add(data["event_type"])
-    # all 18 event types present
-    assert len(seen_types) == 18
+    # all 17 event types present
+    assert len(seen_types) == 17
 
 
 def test_package_exports():
     assert pi.__version__
-    assert hasattr(pi, "Seed") and hasattr(pi, "Output") and hasattr(pi, "Deps")

@@ -41,6 +41,7 @@ def classify(
     hard_ids: dict,
     company_resolved: bool,
     org_is_huge: bool,
+    weak_anchor: bool = False,      # a title, school, or location: weaker than an org, stronger than a bare name
 ) -> Regime:
     if hard_ids.get("email"):
         return "HARD_ID_EMAIL"
@@ -53,6 +54,6 @@ def classify(
         return "BARE_NAME"          # no name, no definite role → resolver abstains typed
     if company_resolved and not org_is_huge:
         return "NAME_STRONG"
-    if org:
+    if org or weak_anchor:
         return "NAME_WEAK"
     return "BARE_NAME"

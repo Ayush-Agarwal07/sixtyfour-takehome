@@ -1,0 +1,2155 @@
+{
+  "status": "confirmed",
+  "input": "Henry wang, sixtyfour ai",
+  "seed": {
+    "input": "Henry wang, sixtyfour ai",
+    "regime": "NAME_STRONG",
+    "names": [
+      {
+        "form": "Henry wang",
+        "kind": "as_given",
+        "weight": 0.0
+      },
+      {
+        "form": "H. wang",
+        "kind": "initials",
+        "weight": 0.0
+      },
+      {
+        "form": "wang Henry",
+        "kind": "order_swap",
+        "weight": 0.0
+      },
+      {
+        "form": "Hal wang",
+        "kind": "nickname",
+        "weight": 0.0
+      },
+      {
+        "form": "Hank wang",
+        "kind": "nickname",
+        "weight": 0.0
+      },
+      {
+        "form": "Hap wang",
+        "kind": "nickname",
+        "weight": 0.0
+      },
+      {
+        "form": "Haps wang",
+        "kind": "nickname",
+        "weight": 0.0
+      },
+      {
+        "form": "Harry wang",
+        "kind": "nickname",
+        "weight": 0.0
+      }
+    ],
+    "hard_ids": {},
+    "orgs": [
+      "sixtyfour ai"
+    ],
+    "titles": [],
+    "schools": [],
+    "locations": [],
+    "tense": {
+      "sixtyfour ai": "current"
+    },
+    "role_description": null,
+    "org_domains": {
+      "sixtyfour ai": "sixtyfour.ai"
+    },
+    "original_regime": null
+  },
+  "regime": "NAME_STRONG",
+  "identity": {
+    "confidence": {
+      "score": 0.973403006423134,
+      "logodds": 3.6,
+      "terms": [
+        {
+          "factor": "prior",
+          "weight": -1.5
+        },
+        {
+          "factor": "anchored_one_way",
+          "weight": 1.5
+        },
+        {
+          "factor": "anchor:employer:personal_site",
+          "weight": 2.0
+        },
+        {
+          "factor": "corroboration:employer:4src",
+          "weight": 0.6
+        },
+        {
+          "factor": "surname:common",
+          "weight": 0.2
+        },
+        {
+          "factor": "uniqueness",
+          "weight": 0.8
+        }
+      ]
+    },
+    "cid": "c3",
+    "hard_keys": [],
+    "how_confirmed": "math P=0.973 margin=0.76 [anchored_one_way=+1.5; anchor:employer:personal_site=+2.0; corroboration:employer:4src=+0.6; surname:common=+0.2; uniqueness=+0.8]; T1 CONFIRM",
+    "public_figure": false,
+    "footprint_since": "2023",
+    "accounts_found": 3
+  },
+  "summary": [
+    {
+      "text": "Henry Wang is employed at Sixtyfour (also referenced as sixtyfour-ai), with ongoing employment recorded from February 2026.",
+      "claim_ids": [
+        "7371465b1c246dfe",
+        "c3294a271a958d1f",
+        "b8a726ba022a6d47"
+      ]
+    },
+    {
+      "text": "His title at Sixtyfour is listed variously as researcher, software engineer, and founding engineer, representing a conflict in the evidence.",
+      "claim_ids": [
+        "d5299a15a8d414aa",
+        "229db12cccdd40b8",
+        "68f7cfa575990e1f"
+      ]
+    },
+    {
+      "text": "He is located in the San Francisco Bay Area.",
+      "claim_ids": [
+        "bb66ca90aef14b44",
+        "c6d723119ef7c5a8",
+        "4f4045a8a8fa79ad"
+      ]
+    },
+    {
+      "text": "He has an association with the University of California, Riverside, where titles including Research Assistant Ballard Lab and Data Structures & Algorithms Grader are recorded.",
+      "claim_ids": [
+        "4a671ec9e9576298",
+        "e28a5dfdb2f5ab2f",
+        "e6d971e82a8f0b6d",
+        "d230347c0013c3c2"
+      ]
+    },
+    {
+      "text": "He holds or has held an advisor role and board or advisor position with the Highlander Builders Initiative, and a title of Founding President is also recorded in connection with that organization.",
+      "claim_ids": [
+        "2156f9a10f2a484a",
+        "00b86ed390feb13e",
+        "4cb33b7264530de5",
+        "d3ce7856ab37da29"
+      ]
+    },
+    {
+      "text": "His GitHub handle (braindead-dev) was first recorded in May 2023, making that the earliest dated activity in the timeline.",
+      "claim_ids": [
+        "91090ba3b9ce6f39"
+      ]
+    },
+    {
+      "text": "He can be reached at contact@henrywa.ng and maintains a personal website at henrywa.ng, with an additional website listed as henr.ee.",
+      "claim_ids": [
+        "183a2dd877b9e387",
+        "5cd91dd42e28b06c",
+        "ceab20aa99780894"
+      ]
+    },
+    {
+      "text": "Online handles are recorded for LinkedIn, X (Twitter), Hacker News, and Hugging Face.",
+      "claim_ids": [
+        "7fb1b58c83ef857a",
+        "42340cd00999bd49",
+        "8b9878c4ae439c71",
+        "bf2c98750febfeb7"
+      ]
+    }
+  ],
+  "profile": {
+    "current_role": {
+      "id": "00b86ed390feb13e",
+      "predicate": "title",
+      "value": "advisor",
+      "value_raw": "Advisor",
+      "temporal": {
+        "start": "2025-12-01",
+        "end": null,
+        "end_state": "ongoing",
+        "precision": "month",
+        "context_date": null
+      },
+      "confidence": {
+        "score": 0.47502081252106,
+        "logodds": -0.10000000000000009,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "source_tier:professional_network",
+            "weight": 1.4
+          },
+          {
+            "factor": "extraction:prose_llm",
+            "weight": 0.0
+          }
+        ]
+      },
+      "attachment_confidence": 0.9991755753136017,
+      "identity_link": "anchor_match:employer",
+      "evidence": [
+        {
+          "evidence_id": "72b0ba0cfb40846b",
+          "candidate_id": "c3",
+          "url": "https://www.linkedin.com/in/henry00c",
+          "snippet": "Advisor",
+          "retrieved_at": "2026-09-04T05:11:00.866875Z",
+          "source_class": "professional_network",
+          "extraction_method": "prose_llm"
+        },
+        {
+          "evidence_id": "2e2f015f8f1aec70",
+          "candidate_id": "c3",
+          "url": "https://linkedin.com/in/henry00c",
+          "snippet": "### Advisor - [Highlander Builders Initiative](https://www.linkedin.com/company/hbi) (Current)",
+          "retrieved_at": "2026-09-04T05:11:34.639119Z",
+          "source_class": "professional_network",
+          "extraction_method": "prose_llm"
+        }
+      ]
+    },
+    "employment": [
+      {
+        "id": "5cd91dd42e28b06c",
+        "predicate": "employment",
+        "value": "henrywa.ng",
+        "value_raw": "henrywa.ng",
+        "temporal": {
+          "start": "2026-01-01",
+          "end": "2026-12-31",
+          "end_state": "ended",
+          "precision": "year",
+          "context_date": "2026-09-04"
+        },
+        "confidence": {
+          "score": 0.6681877721681662,
+          "logodds": 0.7000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:code_host",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:github_emails",
+              "weight": 0.0
+            }
+          ]
+        },
+        "attachment_confidence": 0.9991755753136017,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "3f033e790a9699ef",
+            "candidate_id": "c3",
+            "url": "https://github.com/braindead-dev/wikify",
+            "snippet": "50 commits authored from contact@henrywa.ng between 2026-07-04 and 2026-09-03",
+            "retrieved_at": "2026-09-04T05:10:43.707625Z",
+            "source_class": "code_host",
+            "extraction_method": "github_emails"
+          },
+          {
+            "evidence_id": "5befc1d156e6ed92",
+            "candidate_id": "c3",
+            "url": "https://github.com/braindead-dev/gpu-box2d",
+            "snippet": "28 commits authored from contact@henrywa.ng between 2026-06-24 and 2026-07-02",
+            "retrieved_at": "2026-09-04T05:10:44.074621Z",
+            "source_class": "code_host",
+            "extraction_method": "github_emails"
+          }
+        ]
+      },
+      {
+        "id": "7371465b1c246dfe",
+        "predicate": "employer",
+        "value": "sixtyfour.ai",
+        "value_raw": "Sixtyfour",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.8320183851339245,
+          "logodds": 1.6,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:personal_site",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:prose_llm",
+              "weight": 0.0
+            },
+            {
+              "factor": "corroboration:2src",
+              "weight": 1.2
+            },
+            {
+              "factor": "no_context_date",
+              "weight": -0.3
+            }
+          ]
+        },
+        "attachment_confidence": 0.9991755753136017,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "2dd556162568a8b3",
+            "candidate_id": "c3",
+            "url": "https://henrywa.ng/",
+            "snippet": "currently working on people intelligence agents at Sixtyfour",
+            "retrieved_at": "2026-09-04T05:10:45.808627Z",
+            "source_class": "personal_site",
+            "extraction_method": "prose_llm"
+          },
+          {
+            "evidence_id": "609687661d383d43",
+            "candidate_id": "c3",
+            "url": "https://www.linkedin.com/in/henry00c",
+            "snippet": "Founding Engineer @ Sixtyfour",
+            "retrieved_at": "2026-09-04T05:11:00.866143Z",
+            "source_class": "professional_network",
+            "extraction_method": "prose_llm"
+          },
+          {
+            "evidence_id": "411f26b453a4a38e",
+            "candidate_id": "c3",
+            "url": "https://linkedin.com/in/henry00c",
+            "snippet": "Founding Engineer @ Sixtyfour",
+            "retrieved_at": "2026-09-04T05:11:34.638223Z",
+            "source_class": "professional_network",
+            "extraction_method": "prose_llm"
+          },
+          {
+            "evidence_id": "97035f48644fcd0d",
+            "candidate_id": "c3",
+            "url": "https://www.linkedin.com/posts/henry00c_im-happy-to-share-that-ill-be-joining-sixtyfour-activity-7406941322412085249-o8pS",
+            "snippet": "Founding Engineer at Sixtyfour",
+            "retrieved_at": "2026-09-04T05:11:51.053198Z",
+            "source_class": "professional_network",
+            "extraction_method": "prose_llm"
+          }
+        ]
+      },
+      {
+        "id": "c3294a271a958d1f",
+        "predicate": "employer",
+        "value": "sixtyfour-ai",
+        "value_raw": "sixtyfour-ai",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.5986876601124521,
+          "logodds": 0.4000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:code_host",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:github_api",
+              "weight": 0.0
+            },
+            {
+              "factor": "no_context_date",
+              "weight": -0.3
+            }
+          ]
+        },
+        "attachment_confidence": 0.9991755753136017,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "ccc5dacb3d33bd58",
+            "candidate_id": "c3",
+            "url": "https://github.com/braindead-dev",
+            "snippet": "sixtyfour-ai",
+            "retrieved_at": "2026-09-04T05:10:43.137685Z",
+            "source_class": "code_host",
+            "extraction_method": "github_api"
+          }
+        ]
+      },
+      {
+        "id": "4a671ec9e9576298",
+        "predicate": "employment",
+        "value": "university of california, riverside",
+        "value_raw": "University of California, Riverside",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.401312339887548,
+          "logodds": -0.4000000000000001,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:professional_network",
+              "weight": 1.4
+            },
+            {
+              "factor": "extraction:prose_llm",
+              "weight": 0.0
+            },
+            {
+              "factor": "no_context_date",
+              "weight": -0.3
+            }
+          ]
+        },
+        "attachment_confidence": 0.9977621514787236,
+        "identity_link": "anchor_match:domain,employer,handle,location",
+        "evidence": [
+          {
+            "evidence_id": "30382f14750747a2",
+            "candidate_id": "c3",
+            "url": "https://linkedin.com/in/henry00c",
+            "snippet": "### Research Assistant Ballard Lab - [University of California, Riverside](https://www.linkedin.com/school/",
+            "retrieved_at": "2026-09-04T05:11:34.639194Z",
+            "source_class": "professional_network",
+            "extraction_method": "prose_llm"
+          }
+        ]
+      },
+      {
+        "id": "4cb33b7264530de5",
+        "predicate": "employer",
+        "value": "highlander builders initiative",
+        "value_raw": "Highlander Builders Initiative",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.401312339887548,
+          "logodds": -0.4000000000000001,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:professional_network",
+              "weight": 1.4
+            },
+            {
+              "factor": "extraction:prose_llm",
+              "weight": 0.0
+            },
+            {
+              "factor": "no_context_date",
+              "weight": -0.3
+            }
+          ]
+        },
+        "attachment_confidence": 0.9088770389851438,
+        "identity_link": "anchor_match:employer,location",
+        "evidence": [
+          {
+            "evidence_id": "f416f999843df99e",
+            "candidate_id": "c3",
+            "url": "https://www.linkedin.com/posts/henry00c_im-happy-to-share-that-ill-be-joining-sixtyfour-activity-7406941322412085249-o8pS",
+            "snippet": "Founding President at Highlander Builders Initiative",
+            "retrieved_at": "2026-09-04T05:11:51.053373Z",
+            "source_class": "professional_network",
+            "extraction_method": "prose_llm"
+          }
+        ]
+      }
+    ],
+    "education": [],
+    "location": {
+      "id": "bb66ca90aef14b44",
+      "predicate": "location",
+      "value": "sf bay area",
+      "value_raw": "SF Bay Area",
+      "temporal": {
+        "start": null,
+        "end": null,
+        "end_state": "unknown",
+        "precision": "year",
+        "context_date": null
+      },
+      "confidence": {
+        "score": 0.5986876601124521,
+        "logodds": 0.4000000000000002,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "source_tier:personal_site",
+            "weight": 2.2
+          },
+          {
+            "factor": "extraction:prose_llm",
+            "weight": 0.0
+          },
+          {
+            "factor": "no_context_date",
+            "weight": -0.3
+          }
+        ]
+      },
+      "attachment_confidence": 0.997268039236989,
+      "identity_link": "anchor_match:employer",
+      "evidence": [
+        {
+          "evidence_id": "9a7cd1d63c08fa00",
+          "candidate_id": "c3",
+          "url": "https://henrywa.ng/",
+          "snippet": "SF Bay Area",
+          "retrieved_at": "2026-09-04T05:10:45.808588Z",
+          "source_class": "personal_site",
+          "extraction_method": "prose_llm"
+        }
+      ]
+    },
+    "contact": [
+      {
+        "id": "91090ba3b9ce6f39",
+        "predicate": "handle",
+        "value": "https://github.com/braindead-dev",
+        "value_raw": "https://github.com/braindead-dev",
+        "temporal": {
+          "start": "2023-05-21",
+          "end": null,
+          "end_state": "unknown",
+          "precision": "day",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.6681877721681662,
+          "logodds": 0.7000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:code_host",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:username_probe",
+              "weight": 0.0
+            }
+          ]
+        },
+        "attachment_confidence": 0.9836975006285591,
+        "identity_link": "anchor_match:domain,employer,handle",
+        "evidence": [
+          {
+            "evidence_id": "2469e222f5afc764",
+            "candidate_id": "c3",
+            "url": "https://github.com/braindead-dev",
+            "snippet": "username match; same-person test 0.98",
+            "retrieved_at": "2026-09-04T05:10:43.671615Z",
+            "source_class": "code_host",
+            "extraction_method": "username_probe"
+          }
+        ]
+      },
+      {
+        "id": "183a2dd877b9e387",
+        "predicate": "email",
+        "value": "contact@henrywa.ng",
+        "value_raw": "contact@henrywa.ng",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": "2026-09-04"
+        },
+        "confidence": {
+          "score": 0.6681877721681662,
+          "logodds": 0.7000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:code_host",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:github_emails",
+              "weight": 0.0
+            }
+          ]
+        },
+        "attachment_confidence": 0.9991755753136017,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "e05d633106924061",
+            "candidate_id": "c3",
+            "url": "https://github.com/braindead-dev/wikify",
+            "snippet": "50 commits authored from contact@henrywa.ng between 2026-07-04 and 2026-09-03",
+            "retrieved_at": "2026-09-04T05:10:43.707732Z",
+            "source_class": "code_host",
+            "extraction_method": "github_emails"
+          },
+          {
+            "evidence_id": "5e2a8eb4a3b67ba1",
+            "candidate_id": "c3",
+            "url": "https://github.com/braindead-dev/gpu-box2d",
+            "snippet": "28 commits authored from contact@henrywa.ng between 2026-06-24 and 2026-07-02",
+            "retrieved_at": "2026-09-04T05:10:44.074692Z",
+            "source_class": "code_host",
+            "extraction_method": "github_emails"
+          }
+        ]
+      },
+      {
+        "id": "ceab20aa99780894",
+        "predicate": "website",
+        "value": "henr.ee",
+        "value_raw": "henr.ee",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.5986876601124521,
+          "logodds": 0.4000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:code_host",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:github_api",
+              "weight": 0.0
+            },
+            {
+              "factor": "no_context_date",
+              "weight": -0.3
+            }
+          ]
+        },
+        "attachment_confidence": 0.9991755753136017,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "efc2ad26a1cdfdc1",
+            "candidate_id": "c3",
+            "url": "https://github.com/braindead-dev",
+            "snippet": "henr.ee",
+            "retrieved_at": "2026-09-04T05:10:43.137712Z",
+            "source_class": "code_host",
+            "extraction_method": "github_api"
+          }
+        ]
+      },
+      {
+        "id": "7fb1b58c83ef857a",
+        "predicate": "handle",
+        "value": "https://linkedin.com/in/henry00c",
+        "value_raw": "https://linkedin.com/in/henry00c",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.5986876601124521,
+          "logodds": 0.4000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:personal_site",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:link",
+              "weight": 0.0
+            },
+            {
+              "factor": "no_context_date",
+              "weight": -0.3
+            }
+          ]
+        },
+        "attachment_confidence": 0.997268039236989,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "f401913c9f93f490",
+            "candidate_id": "c3",
+            "url": "https://henrywa.ng/",
+            "snippet": "https://linkedin.com/in/henry00c",
+            "retrieved_at": "2026-09-04T05:10:45.813381Z",
+            "source_class": "personal_site",
+            "extraction_method": "link"
+          }
+        ]
+      },
+      {
+        "id": "42340cd00999bd49",
+        "predicate": "handle",
+        "value": "https://x.com/henry0284928382",
+        "value_raw": "https://x.com/henry0284928382",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.5986876601124521,
+          "logodds": 0.4000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:personal_site",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:link",
+              "weight": 0.0
+            },
+            {
+              "factor": "no_context_date",
+              "weight": -0.3
+            }
+          ]
+        },
+        "attachment_confidence": 0.997268039236989,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "ff2aaf2ba8cb0391",
+            "candidate_id": "c3",
+            "url": "https://henrywa.ng/",
+            "snippet": "https://x.com/henry0284928382",
+            "retrieved_at": "2026-09-04T05:10:45.813430Z",
+            "source_class": "personal_site",
+            "extraction_method": "link"
+          }
+        ]
+      },
+      {
+        "id": "8b9878c4ae439c71",
+        "predicate": "handle",
+        "value": "https://news.ycombinator.com/user?id=henry00c",
+        "value_raw": "https://news.ycombinator.com/user?id=henry00c",
+        "temporal": {
+          "start": "2024-09-28",
+          "end": null,
+          "end_state": "unknown",
+          "precision": "day",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.47502081252106,
+          "logodds": -0.10000000000000009,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:press",
+              "weight": 1.4
+            },
+            {
+              "factor": "extraction:username_probe",
+              "weight": 0.0
+            }
+          ]
+        },
+        "attachment_confidence": 0.9478464369215823,
+        "identity_link": "anchor_match:domain,handle",
+        "evidence": [
+          {
+            "evidence_id": "e8581ba29cb5a80e",
+            "candidate_id": "c3",
+            "url": "https://news.ycombinator.com/user?id=henry00c",
+            "snippet": "username match; same-person test 0.95",
+            "retrieved_at": "2026-09-04T05:10:43.670086Z",
+            "source_class": "press",
+            "extraction_method": "username_probe"
+          }
+        ]
+      },
+      {
+        "id": "bf2c98750febfeb7",
+        "predicate": "handle",
+        "value": "https://huggingface.co/henry00c",
+        "value_raw": "https://huggingface.co/henry00c",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.2689414213699951,
+          "logodds": -1.0,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:unknown",
+              "weight": 0.8
+            },
+            {
+              "factor": "extraction:username_probe",
+              "weight": 0.0
+            },
+            {
+              "factor": "no_context_date",
+              "weight": -0.3
+            }
+          ]
+        },
+        "attachment_confidence": 0.9478464369215823,
+        "identity_link": "anchor_match:domain,handle",
+        "evidence": [
+          {
+            "evidence_id": "61b988fe40cfd44e",
+            "candidate_id": "c3",
+            "url": "https://huggingface.co/henry00c",
+            "snippet": "username match; same-person test 0.95",
+            "retrieved_at": "2026-09-04T05:10:43.918316Z",
+            "source_class": "unknown",
+            "extraction_method": "username_probe"
+          }
+        ]
+      }
+    ],
+    "accounts": [],
+    "public_output": [
+      {
+        "id": "2c518ca2a0e6aa20",
+        "predicate": "repo",
+        "value": "https://github.com/braindead-dev/wikify",
+        "value_raw": "https://github.com/braindead-dev/wikify",
+        "temporal": {
+          "start": "2026-09-03",
+          "end": null,
+          "end_state": "unknown",
+          "precision": "day",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.6681877721681662,
+          "logodds": 0.7000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:code_host",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:github_api",
+              "weight": 0.0
+            }
+          ]
+        },
+        "attachment_confidence": 0.9991755753136017,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "4a31e9a61cacdd27",
+            "candidate_id": "c3",
+            "url": "https://github.com/braindead-dev/wikify",
+            "snippet": "braindead-dev/wikify",
+            "retrieved_at": "2026-09-04T05:10:43.353383Z",
+            "source_class": "code_host",
+            "extraction_method": "github_api"
+          }
+        ]
+      },
+      {
+        "id": "a045dd1504dc62c8",
+        "predicate": "repo",
+        "value": "https://github.com/braindead-dev/gpu-box2d",
+        "value_raw": "https://github.com/braindead-dev/gpu-box2d",
+        "temporal": {
+          "start": "2026-07-02",
+          "end": null,
+          "end_state": "unknown",
+          "precision": "day",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.6681877721681662,
+          "logodds": 0.7000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:code_host",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:github_api",
+              "weight": 0.0
+            }
+          ]
+        },
+        "attachment_confidence": 0.9991755753136017,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "2197479cbb669e7d",
+            "candidate_id": "c3",
+            "url": "https://github.com/braindead-dev/gpu-box2d",
+            "snippet": "braindead-dev/gpu-box2d: GPU accelerated port of Box2D 2.3.0",
+            "retrieved_at": "2026-09-04T05:10:43.353444Z",
+            "source_class": "code_host",
+            "extraction_method": "github_api"
+          }
+        ]
+      }
+    ],
+    "relationships": [],
+    "notable": [
+      {
+        "id": "2156f9a10f2a484a",
+        "predicate": "board_or_advisor",
+        "value": "highlander builders initiative",
+        "value_raw": "Highlander Builders Initiative",
+        "temporal": {
+          "start": "2025-12-01",
+          "end": null,
+          "end_state": "ongoing",
+          "precision": "month",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.47502081252106,
+          "logodds": -0.10000000000000009,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:professional_network",
+              "weight": 1.4
+            },
+            {
+              "factor": "extraction:prose_llm",
+              "weight": 0.0
+            }
+          ]
+        },
+        "attachment_confidence": 0.9991755753136017,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "5a08dfa3c2e0c996",
+            "candidate_id": "c3",
+            "url": "https://www.linkedin.com/in/henry00c",
+            "snippet": "Highlander Builders Initiative",
+            "retrieved_at": "2026-09-04T05:11:00.866793Z",
+            "source_class": "professional_network",
+            "extraction_method": "prose_llm"
+          },
+          {
+            "evidence_id": "f266ae26d285b918",
+            "candidate_id": "c3",
+            "url": "https://linkedin.com/in/henry00c",
+            "snippet": "### Advisor - [Highlander Builders Initiative](https://www.linkedin.com/company/hbi) (Current)\n\nDec 2025 - Present (3 months)",
+            "retrieved_at": "2026-09-04T05:11:34.639034Z",
+            "source_class": "professional_network",
+            "extraction_method": "prose_llm"
+          }
+        ]
+      },
+      {
+        "id": "c6d723119ef7c5a8",
+        "predicate": "location",
+        "value": "san francisco bay area (us",
+        "value_raw": "San Francisco Bay Area (US)",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.401312339887548,
+          "logodds": -0.4000000000000001,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:professional_network",
+              "weight": 1.4
+            },
+            {
+              "factor": "extraction:prose_llm",
+              "weight": 0.0
+            },
+            {
+              "factor": "no_context_date",
+              "weight": -0.3
+            }
+          ]
+        },
+        "attachment_confidence": 0.9991755753136017,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "2ac511e03452ed9a",
+            "candidate_id": "c3",
+            "url": "https://www.linkedin.com/in/henry00c",
+            "snippet": "San Francisco Bay Area (US)",
+            "retrieved_at": "2026-09-04T05:11:00.866220Z",
+            "source_class": "professional_network",
+            "extraction_method": "prose_llm"
+          },
+          {
+            "evidence_id": "6acb203874cac0a4",
+            "candidate_id": "c3",
+            "url": "https://linkedin.com/in/henry00c",
+            "snippet": "San Francisco Bay Area (US)",
+            "retrieved_at": "2026-09-04T05:11:34.638316Z",
+            "source_class": "professional_network",
+            "extraction_method": "prose_llm"
+          }
+        ]
+      },
+      {
+        "id": "4f4045a8a8fa79ad",
+        "predicate": "location",
+        "value": "san francisco",
+        "value_raw": "San Francisco, California",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.401312339887548,
+          "logodds": -0.4000000000000001,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:professional_network",
+              "weight": 1.4
+            },
+            {
+              "factor": "extraction:prose_llm",
+              "weight": 0.0
+            },
+            {
+              "factor": "no_context_date",
+              "weight": -0.3
+            }
+          ]
+        },
+        "attachment_confidence": 0.9977621514787236,
+        "identity_link": "anchor_match:domain,employer,handle,location",
+        "evidence": [
+          {
+            "evidence_id": "090ac5a7bdbb7e0b",
+            "candidate_id": "c3",
+            "url": "https://linkedin.com/in/henry00c",
+            "snippet": "Feb 2026 - Present (6 months) in San Francisco, California",
+            "retrieved_at": "2026-09-04T05:11:34.638939Z",
+            "source_class": "professional_network",
+            "extraction_method": "prose_llm"
+          }
+        ]
+      },
+      {
+        "id": "8eabefc19795caf5",
+        "predicate": "location",
+        "value": "san francisco bay area [us",
+        "value_raw": "San Francisco Bay Area [US]",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.401312339887548,
+          "logodds": -0.4000000000000001,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:professional_network",
+              "weight": 1.4
+            },
+            {
+              "factor": "extraction:prose_llm",
+              "weight": 0.0
+            },
+            {
+              "factor": "no_context_date",
+              "weight": -0.3
+            }
+          ]
+        },
+        "attachment_confidence": 0.9088770389851438,
+        "identity_link": "anchor_match:employer,location",
+        "evidence": [
+          {
+            "evidence_id": "2bbbe81b34299b1d",
+            "candidate_id": "c3",
+            "url": "https://www.linkedin.com/posts/henry00c_im-happy-to-share-that-ill-be-joining-sixtyfour-activity-7406941322412085249-o8pS",
+            "snippet": "Based in San Francisco Bay Area [US].",
+            "retrieved_at": "2026-09-04T05:11:51.053507Z",
+            "source_class": "professional_network",
+            "extraction_method": "prose_llm"
+          }
+        ]
+      }
+    ]
+  },
+  "unverified": [
+    {
+      "id": "d6c61d2636a224cd",
+      "predicate": "publication",
+      "value": "the prevalence of adverse events after prehospital neuromuscular blockade-assisted airway management",
+      "value_raw": "The Prevalence of Adverse Events After Prehospital Neuromuscular Blockade-Assisted Airway Management",
+      "temporal": {
+        "start": "2026-01-01",
+        "end": "2026-12-31",
+        "end_state": "ended",
+        "precision": "year",
+        "context_date": null
+      },
+      "confidence": {
+        "score": 0.7310585786300049,
+        "logodds": 1.0,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "source_tier:academic",
+            "weight": 2.5
+          },
+          {
+            "factor": "extraction:openalex",
+            "weight": 0.0
+          }
+        ]
+      },
+      "attachment_confidence": 0.6224593312018546,
+      "identity_link": "graph_path:1",
+      "evidence": [
+        {
+          "evidence_id": "629f6f989b337faa",
+          "candidate_id": "c3",
+          "url": "https://doi.org/10.1080/10903127.2026.2713128",
+          "snippet": "The Prevalence of Adverse Events After Prehospital Neuromuscular Blockade-Assisted Airway Management (2026, Prehospital Emergency Care)",
+          "retrieved_at": "2026-09-04T05:12:03.184962Z",
+          "source_class": "academic",
+          "extraction_method": "openalex"
+        }
+      ]
+    },
+    {
+      "id": "8a761754902ff53d",
+      "predicate": "publication",
+      "value": "digital technologies for community consultation and public disclosure in exception from informed consent trials",
+      "value_raw": "Digital Technologies for Community Consultation and Public Disclosure in Exception From Informed Consent Trials",
+      "temporal": {
+        "start": "2026-01-01",
+        "end": "2026-12-31",
+        "end_state": "ended",
+        "precision": "year",
+        "context_date": null
+      },
+      "confidence": {
+        "score": 0.7310585786300049,
+        "logodds": 1.0,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "source_tier:academic",
+            "weight": 2.5
+          },
+          {
+            "factor": "extraction:openalex",
+            "weight": 0.0
+          }
+        ]
+      },
+      "attachment_confidence": 0.6224593312018546,
+      "identity_link": "graph_path:1",
+      "evidence": [
+        {
+          "evidence_id": "28fb956a2faa0c76",
+          "candidate_id": "c3",
+          "url": "https://doi.org/10.1016/j.acepjo.2026.100464",
+          "snippet": "Digital Technologies for Community Consultation and Public Disclosure in Exception From Informed Consent Trials (2026, Journal of the American College of Emergency Physicians Open)",
+          "retrieved_at": "2026-09-04T05:12:03.185043Z",
+          "source_class": "academic",
+          "extraction_method": "openalex"
+        }
+      ]
+    },
+    {
+      "id": "3bf1e4f4fba73d8e",
+      "predicate": "publication",
+      "value": "association of markers of kidney tubular secretion and risk of acute kidney injury after acute heart failure",
+      "value_raw": "Association of Markers of Kidney Tubular Secretion and Risk of Acute Kidney Injury after Acute Heart Failure",
+      "temporal": {
+        "start": "2026-01-01",
+        "end": "2026-12-31",
+        "end_state": "ended",
+        "precision": "year",
+        "context_date": null
+      },
+      "confidence": {
+        "score": 0.7310585786300049,
+        "logodds": 1.0,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "source_tier:academic",
+            "weight": 2.5
+          },
+          {
+            "factor": "extraction:openalex",
+            "weight": 0.0
+          }
+        ]
+      },
+      "attachment_confidence": 0.6224593312018546,
+      "identity_link": "graph_path:1",
+      "evidence": [
+        {
+          "evidence_id": "0f0b92392818ff21",
+          "candidate_id": "c3",
+          "url": "https://doi.org/10.34067/kid.0000001263",
+          "snippet": "Association of Markers of Kidney Tubular Secretion and Risk of Acute Kidney Injury after Acute Heart Failure (2026, Kidney360)",
+          "retrieved_at": "2026-09-04T05:12:03.185085Z",
+          "source_class": "academic",
+          "extraction_method": "openalex"
+        }
+      ]
+    },
+    {
+      "id": "2a83b6fa129b269b",
+      "predicate": "publication",
+      "value": "association of kidney tubule dysfunction and injury biomarkers with long-term risk of acute kidney injury during acute congestive heart failure hospitalizations",
+      "value_raw": "Association of Kidney Tubule Dysfunction and Injury Biomarkers With Long-Term Risk of Acute Kidney Injury During Acute Congestive Heart Failure Hospitalizations",
+      "temporal": {
+        "start": "2026-01-01",
+        "end": "2026-12-31",
+        "end_state": "ended",
+        "precision": "year",
+        "context_date": null
+      },
+      "confidence": {
+        "score": 0.7310585786300049,
+        "logodds": 1.0,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "source_tier:academic",
+            "weight": 2.5
+          },
+          {
+            "factor": "extraction:openalex",
+            "weight": 0.0
+          }
+        ]
+      },
+      "attachment_confidence": 0.6224593312018546,
+      "identity_link": "graph_path:1",
+      "evidence": [
+        {
+          "evidence_id": "e3c9848f828616d4",
+          "candidate_id": "c3",
+          "url": "https://doi.org/10.1016/j.xkme.2026.101466",
+          "snippet": "Association of Kidney Tubule Dysfunction and Injury Biomarkers With Long-Term Risk of Acute Kidney Injury During Acute Congestive Heart Failure Hospitalizations (2026, Kidney Medicine)",
+          "retrieved_at": "2026-09-04T05:12:03.185124Z",
+          "source_class": "academic",
+          "extraction_method": "openalex"
+        }
+      ]
+    },
+    {
+      "id": "6e74700e14b676bf",
+      "predicate": "publication",
+      "value": "markers of kidney tubule dysfunction and injury and long-term risk of acute kidney injury following coronary artery bypass graft surgery",
+      "value_raw": "Markers of kidney tubule dysfunction and injury and long-term risk of acute kidney injury following coronary artery bypass graft surgery",
+      "temporal": {
+        "start": "2026-01-01",
+        "end": "2026-12-31",
+        "end_state": "ended",
+        "precision": "year",
+        "context_date": null
+      },
+      "confidence": {
+        "score": 0.7310585786300049,
+        "logodds": 1.0,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "source_tier:academic",
+            "weight": 2.5
+          },
+          {
+            "factor": "extraction:openalex",
+            "weight": 0.0
+          }
+        ]
+      },
+      "attachment_confidence": 0.6224593312018546,
+      "identity_link": "graph_path:1",
+      "evidence": [
+        {
+          "evidence_id": "1ca8dee9f7020cbf",
+          "candidate_id": "c3",
+          "url": "https://doi.org/10.1371/journal.pone.0331996",
+          "snippet": "Markers of kidney tubule dysfunction and injury and long-term risk of acute kidney injury following coronary artery bypass graft surgery (2026, PLoS ONE)",
+          "retrieved_at": "2026-09-04T05:12:03.185160Z",
+          "source_class": "academic",
+          "extraction_method": "openalex"
+        }
+      ]
+    },
+    {
+      "id": "4619094e974d3dad",
+      "predicate": "relationship",
+      "value": "co_author: Michael Spigner",
+      "value_raw": "co_author: Michael Spigner",
+      "temporal": {
+        "start": null,
+        "end": null,
+        "end_state": "unknown",
+        "precision": "year",
+        "context_date": null
+      },
+      "confidence": {
+        "score": 0.7310585786300049,
+        "logodds": 1.0,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "source_tier:academic",
+            "weight": 2.5
+          },
+          {
+            "factor": "extraction:openalex",
+            "weight": 0.0
+          }
+        ]
+      },
+      "attachment_confidence": 0.6224593312018546,
+      "identity_link": "graph_path:1",
+      "evidence": [
+        {
+          "evidence_id": "592ad6657a049f78",
+          "candidate_id": "c3",
+          "url": "https://doi.org/10.1080/10903127.2026.2713128",
+          "snippet": "co_author: Michael Spigner",
+          "retrieved_at": "2026-09-04T05:12:03.185188Z",
+          "source_class": "academic",
+          "extraction_method": "openalex"
+        }
+      ]
+    },
+    {
+      "id": "4d1c0a6631cd6dbf",
+      "predicate": "relationship",
+      "value": "co_author: Alyssa Green",
+      "value_raw": "co_author: Alyssa Green",
+      "temporal": {
+        "start": null,
+        "end": null,
+        "end_state": "unknown",
+        "precision": "year",
+        "context_date": null
+      },
+      "confidence": {
+        "score": 0.7310585786300049,
+        "logodds": 1.0,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "source_tier:academic",
+            "weight": 2.5
+          },
+          {
+            "factor": "extraction:openalex",
+            "weight": 0.0
+          }
+        ]
+      },
+      "attachment_confidence": 0.6224593312018546,
+      "identity_link": "graph_path:1",
+      "evidence": [
+        {
+          "evidence_id": "37da08cac4a6b10a",
+          "candidate_id": "c3",
+          "url": "https://doi.org/10.1080/10903127.2026.2713128",
+          "snippet": "co_author: Alyssa Green",
+          "retrieved_at": "2026-09-04T05:12:03.185253Z",
+          "source_class": "academic",
+          "extraction_method": "openalex"
+        }
+      ]
+    },
+    {
+      "id": "c1eb7c1ea33cca85",
+      "predicate": "relationship",
+      "value": "co_author: CJ Naas",
+      "value_raw": "co_author: CJ Naas",
+      "temporal": {
+        "start": null,
+        "end": null,
+        "end_state": "unknown",
+        "precision": "year",
+        "context_date": null
+      },
+      "confidence": {
+        "score": 0.7310585786300049,
+        "logodds": 1.0,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "source_tier:academic",
+            "weight": 2.5
+          },
+          {
+            "factor": "extraction:openalex",
+            "weight": 0.0
+          }
+        ]
+      },
+      "attachment_confidence": 0.6224593312018546,
+      "identity_link": "graph_path:1",
+      "evidence": [
+        {
+          "evidence_id": "d3f5c79a07b218c1",
+          "candidate_id": "c3",
+          "url": "https://doi.org/10.1080/10903127.2026.2713128",
+          "snippet": "co_author: CJ Naas",
+          "retrieved_at": "2026-09-04T05:12:03.185297Z",
+          "source_class": "academic",
+          "extraction_method": "openalex"
+        }
+      ]
+    },
+    {
+      "id": "5396e79a9f96265d",
+      "predicate": "other",
+      "value": "orcid https://orcid.org/0000-0002-4738-0093",
+      "value_raw": "ORCID https://orcid.org/0000-0002-4738-0093",
+      "temporal": {
+        "start": null,
+        "end": null,
+        "end_state": "unknown",
+        "precision": "year",
+        "context_date": null
+      },
+      "confidence": {
+        "score": 0.7310585786300049,
+        "logodds": 1.0,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "source_tier:academic",
+            "weight": 2.5
+          },
+          {
+            "factor": "extraction:openalex",
+            "weight": 0.0
+          }
+        ]
+      },
+      "attachment_confidence": 0.6224593312018546,
+      "identity_link": "graph_path:1",
+      "evidence": [
+        {
+          "evidence_id": "acb25c6617c598e6",
+          "candidate_id": "c3",
+          "url": "https://openalex.org/A5026192603",
+          "snippet": "ORCID https://orcid.org/0000-0002-4738-0093",
+          "retrieved_at": "2026-09-04T05:12:03.185341Z",
+          "source_class": "academic",
+          "extraction_method": "openalex"
+        }
+      ]
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "person:c3",
+        "type": "person",
+        "label": "Henry wang",
+        "depth": 0,
+        "attachment_confidence": 0.973403006423134
+      },
+      {
+        "id": "account:github.com:https://github.com/braindead-dev",
+        "type": "account",
+        "label": "https://github.com/braindead-dev",
+        "depth": 1,
+        "attachment_confidence": 0.9836975006285591
+      },
+      {
+        "id": "account:news.ycombinator.com:https://news.ycombinator.com/user?id=henry00c",
+        "type": "account",
+        "label": "https://news.ycombinator.com/user?id=henry00c",
+        "depth": 1,
+        "attachment_confidence": 0.9478464369215823
+      },
+      {
+        "id": "account:huggingface.co:https://huggingface.co/henry00c",
+        "type": "account",
+        "label": "https://huggingface.co/henry00c",
+        "depth": 1,
+        "attachment_confidence": 0.9478464369215823
+      },
+      {
+        "id": "company:sixtyfour-ai",
+        "type": "company",
+        "label": "sixtyfour-ai",
+        "depth": 1,
+        "attachment_confidence": 0.9991755753136017
+      },
+      {
+        "id": "account:henr.ee:henr.ee",
+        "type": "account",
+        "label": "henr.ee",
+        "depth": 1,
+        "attachment_confidence": 0.9991755753136017
+      },
+      {
+        "id": "company:henrywa.ng",
+        "type": "company",
+        "label": "henrywa.ng",
+        "depth": 1,
+        "attachment_confidence": 0.9991755753136017
+      },
+      {
+        "id": "company:sixtyfour.ai",
+        "type": "company",
+        "label": "Sixtyfour",
+        "depth": 1,
+        "attachment_confidence": 0.9991755753136017
+      },
+      {
+        "id": "account:linkedin.com:https://linkedin.com/in/henry00c",
+        "type": "account",
+        "label": "https://linkedin.com/in/henry00c",
+        "depth": 1,
+        "attachment_confidence": 0.997268039236989
+      },
+      {
+        "id": "account:x.com:https://x.com/henry0284928382",
+        "type": "account",
+        "label": "https://x.com/henry0284928382",
+        "depth": 1,
+        "attachment_confidence": 0.997268039236989
+      },
+      {
+        "id": "company:university of california, riverside",
+        "type": "company",
+        "label": "University of California, Riverside",
+        "depth": 1,
+        "attachment_confidence": 0.9977621514787236
+      },
+      {
+        "id": "person:unresolved:michael-spigner:72171a45",
+        "type": "person",
+        "label": "Michael Spigner",
+        "depth": 1,
+        "attachment_confidence": 0.6224593312018546
+      },
+      {
+        "id": "person:unresolved:alyssa-green:72171a45",
+        "type": "person",
+        "label": "Alyssa Green",
+        "depth": 1,
+        "attachment_confidence": 0.6224593312018546
+      },
+      {
+        "id": "person:unresolved:cj-naas:72171a45",
+        "type": "person",
+        "label": "CJ Naas",
+        "depth": 1,
+        "attachment_confidence": 0.6224593312018546
+      },
+      {
+        "id": "company:highlander builders initiative",
+        "type": "company",
+        "label": "Highlander Builders Initiative",
+        "depth": 1,
+        "attachment_confidence": 0.9088770389851438
+      }
+    ],
+    "edges": [
+      {
+        "id": "649767240163ac96",
+        "src": "person:c3",
+        "dst": "account:github.com:https://github.com/braindead-dev",
+        "type": "affiliation",
+        "mechanism": "username_probe on github.com",
+        "evidence_ids": [
+          "2469e222f5afc764"
+        ]
+      },
+      {
+        "id": "ac790f7c18224290",
+        "src": "person:c3",
+        "dst": "account:news.ycombinator.com:https://news.ycombinator.com/user?id=henry00c",
+        "type": "affiliation",
+        "mechanism": "username_probe on news.ycombinator.com",
+        "evidence_ids": [
+          "e8581ba29cb5a80e"
+        ]
+      },
+      {
+        "id": "bec646bc50c119d8",
+        "src": "person:c3",
+        "dst": "account:huggingface.co:https://huggingface.co/henry00c",
+        "type": "affiliation",
+        "mechanism": "username_probe on huggingface.co",
+        "evidence_ids": [
+          "61b988fe40cfd44e"
+        ]
+      },
+      {
+        "id": "a9a748f8d7d841d5",
+        "src": "person:c3",
+        "dst": "company:sixtyfour-ai",
+        "type": "employment",
+        "mechanism": "github_api on github.com",
+        "evidence_ids": [
+          "ccc5dacb3d33bd58"
+        ]
+      },
+      {
+        "id": "155ea81a0e38ca48",
+        "src": "person:c3",
+        "dst": "account:henr.ee:henr.ee",
+        "type": "affiliation",
+        "mechanism": "github_api on github.com",
+        "evidence_ids": [
+          "efc2ad26a1cdfdc1"
+        ]
+      },
+      {
+        "id": "d4f2bf300ebf2db8",
+        "src": "person:c3",
+        "dst": "company:henrywa.ng",
+        "type": "employment",
+        "mechanism": "github_emails on github.com",
+        "evidence_ids": [
+          "3f033e790a9699ef"
+        ]
+      },
+      {
+        "id": "0beb387e61ce00c9",
+        "src": "person:c3",
+        "dst": "company:henrywa.ng",
+        "type": "employment",
+        "mechanism": "github_emails on github.com",
+        "evidence_ids": [
+          "5befc1d156e6ed92"
+        ]
+      },
+      {
+        "id": "f38ac648cee29832",
+        "src": "person:c3",
+        "dst": "company:sixtyfour.ai",
+        "type": "employment",
+        "mechanism": "prose_llm on henrywa.ng",
+        "evidence_ids": [
+          "2dd556162568a8b3"
+        ]
+      },
+      {
+        "id": "17d461fcff47dbb4",
+        "src": "person:c3",
+        "dst": "account:linkedin.com:https://linkedin.com/in/henry00c",
+        "type": "affiliation",
+        "mechanism": "link on henrywa.ng",
+        "evidence_ids": [
+          "f401913c9f93f490"
+        ]
+      },
+      {
+        "id": "f6156054ed2056c2",
+        "src": "person:c3",
+        "dst": "account:x.com:https://x.com/henry0284928382",
+        "type": "affiliation",
+        "mechanism": "link on henrywa.ng",
+        "evidence_ids": [
+          "ff2aaf2ba8cb0391"
+        ]
+      },
+      {
+        "id": "cb2d28d2718251f7",
+        "src": "person:c3",
+        "dst": "company:sixtyfour.ai",
+        "type": "employment",
+        "mechanism": "prose_llm on linkedin.com",
+        "evidence_ids": [
+          "609687661d383d43"
+        ]
+      },
+      {
+        "id": "d7e76f58158cd9da",
+        "src": "person:c3",
+        "dst": "company:sixtyfour.ai",
+        "type": "employment",
+        "mechanism": "prose_llm on linkedin.com",
+        "evidence_ids": [
+          "411f26b453a4a38e"
+        ]
+      },
+      {
+        "id": "18355ca710c736de",
+        "src": "person:c3",
+        "dst": "company:university of california, riverside",
+        "type": "employment",
+        "mechanism": "prose_llm on linkedin.com",
+        "evidence_ids": [
+          "30382f14750747a2"
+        ]
+      },
+      {
+        "id": "b75d4c3398415a99",
+        "src": "person:c3",
+        "dst": "person:unresolved:michael-spigner:72171a45",
+        "type": "relationship",
+        "mechanism": "co_author",
+        "evidence_ids": [
+          "592ad6657a049f78"
+        ]
+      },
+      {
+        "id": "b580c95a7829119d",
+        "src": "person:c3",
+        "dst": "person:unresolved:alyssa-green:72171a45",
+        "type": "relationship",
+        "mechanism": "co_author",
+        "evidence_ids": [
+          "37da08cac4a6b10a"
+        ]
+      },
+      {
+        "id": "b9fcfb477a6e6215",
+        "src": "person:c3",
+        "dst": "person:unresolved:cj-naas:72171a45",
+        "type": "relationship",
+        "mechanism": "co_author",
+        "evidence_ids": [
+          "d3f5c79a07b218c1"
+        ]
+      },
+      {
+        "id": "1dd55e54cb8c17eb",
+        "src": "person:c3",
+        "dst": "company:sixtyfour.ai",
+        "type": "employment",
+        "mechanism": "prose_llm on linkedin.com",
+        "evidence_ids": [
+          "97035f48644fcd0d"
+        ]
+      },
+      {
+        "id": "37d79bbf9f491e23",
+        "src": "person:c3",
+        "dst": "company:highlander builders initiative",
+        "type": "employment",
+        "mechanism": "prose_llm on linkedin.com",
+        "evidence_ids": [
+          "f416f999843df99e"
+        ]
+      },
+      {
+        "id": "5849b9ab641eae8f",
+        "src": "person:c3",
+        "dst": "company:university of california, riverside",
+        "type": "employment",
+        "mechanism": "prose_llm on linkedin.com",
+        "evidence_ids": [
+          "919ae223b2803f74"
+        ]
+      }
+    ]
+  },
+  "conflicts": [],
+  "negative_findings": [
+    {
+      "predicate": "coverage",
+      "sought": "current role corroborated by 2 independent sources",
+      "slot": "current_role",
+      "found": 0,
+      "target": 1,
+      "status": "not_found"
+    },
+    {
+      "predicate": "coverage",
+      "sought": "education",
+      "slot": "education",
+      "found": 0,
+      "target": 1,
+      "status": "not_found"
+    },
+    {
+      "predicate": "coverage",
+      "sought": "public output (repos, publications, talks)",
+      "slot": "public_output",
+      "found": 2,
+      "target": 3,
+      "status": "partial"
+    },
+    {
+      "predicate": "coverage",
+      "sought": "relationships (co-founders, co-authors, colleagues)",
+      "slot": "social_graph",
+      "found": 0,
+      "target": 3,
+      "status": "not_found"
+    }
+  ],
+  "identity_resolution": {
+    "candidates": [
+      {
+        "cid": "c3",
+        "score": 0.973403006423134,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "anchored_one_way",
+            "weight": 1.5
+          },
+          {
+            "factor": "anchor:employer:personal_site",
+            "weight": 2.0
+          },
+          {
+            "factor": "corroboration:employer:4src",
+            "weight": 0.6
+          },
+          {
+            "factor": "surname:common",
+            "weight": 0.2
+          },
+          {
+            "factor": "uniqueness",
+            "weight": 0.8
+          }
+        ],
+        "urls": [
+          "https://henrywa.ng/",
+          "https://github.com/braindead-dev",
+          "https://www.linkedin.com/in/henry00c",
+          "https://henr.ee/resume"
+        ]
+      },
+      {
+        "cid": "c5",
+        "score": 0.2141650169574414,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "surname:common",
+            "weight": 0.2
+          }
+        ],
+        "urls": [
+          "https://github.com/thekidofarcrania"
+        ]
+      },
+      {
+        "cid": "c6",
+        "score": 0.2141650169574414,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "surname:common",
+            "weight": 0.2
+          }
+        ],
+        "urls": [
+          "https://github.com/henry118"
+        ]
+      },
+      {
+        "cid": "c7",
+        "score": 0.2141650169574414,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "surname:common",
+            "weight": 0.2
+          }
+        ],
+        "urls": [
+          "https://github.com/henryqw"
+        ]
+      },
+      {
+        "cid": "c8",
+        "score": 0.2141650169574414,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "surname:common",
+            "weight": 0.2
+          }
+        ],
+        "urls": [
+          "https://github.com/henrywangzh"
+        ]
+      }
+    ],
+    "rejected": [
+      {
+        "cid": "c5",
+        "reason": "No evidence linking to Sixtyfour ai; only shares common surname."
+      },
+      {
+        "cid": "c6",
+        "reason": "No evidence linking to Sixtyfour ai; only shares common surname."
+      },
+      {
+        "cid": "c7",
+        "reason": "below gate margin; not in the top candidates shown to T1"
+      },
+      {
+        "cid": "c8",
+        "reason": "below gate margin; not in the top candidates shown to T1"
+      },
+      {
+        "cid": "c9",
+        "reason": "below gate margin; not in the top candidates shown to T1"
+      },
+      {
+        "cid": "c10",
+        "reason": "below gate margin; not in the top candidates shown to T1"
+      },
+      {
+        "cid": "c11",
+        "reason": "below gate margin; not in the top candidates shown to T1"
+      }
+    ],
+    "what_would_disambiguate": []
+  },
+  "specialization_payoff": [
+    "91090ba3b9ce6f39",
+    "5cd91dd42e28b06c",
+    "183a2dd877b9e387",
+    "8b9878c4ae439c71",
+    "bf2c98750febfeb7"
+  ],
+  "timeline": [
+    {
+      "date": "2023-05",
+      "text": "handle: https://github.com/braindead-dev",
+      "claim_id": "91090ba3b9ce6f39",
+      "url": "https://github.com/braindead-dev"
+    },
+    {
+      "date": "2024-09",
+      "text": "handle: https://news.ycombinator.com/user?id=henry00c",
+      "claim_id": "8b9878c4ae439c71",
+      "url": "https://news.ycombinator.com/user?id=henry00c"
+    },
+    {
+      "date": "2025-12",
+      "text": "board_or_advisor: Highlander Builders Initiative",
+      "claim_id": "2156f9a10f2a484a",
+      "url": "https://www.linkedin.com/in/henry00c"
+    },
+    {
+      "date": "2025-12",
+      "text": "title: Advisor",
+      "claim_id": "00b86ed390feb13e",
+      "url": "https://www.linkedin.com/in/henry00c"
+    },
+    {
+      "date": "2025-12",
+      "text": "title: full-stack SWE intern",
+      "claim_id": "37e0c4d6efee5fc6",
+      "url": "https://www.linkedin.com/posts/henry00c_im-happy-to-share-that-ill-be-joining-sixtyfour-activity-7406941322412085249-o8pS"
+    },
+    {
+      "date": "2026",
+      "text": "employment: henrywa.ng (ended 2026)",
+      "claim_id": "5cd91dd42e28b06c",
+      "url": "https://github.com/braindead-dev/wikify"
+    },
+    {
+      "date": "2026",
+      "text": "email: contact@henrywa.ng",
+      "claim_id": "183a2dd877b9e387",
+      "url": "https://github.com/braindead-dev/wikify"
+    },
+    {
+      "date": "2026-02",
+      "text": "employment: Sixtyfour",
+      "claim_id": "b8a726ba022a6d47",
+      "url": "https://www.linkedin.com/in/henry00c"
+    },
+    {
+      "date": "2026-07",
+      "text": "repo: https://github.com/braindead-dev/gpu-box2d",
+      "claim_id": "a045dd1504dc62c8",
+      "url": "https://github.com/braindead-dev/gpu-box2d"
+    },
+    {
+      "date": "2026-09",
+      "text": "repo: https://github.com/braindead-dev/wikify",
+      "claim_id": "2c518ca2a0e6aa20",
+      "url": "https://github.com/braindead-dev/wikify"
+    }
+  ],
+  "run_metadata": {
+    "job_id": "henry-wang-32",
+    "budget": {
+      "tool_calls": 38,
+      "llm_calls": 40,
+      "usd": 0.2127125,
+      "cache_hits": 0,
+      "resolve": {
+        "tool_calls": 6,
+        "cap": 20
+      },
+      "seconds": 155.4
+    },
+    "stop_reason": "S2",
+    "models": {
+      "T1": "anthropic/claude-sonnet-5",
+      "T2": "anthropic/claude-sonnet-5",
+      "T3": "google/gemini-3.8-flash",
+      "T4": "google/gemini-3.8-flash",
+      "T5": "google/gemini-3.8-flash"
+    },
+    "timings": {
+      "seconds": 155.35175495799922
+    }
+  }
+}

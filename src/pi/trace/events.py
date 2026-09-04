@@ -38,8 +38,6 @@ class LLMCall(BaseEvent):
     event_type: Literal["llm_call"] = "llm_call"
     model: str
     tier: str
-    prompt_ref: Optional[str] = None
-    response_ref: Optional[str] = None
     usage: dict[str, Any] = Field(default_factory=dict)
     cost_usd: float = 0.0
     latency_ms: float = 0.0
@@ -72,13 +70,6 @@ class Rejection(BaseEvent):
     event_type: Literal["rejection"] = "rejection"
     cid: str
     reason: str
-
-
-class VariantDiscovered(BaseEvent):
-    event_type: Literal["variant_discovered"] = "variant_discovered"
-    form: str
-    origin: str
-    evidence_id: Optional[str] = None
 
 
 class RoleResolution(BaseEvent):
@@ -163,26 +154,28 @@ class Stop(BaseEvent):
     numbers: dict[str, Any] = Field(default_factory=dict)
 
 
+class AttachmentTest(BaseEvent):
+    """The deterministic same-person test (DESIGN.md §13) run on every new EXPAND
+    source before its claims attach to the confirmed person."""
+    event_type: Literal["attachment_test"] = "attachment_test"
+    url: str
+    score: float
+    matched: list[str] = Field(default_factory=list)
+    name_present: bool = False
+    owned: bool = False
+    linked: bool = False
+    t4: Optional[str] = None
+    band: str = ""
+
+
 Event = Annotated[
     Union[
         ToolCall, LLMCall, PhaseTransition, CandidateScore, Merge, Rejection,
-        VariantDiscovered, RoleResolution, Disconfirmation, GateTest, GateDecision,
+        RoleResolution, Disconfirmation, GateTest, GateDecision,
         FrontierUpdate, PlannerDecision, Reinforce, SlotUpdate, ConflictDetected,
-        BudgetUpdate, Stop,
+        BudgetUpdate, Stop, AttachmentTest,
     ],
     Field(discriminator="event_type"),
 ]
 
 EVENT_ADAPTER: TypeAdapter[Any] = TypeAdapter(Event)
-
-ALL_EVENT_TYPES = (
-    ToolCall, LLMCall, PhaseTransition, CandidateScore, Merge, Rejection,
-    VariantDiscovered, RoleResolution, Disconfirmation, GateTest, GateDecision,
-    FrontierUpdate, PlannerDecision, Reinforce, SlotUpdate, ConflictDetected,
-    BudgetUpdate, Stop,
-)
-
-
-def parse_event(data: dict[str, Any]) -> BaseEvent:
-    """Round-trip a serialized event back into its concrete model."""
-    return EVENT_ADAPTER.validate_python(data)

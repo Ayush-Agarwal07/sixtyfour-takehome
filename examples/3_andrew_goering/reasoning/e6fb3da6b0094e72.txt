@@ -1,0 +1,1 @@
+All claims share the same low confidence (0.48/0.43/0.40) and no explicit conflict is flagged, but the two employers (Ramp and Atelio by FIS) and two titles appear as sequential per the timeline rather than conflicting, so each is stated as associated without asserting current status beyond what timeline shows.

@@ -1,0 +1,1 @@
+LinkedIn closes identity_anchors/current_role/employment_history; public_output query targets open slot; Ramp wayback checks weakly-attached anchor org; pivot query with co-founder names disambiguates unresolved persons for social_graph.

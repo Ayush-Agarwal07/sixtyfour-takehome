@@ -1,0 +1,4 @@
+**Investigating Ramp Connection**
+
+I'm currently focusing on definitively linking this Andrew Goering to the ramp.com anchor, specifically as a co-author on relevant research. This connection is key to understanding the context of our VI-SLAM project.
+

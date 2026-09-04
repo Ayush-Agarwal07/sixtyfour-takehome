@@ -1,0 +1,8 @@
+**Identifying Facts**
+
+I'm currently analyzing the provided text to extract explicit, structured facts about Andrew Goering. My immediate focus is on discerning whether details like his education, employer, or job title are clearly stated, as opposed to implied or inferential information.
+
+**Extracting Details**
+
+I'm reviewing the input to see if there are any clear, verbatim facts about the target, Andrew Goering. My current thoughts revolve around whether mentioning him as an author of a package or a course code like EECE5554 constitutes a verifiable biographical claim given the available predicates and the strict requirement for direct textual evidence.
+

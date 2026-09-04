@@ -1,0 +1,1 @@
+GitHub login pulls commit emails plus profile data, directly hitting contact and identity anchors. Personal site fetch is target-controlled, likely covers current_role, education, and artifacts. Anchor org page confirms employment_history and role. Pivot query on founder/cofounder targets open social_graph slot.

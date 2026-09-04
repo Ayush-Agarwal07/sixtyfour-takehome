@@ -1,0 +1,1 @@
+current_role and social_graph still open: pivot query on co-founder closes social_graph, LinkedIn confirms current_role, Sixtyfour site fetch surfaces team/co-founder details; verify load-bearing Sixtyfour node given duplicate company entries and many claims hanging on it.

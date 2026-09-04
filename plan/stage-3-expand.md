@@ -59,7 +59,7 @@ confirmed_contested`. **Never abort to `abstained`.**
 - `test_temporal.py`, `test_claim_spread.py` — see [reference-confidence-scoring.md](reference-confidence-scoring.md).
 - `test_frontier.py` — Case B section multipliers applied; a reinforce item ranks first when its trigger holds.
 
-## Checkpoints (binary)
+## Checkpoints (binary) — 2026-09-02: built via SDD (tasks 3, 4a, 4b + 3 fix rounds). Live: runs/34119820efb4 (Henry Wang) confirmed, 8 batches, 16 claims, payoff via commit emails, Reinforce fired once in runs/83fe951be281. Reinforce rarely triggers live (assembly wires edges from root). Planner runs on T2 without reasoning; batch cap 8; barren stop after 2 empty batches.
 
 - [ ] On a stubbed confirmed candidate, **coverage slots fill** and close correctly; budget respected (`EXPAND_cap = min(40, 60−resolve_spent)`).
 - [ ] Trace contains **≥1 planner-injected `new_actions` query** and **≥1 `verify`/reinforce action**, with `planner_decision` showing formula-top vs chosen.

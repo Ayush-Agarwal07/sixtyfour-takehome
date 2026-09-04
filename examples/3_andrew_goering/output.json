@@ -1,0 +1,628 @@
+{
+  "status": "confirmed",
+  "input": "andrew.goering@ramp.com",
+  "seed": {
+    "input": "andrew.goering@ramp.com",
+    "regime": "HARD_ID_EMAIL",
+    "names": [
+      {
+        "form": "Andrew Goering",
+        "kind": "as_given",
+        "weight": 0.9
+      }
+    ],
+    "hard_ids": {
+      "email": "andrew.goering@ramp.com"
+    },
+    "orgs": [
+      "ramp.com"
+    ],
+    "titles": [],
+    "schools": [],
+    "locations": [],
+    "tense": {
+      "ramp.com": "current"
+    },
+    "role_description": null,
+    "org_domains": {
+      "ramp.com": "ramp.com"
+    },
+    "original_regime": null
+  },
+  "regime": "HARD_ID_EMAIL",
+  "identity": {
+    "confidence": {
+      "score": 0.9866130821723351,
+      "logodds": 4.3,
+      "terms": [
+        {
+          "factor": "prior",
+          "weight": 0.0
+        },
+        {
+          "factor": "anchor:employer:professional_network",
+          "weight": 1.2
+        },
+        {
+          "factor": "corroboration:employer:2src",
+          "weight": 0.3
+        },
+        {
+          "factor": "surname:rare",
+          "weight": 2.0
+        },
+        {
+          "factor": "uniqueness",
+          "weight": 0.8
+        }
+      ]
+    },
+    "cid": "c1",
+    "hard_keys": [
+      "email:andrew.goering@ramp.com"
+    ],
+    "how_confirmed": "math P=0.987 margin=0.99 [anchor:employer:professional_network=+1.2; corroboration:employer:2src=+0.3; surname:rare=+2.0; uniqueness=+0.8]; T1 CONFIRM",
+    "public_figure": false,
+    "footprint_since": "2024",
+    "accounts_found": 0
+  },
+  "summary": [
+    {
+      "text": "Andrew Goering is associated with employment at Ramp.",
+      "claim_ids": [
+        "b2a361cebdd4e508"
+      ]
+    },
+    {
+      "text": "He holds the title Technical Program Manager - Compliance, an ongoing role.",
+      "claim_ids": [
+        "dcee490af78d9ff0"
+      ]
+    },
+    {
+      "text": "He is also associated with employment at Atelio by FIS.",
+      "claim_ids": [
+        "f2f6d6491f18c2cf"
+      ]
+    },
+    {
+      "text": "He held the title Compliance Manager Senior.",
+      "claim_ids": [
+        "9e2748443c7c7508"
+      ]
+    },
+    {
+      "text": "Another claim lists his employer as ramp.com.",
+      "claim_ids": [
+        "e9d2c7c3867d519e"
+      ]
+    },
+    {
+      "text": "His location is listed as Lexington, Massachusetts, United States.",
+      "claim_ids": [
+        "d923d3b32722eed0"
+      ]
+    },
+    {
+      "text": "The earliest dated activity is his employment at Atelio by FIS starting 2024-06.",
+      "claim_ids": [
+        "f2f6d6491f18c2cf"
+      ]
+    }
+  ],
+  "profile": {
+    "current_role": {
+      "id": "dcee490af78d9ff0",
+      "predicate": "title",
+      "value": "technical program manager compliance",
+      "value_raw": "Technical Program Manager - Compliance",
+      "temporal": {
+        "start": "2026-01-01",
+        "end": null,
+        "end_state": "ongoing",
+        "precision": "month",
+        "context_date": null
+      },
+      "confidence": {
+        "score": 0.47502081252106,
+        "logodds": -0.10000000000000009,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "source_tier:professional_network",
+            "weight": 1.4
+          },
+          {
+            "factor": "extraction:prose_llm",
+            "weight": 0.0
+          }
+        ]
+      },
+      "attachment_confidence": 0.990986701347152,
+      "identity_link": "anchor_match:employer",
+      "evidence": [
+        {
+          "evidence_id": "e10fc3e1fb905318",
+          "candidate_id": "c1",
+          "url": "https://www.linkedin.com/in/andrewgoering",
+          "snippet": "Technical Program Manager - Compliance - [Ramp](https://www.linkedin.com/company/ramp) (Current)",
+          "retrieved_at": "2026-09-04T05:17:39.135529Z",
+          "source_class": "professional_network",
+          "extraction_method": "prose_llm"
+        }
+      ]
+    },
+    "employment": [
+      {
+        "id": "b2a361cebdd4e508",
+        "predicate": "employment",
+        "value": "ramp.com",
+        "value_raw": "Ramp",
+        "temporal": {
+          "start": "2026-01-01",
+          "end": null,
+          "end_state": "ongoing",
+          "precision": "month",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.47502081252106,
+          "logodds": -0.10000000000000009,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:professional_network",
+              "weight": 1.4
+            },
+            {
+              "factor": "extraction:prose_llm",
+              "weight": 0.0
+            }
+          ]
+        },
+        "attachment_confidence": 0.990986701347152,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "511a68bcffac40cc",
+            "candidate_id": "c1",
+            "url": "https://www.linkedin.com/in/andrewgoering",
+            "snippet": "Technical Program Manager - Compliance - [Ramp](https://www.linkedin.com/company/ramp) (Current)\n\nJan 2026 - Present",
+            "retrieved_at": "2026-09-04T05:17:39.135335Z",
+            "source_class": "professional_network",
+            "extraction_method": "prose_llm"
+          }
+        ]
+      },
+      {
+        "id": "f2f6d6491f18c2cf",
+        "predicate": "employment",
+        "value": "atelio by fis",
+        "value_raw": "Atelio by FIS",
+        "temporal": {
+          "start": "2024-06-01",
+          "end": "2026-01-31",
+          "end_state": "ended",
+          "precision": "month",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.47502081252106,
+          "logodds": -0.10000000000000009,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:professional_network",
+              "weight": 1.4
+            },
+            {
+              "factor": "extraction:prose_llm",
+              "weight": 0.0
+            }
+          ]
+        },
+        "attachment_confidence": 0.990986701347152,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "6d82d5feebee1865",
+            "candidate_id": "c1",
+            "url": "https://www.linkedin.com/in/andrewgoering",
+            "snippet": "Compliance Manager Senior - Atelio by FIS\n\nJun 2024 - Jan 2026",
+            "retrieved_at": "2026-09-04T05:17:39.135647Z",
+            "source_class": "professional_network",
+            "extraction_method": "prose_llm"
+          }
+        ]
+      }
+    ],
+    "education": [],
+    "location": {
+      "id": "d923d3b32722eed0",
+      "predicate": "location",
+      "value": "lexington",
+      "value_raw": "Lexington, Massachusetts, United States (US)",
+      "temporal": {
+        "start": null,
+        "end": null,
+        "end_state": "unknown",
+        "precision": "year",
+        "context_date": null
+      },
+      "confidence": {
+        "score": 0.401312339887548,
+        "logodds": -0.4000000000000001,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "source_tier:professional_network",
+            "weight": 1.4
+          },
+          {
+            "factor": "extraction:prose_llm",
+            "weight": 0.0
+          },
+          {
+            "factor": "no_context_date",
+            "weight": -0.3
+          }
+        ]
+      },
+      "attachment_confidence": 0.990986701347152,
+      "identity_link": "anchor_match:employer",
+      "evidence": [
+        {
+          "evidence_id": "c83ab8fe76a1f280",
+          "candidate_id": "c1",
+          "url": "https://www.linkedin.com/in/andrewgoering",
+          "snippet": "Lexington, Massachusetts, United States (US)",
+          "retrieved_at": "2026-09-04T05:17:39.133351Z",
+          "source_class": "professional_network",
+          "extraction_method": "prose_llm"
+        }
+      ]
+    },
+    "contact": [],
+    "accounts": [],
+    "public_output": [],
+    "relationships": [],
+    "notable": []
+  },
+  "unverified": [
+    {
+      "id": "523cd22bbeffd57b",
+      "predicate": "relationship",
+      "value": "collaborator: Curtis Manore",
+      "value_raw": "collaborator: Curtis Manore",
+      "temporal": {
+        "start": null,
+        "end": null,
+        "end_state": "unknown",
+        "precision": "year",
+        "context_date": null
+      },
+      "confidence": {
+        "score": 0.6681877721681662,
+        "logodds": 0.7000000000000002,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "source_tier:code_host",
+            "weight": 2.2
+          },
+          {
+            "factor": "extraction:github_code",
+            "weight": 0.0
+          }
+        ]
+      },
+      "attachment_confidence": 0.6224593312018546,
+      "identity_link": "graph_path:1",
+      "evidence": [
+        {
+          "evidence_id": "90f7659d4f35c3a6",
+          "candidate_id": "c1",
+          "url": "https://github.com/meuliano/rsn_orbslam3/blob/d4efcf4eedcf281746d56485b1052bf8e810ccb8/README.md",
+          "snippet": "Curtis Manore, Matthew Euliano, and Andrew Goering",
+          "retrieved_at": "2026-09-04T05:17:11.850049Z",
+          "source_class": "code_host",
+          "extraction_method": "github_code"
+        }
+      ]
+    },
+    {
+      "id": "a9826d95b8eb4002",
+      "predicate": "relationship",
+      "value": "collaborator: Matthew Euliano",
+      "value_raw": "collaborator: Matthew Euliano",
+      "temporal": {
+        "start": null,
+        "end": null,
+        "end_state": "unknown",
+        "precision": "year",
+        "context_date": null
+      },
+      "confidence": {
+        "score": 0.6681877721681662,
+        "logodds": 0.7000000000000002,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "source_tier:code_host",
+            "weight": 2.2
+          },
+          {
+            "factor": "extraction:github_code",
+            "weight": 0.0
+          }
+        ]
+      },
+      "attachment_confidence": 0.6224593312018546,
+      "identity_link": "graph_path:1",
+      "evidence": [
+        {
+          "evidence_id": "4bbbb646a02ba531",
+          "candidate_id": "c1",
+          "url": "https://github.com/meuliano/rsn_orbslam3/blob/d4efcf4eedcf281746d56485b1052bf8e810ccb8/README.md",
+          "snippet": "Curtis Manore, Matthew Euliano, and Andrew Goering",
+          "retrieved_at": "2026-09-04T05:17:11.850124Z",
+          "source_class": "code_host",
+          "extraction_method": "github_code"
+        }
+      ]
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "person:c1",
+        "type": "person",
+        "label": "Andrew Goering",
+        "depth": 0,
+        "attachment_confidence": 0.9866130821723351
+      },
+      {
+        "id": "person:unresolved:curtis-manore:87fcaf05",
+        "type": "person",
+        "label": "Curtis Manore",
+        "depth": 1,
+        "attachment_confidence": 0.6224593312018546
+      },
+      {
+        "id": "person:unresolved:matthew-euliano:87fcaf05",
+        "type": "person",
+        "label": "Matthew Euliano",
+        "depth": 1,
+        "attachment_confidence": 0.6224593312018546
+      },
+      {
+        "id": "company:ramp.com",
+        "type": "company",
+        "label": "Ramp",
+        "depth": 1,
+        "attachment_confidence": 0.990986701347152
+      },
+      {
+        "id": "company:atelio by fis",
+        "type": "company",
+        "label": "Atelio by FIS",
+        "depth": 1,
+        "attachment_confidence": 0.990986701347152
+      }
+    ],
+    "edges": [
+      {
+        "id": "3a16195ac76851c6",
+        "src": "person:c1",
+        "dst": "person:unresolved:curtis-manore:87fcaf05",
+        "type": "relationship",
+        "mechanism": "collaborator",
+        "evidence_ids": [
+          "90f7659d4f35c3a6"
+        ]
+      },
+      {
+        "id": "72a6a15ffda6693e",
+        "src": "person:c1",
+        "dst": "person:unresolved:matthew-euliano:87fcaf05",
+        "type": "relationship",
+        "mechanism": "collaborator",
+        "evidence_ids": [
+          "4bbbb646a02ba531"
+        ]
+      },
+      {
+        "id": "d47ba6761073e787",
+        "src": "person:c1",
+        "dst": "company:ramp.com",
+        "type": "employment",
+        "mechanism": "prose_llm on linkedin.com",
+        "evidence_ids": [
+          "511a68bcffac40cc"
+        ]
+      },
+      {
+        "id": "6d7ab727632d20db",
+        "src": "person:c1",
+        "dst": "company:atelio by fis",
+        "type": "employment",
+        "mechanism": "prose_llm on linkedin.com",
+        "evidence_ids": [
+          "6d82d5feebee1865"
+        ]
+      }
+    ]
+  },
+  "conflicts": [],
+  "negative_findings": [
+    {
+      "predicate": "coverage",
+      "sought": "identity anchors (verified handle, email, or site)",
+      "slot": "identity_anchors",
+      "found": 0,
+      "target": 1,
+      "status": "not_found"
+    },
+    {
+      "predicate": "coverage",
+      "sought": "current role corroborated by 2 independent sources",
+      "slot": "current_role",
+      "found": 0,
+      "target": 1,
+      "status": "not_found"
+    },
+    {
+      "predicate": "coverage",
+      "sought": "employment history (3 positions)",
+      "slot": "employment_history",
+      "found": 2,
+      "target": 3,
+      "status": "partial"
+    },
+    {
+      "predicate": "coverage",
+      "sought": "education",
+      "slot": "education",
+      "found": 0,
+      "target": 1,
+      "status": "not_found"
+    },
+    {
+      "predicate": "coverage",
+      "sought": "verified contact",
+      "slot": "contact",
+      "found": 0,
+      "target": 1,
+      "status": "not_found"
+    },
+    {
+      "predicate": "coverage",
+      "sought": "public output (repos, publications, talks)",
+      "slot": "public_output",
+      "found": 0,
+      "target": 3,
+      "status": "not_found"
+    },
+    {
+      "predicate": "coverage",
+      "sought": "relationships (co-founders, co-authors, colleagues)",
+      "slot": "social_graph",
+      "found": 0,
+      "target": 3,
+      "status": "not_found"
+    },
+    {
+      "predicate": "coverage",
+      "sought": "notable artifacts (awards, funding, founded, boards)",
+      "slot": "notable_artifacts",
+      "found": 0,
+      "target": 2,
+      "status": "not_found"
+    }
+  ],
+  "identity_resolution": {
+    "candidates": [
+      {
+        "cid": "c1",
+        "score": 0.9866130821723351,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": 0.0
+          },
+          {
+            "factor": "anchor:employer:professional_network",
+            "weight": 1.2
+          },
+          {
+            "factor": "corroboration:employer:2src",
+            "weight": 0.3
+          },
+          {
+            "factor": "surname:rare",
+            "weight": 2.0
+          },
+          {
+            "factor": "uniqueness",
+            "weight": 0.8
+          }
+        ],
+        "urls": [
+          "https://www.linkedin.com/in/andrewgoering"
+        ]
+      }
+    ],
+    "rejected": [],
+    "what_would_disambiguate": []
+  },
+  "specialization_payoff": [],
+  "timeline": [
+    {
+      "date": "2024-06",
+      "text": "employment: Atelio by FIS (ended 2026)",
+      "claim_id": "f2f6d6491f18c2cf",
+      "url": "https://www.linkedin.com/in/andrewgoering"
+    },
+    {
+      "date": "2024-06",
+      "text": "title: Compliance Manager Senior (ended 2026)",
+      "claim_id": "9e2748443c7c7508",
+      "url": "https://www.linkedin.com/in/andrewgoering"
+    },
+    {
+      "date": "2026-01",
+      "text": "employment: Ramp",
+      "claim_id": "b2a361cebdd4e508",
+      "url": "https://www.linkedin.com/in/andrewgoering"
+    },
+    {
+      "date": "2026-01",
+      "text": "title: Technical Program Manager - Compliance",
+      "claim_id": "dcee490af78d9ff0",
+      "url": "https://www.linkedin.com/in/andrewgoering"
+    }
+  ],
+  "run_metadata": {
+    "job_id": "andrew-goering-11",
+    "budget": {
+      "tool_calls": 17,
+      "llm_calls": 13,
+      "usd": 0.04875425,
+      "cache_hits": 0,
+      "resolve": {
+        "tool_calls": 4,
+        "cap": 10
+      },
+      "seconds": 63.6
+    },
+    "stop_reason": "S_frontier_empty",
+    "models": {
+      "T1": "anthropic/claude-sonnet-5",
+      "T2": "anthropic/claude-sonnet-5",
+      "T3": "google/gemini-3.8-flash",
+      "T4": "google/gemini-3.8-flash",
+      "T5": "google/gemini-3.8-flash"
+    },
+    "timings": {
+      "seconds": 63.63975083299738
+    }
+  }
+}

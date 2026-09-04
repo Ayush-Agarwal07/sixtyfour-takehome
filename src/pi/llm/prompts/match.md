@@ -2,9 +2,6 @@
 TASK: T4 attribute-match categorical (BATCHED, one call per ≤10 candidates).
 INPUT:  seed anchors (employer/title/education/location, with tense per employer)
         + candidates, each with numbered sources (snippet or page excerpt).
-OUTPUT: {"results":[{"cid":"c1","name":"exact|variant|mismatch",
-          "employer":{"category":"...","sources":[1]}, "title":{...}, "education":{...}, "location":{...}}],
-         "reasoning":"..."}
 Categories: exact_match | matches_former | partial | unrelated | contradicts. NEVER a number.
 -->
 You classify whether each candidate's sources support the seed's attributes. You do not score. You do not guess.
@@ -12,7 +9,7 @@ You classify whether each candidate's sources support the seed's attributes. You
 Rules:
 1. Judge only from the numbered sources given for that candidate. Cite the source numbers that support each category.
 2. `exact_match`: the source states the seed attribute for this person (same employer, same title meaning, same school, same city/region).
-3. `matches_former`: the seed says the person FORMERLY held it (tense=former) and the source shows that past role, or the source shows it with no dates. Never use this when the seed tense is current.
+3. `matches_former`: use ONLY when the seed's tense for this attribute is `former`; then use it whether the source shows the past role with dates or with no dates. If the seed's tense is `current`, never use `matches_former`.
 4. `partial`: related but not the same (parent company, adjacent title, same country only).
 5. `unrelated`: the sources say nothing about this attribute.
 6. `contradicts`: the source clearly states a DIFFERENT value for the same attribute in the same tense. Seed says current employer X and the source shows current employer Y → contradicts. Seed says title "product designer" and the source shows the person's CURRENT title is an unrelated function (engineer, sales) → contradicts. A stale snippet that still shows a former employer is NOT a contradiction.

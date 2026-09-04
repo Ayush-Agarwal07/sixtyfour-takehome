@@ -40,7 +40,7 @@ eval/{targets.json, run_eval.py}
 - **README.md** — setup, keys, run, example `curl`, the calibration scope statement, edge-case behavior.
 - **SCALING.md** — three sections: what breaks at **100 concurrent runs**, at **10k stored entities**, when **the same person is investigated twice**. Include the C9 resume design and the C6′ contested-identity handling as architectural-judgment notes.
 
-## Checkpoints (binary)
+## Checkpoints (binary) — 2026-09-02: examples/ = runs 34119820efb4 (henry), 75a83420c341 (ariglad), 62a6e6d7d6a1 (andrew), 4270b291774a (sarah chen ambiguous refusal). eval/run_eval.py, README, DESIGN.md, SCALING.md via task 7.
 
 - [ ] Fresh clone + `.env` → `uv run pi investigate "Henry wang, sixtyfour ai"` produces valid output in **< 5 min**.
 - [ ] All three `examples/*/` committed with `input.txt`, `output.json`, `trace.jsonl`, `trace.md`.

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import uuid
 from pathlib import Path
+from typing import Sequence
 
 from pydantic import BaseModel, Field
 
@@ -71,11 +72,13 @@ async def run_actions(actions: list[dict], top: Candidate, seed, deps, read_page
 
 
 async def disconfirm(seed, top: Candidate, runner: Candidate | None, deps, llm, read_page, *,
-                     spent: int, budget: int, anchor_domains: set[str], on_page=None) -> DisconfirmPlan:
+                     spent: int, budget: int, anchor_domains: set[str], on_page=None,
+                     queries: Sequence[str] = ()) -> DisconfirmPlan:
     prompt = "\n".join([
         f"Seed input: {seed.input}",
         f"Seed anchors: orgs={seed.orgs} titles={seed.titles} tense={seed.tense} hard_ids={seed.hard_ids}",
-        f"Tool calls left: {max(0, budget - spent)}", "",
+        f"Tool calls left: {max(0, budget - spent)}",
+        f"Queries already run: {', '.join(queries)}", "",
         "TOP CANDIDATE", _cand_block(top), "",
         ("RUNNER-UP\n" + _cand_block(runner)) if runner else "RUNNER-UP: none",
     ])

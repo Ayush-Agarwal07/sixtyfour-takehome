@@ -1,0 +1,8 @@
+**Identifying Affiliation Details**
+
+I'm focusing on uncovering any employer or title information for Saarth Shah, one of the contributors to the "Power Outage Cause Prediction in the U.S." GitHub project. So far, no explicit employer or title is listed.
+
+**Extracting Collaborative Links**
+
+I'm now exploring the nature of Saarth Shah's connection with Saathvik Dirisala, specifically considering a "collaborator" relationship based on their joint contributions to the GitHub project. I'm also evaluating whether to extract further details about their involvement with "DSC 80," perhaps as an "other" fact.
+

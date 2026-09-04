@@ -1,0 +1,1 @@
+101e2b15b716f9c7: LinkedIn post announcing joining sixtyfour directly closes current_role. b70d184517e98212 (chiron.so) and 101831e06e6a74a6 (donkeyspotter app) are target-controlled artifacts closing notable_artifacts/public_output. e7f6e925c583931b (ballardlab.org) verifies research assistant claim for education slot. One linkedin.com fetch only, per domain rule.

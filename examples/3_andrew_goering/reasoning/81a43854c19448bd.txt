@@ -1,0 +1,1 @@
+Gravatar cheaply confirms contact/identity keys; GitHub search targets public_output/notable_artifacts; founder query targets social_graph/employment; Ramp fetch anchors current_role and org details.

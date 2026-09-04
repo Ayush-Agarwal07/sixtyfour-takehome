@@ -1,0 +1,2565 @@
+{
+  "status": "confirmed",
+  "input": "Saarth Shah, Sixtyfour",
+  "seed": {
+    "input": "Saarth Shah, Sixtyfour",
+    "regime": "NAME_STRONG",
+    "names": [
+      {
+        "form": "Saarth Shah",
+        "kind": "as_given",
+        "weight": 0.0
+      },
+      {
+        "form": "S. Shah",
+        "kind": "initials",
+        "weight": 0.0
+      },
+      {
+        "form": "Shah Saarth",
+        "kind": "order_swap",
+        "weight": 0.0
+      }
+    ],
+    "hard_ids": {},
+    "orgs": [
+      "Sixtyfour"
+    ],
+    "titles": [],
+    "schools": [],
+    "locations": [],
+    "tense": {
+      "sixtyfour": "current"
+    },
+    "role_description": null,
+    "org_domains": {
+      "Sixtyfour": "sixtyfour.ai"
+    },
+    "original_regime": null
+  },
+  "regime": "NAME_STRONG",
+  "identity": {
+    "confidence": {
+      "score": 0.9878715650157257,
+      "logodds": 4.4,
+      "terms": [
+        {
+          "factor": "prior",
+          "weight": -1.5
+        },
+        {
+          "factor": "anchored_one_way",
+          "weight": 1.5
+        },
+        {
+          "factor": "anchor:employer:personal_site",
+          "weight": 2.0
+        },
+        {
+          "factor": "corroboration:employer:4src",
+          "weight": 0.6
+        },
+        {
+          "factor": "surname:uncommon",
+          "weight": 1.0
+        },
+        {
+          "factor": "uniqueness",
+          "weight": 0.8
+        }
+      ]
+    },
+    "cid": "c2",
+    "hard_keys": [],
+    "how_confirmed": "math P=0.988 margin=0.99 [anchored_one_way=+1.5; anchor:employer:personal_site=+2.0; corroboration:employer:4src=+0.6; surname:uncommon=+1.0; uniqueness=+0.8]; T1 CONFIRM",
+    "public_figure": false,
+    "footprint_since": "2019",
+    "accounts_found": 6
+  },
+  "summary": [
+    {
+      "text": "Saarth Shah is the co-founder and CEO of Sixtyfour, a company accepted into Y Combinator's X25 batch.",
+      "claim_ids": [
+        "1b1ceece87bc32e2",
+        "3091d9fee3d1b3d2",
+        "7075b9a1a53e269c"
+      ]
+    },
+    {
+      "text": "He is based in San Francisco, CA.",
+      "claim_ids": [
+        "fe65ee7da3118a6b"
+      ]
+    },
+    {
+      "text": "His educational background includes UC Berkeley and UCSD's Halıcıoğlu Data Science Institute.",
+      "claim_ids": [
+        "6d70120cc501dc00",
+        "5b49fd2a7a133fbd"
+      ]
+    },
+    {
+      "text": "Prior employment includes Whatnot, Deepgram, Stanford's Snyder Lab, the San Diego Supercomputer Center, and UC San Diego.",
+      "claim_ids": [
+        "268db53c69b84602",
+        "5a407bc5577704cd",
+        "934de4d7e075df6a",
+        "e85678d8ebd53bca",
+        "82dae72a0e7fcc0c"
+      ]
+    },
+    {
+      "text": "He has also founded Socale and Dart in addition to Sixtyfour.",
+      "claim_ids": [
+        "db16f9f09401641f",
+        "e4594b1adbfb7a35",
+        "1b1ceece87bc32e2"
+      ]
+    },
+    {
+      "text": "A collaborator named Saathvik Dirisala is associated with him.",
+      "claim_ids": [
+        "7d7ae5f321ccf942"
+      ]
+    },
+    {
+      "text": "The earliest dated activity in the timeline is a PRMO Qualifier award in September 2019.",
+      "claim_ids": [
+        "32a0fac6639cd1ee"
+      ]
+    },
+    {
+      "text": "His online presence includes profiles on GitHub, LinkedIn, X (Twitter), Hugging Face, and a personal website at www.saarthshah.com.",
+      "claim_ids": [
+        "ffeffaf7366d656a",
+        "0788262832ccc195",
+        "2a10f162d7f9ae31",
+        "6ed124b2d70a3304",
+        "d7ce141b86bce014"
+      ]
+    }
+  ],
+  "profile": {
+    "current_role": {
+      "id": "3091d9fee3d1b3d2",
+      "predicate": "title",
+      "value": "cofounder and ceo",
+      "value_raw": "co-founder and CEO",
+      "temporal": {
+        "start": null,
+        "end": null,
+        "end_state": "unknown",
+        "precision": "year",
+        "context_date": null
+      },
+      "confidence": {
+        "score": 0.5986876601124521,
+        "logodds": 0.4000000000000002,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "source_tier:personal_site",
+            "weight": 2.2
+          },
+          {
+            "factor": "extraction:prose_llm",
+            "weight": 0.0
+          },
+          {
+            "factor": "no_context_date",
+            "weight": -0.3
+          }
+        ]
+      },
+      "attachment_confidence": 0.9991755753136017,
+      "identity_link": "anchor_match:employer",
+      "evidence": [
+        {
+          "evidence_id": "a38d053633ac2f47",
+          "candidate_id": "c2",
+          "url": "https://www.saarthshah.com/",
+          "snippet": "co-founder and CEO of Sixtyfour",
+          "retrieved_at": "2026-09-04T05:20:03.103318Z",
+          "source_class": "personal_site",
+          "extraction_method": "prose_llm"
+        }
+      ]
+    },
+    "employment": [
+      {
+        "id": "268db53c69b84602",
+        "predicate": "employment",
+        "value": "whatnot",
+        "value_raw": "Whatnot",
+        "temporal": {
+          "start": "2025-01-01",
+          "end": "2025-03-31",
+          "end_state": "ended",
+          "precision": "month",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.9321377064230055,
+          "logodds": 2.62,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:personal_site",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:prose_llm",
+              "weight": 0.0
+            },
+            {
+              "factor": "corroboration:3src",
+              "weight": 1.92
+            }
+          ]
+        },
+        "attachment_confidence": 0.9998883466593704,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "6e3001378f378a4d",
+            "candidate_id": "c2",
+            "url": "https://www.saarthshah.com/",
+            "snippet": "In summer 2024, I worked at Whatnot",
+            "retrieved_at": "2026-09-04T05:20:03.103632Z",
+            "source_class": "personal_site",
+            "extraction_method": "prose_llm"
+          },
+          {
+            "evidence_id": "d7821f690ac81c9f",
+            "candidate_id": "c2",
+            "url": "https://www.linkedin.com/in/saarthshah",
+            "snippet": "Whatnot\n\n#### Software Engineer\n\nJan 2025 - Mar 2025",
+            "retrieved_at": "2026-09-04T05:20:17.569748Z",
+            "source_class": "professional_network",
+            "extraction_method": "prose_llm"
+          },
+          {
+            "evidence_id": "a909ba18e72fc51b",
+            "candidate_id": "c2",
+            "url": "https://github.com/SaarthShah",
+            "snippet": "@Whatnot-Inc",
+            "retrieved_at": "2026-09-04T05:20:30.924559Z",
+            "source_class": "code_host",
+            "extraction_method": "prose_llm"
+          }
+        ]
+      },
+      {
+        "id": "6f57a5c558ee16d1",
+        "predicate": "employer",
+        "value": "sixtyfour.ai",
+        "value_raw": "Sixtyfour",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.8320183851339245,
+          "logodds": 1.6,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:personal_site",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:prose_llm",
+              "weight": 0.0
+            },
+            {
+              "factor": "corroboration:2src",
+              "weight": 1.2
+            },
+            {
+              "factor": "no_context_date",
+              "weight": -0.3
+            }
+          ]
+        },
+        "attachment_confidence": 0.9998883466593704,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "20b65017970cbe2f",
+            "candidate_id": "c2",
+            "url": "https://www.saarthshah.com/",
+            "snippet": "co-founder and CEO of Sixtyfour",
+            "retrieved_at": "2026-09-04T05:20:03.103345Z",
+            "source_class": "personal_site",
+            "extraction_method": "prose_llm"
+          },
+          {
+            "evidence_id": "1d2e57dc9fa0dea2",
+            "candidate_id": "c2",
+            "url": "https://github.com/SaarthShah",
+            "snippet": "Co-Founder & CEO @ Sixtyfour",
+            "retrieved_at": "2026-09-04T05:20:30.924338Z",
+            "source_class": "code_host",
+            "extraction_method": "prose_llm"
+          }
+        ]
+      },
+      {
+        "id": "5a407bc5577704cd",
+        "predicate": "employment",
+        "value": "deepgram",
+        "value_raw": "Deepgram",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.8320183851339245,
+          "logodds": 1.6,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:personal_site",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:prose_llm",
+              "weight": 0.0
+            },
+            {
+              "factor": "corroboration:2src",
+              "weight": 1.2
+            },
+            {
+              "factor": "no_context_date",
+              "weight": -0.3
+            }
+          ]
+        },
+        "attachment_confidence": 0.9998883466593704,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "4be6ecfa612201b9",
+            "candidate_id": "c2",
+            "url": "https://www.saarthshah.com/",
+            "snippet": "In summer 2023, I joined Deepgram",
+            "retrieved_at": "2026-09-04T05:20:03.103564Z",
+            "source_class": "personal_site",
+            "extraction_method": "prose_llm"
+          },
+          {
+            "evidence_id": "69ddfb1ab17a01f6",
+            "candidate_id": "c2",
+            "url": "https://github.com/SaarthShah",
+            "snippet": "@deepgram",
+            "retrieved_at": "2026-09-04T05:20:30.924585Z",
+            "source_class": "code_host",
+            "extraction_method": "prose_llm"
+          }
+        ]
+      },
+      {
+        "id": "243cbba1d4039f6f",
+        "predicate": "employer",
+        "value": "sixtyfour ai",
+        "value_raw": "Sixtyfour AI",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.5986876601124521,
+          "logodds": 0.4000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:code_host",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:github_api",
+              "weight": 0.0
+            },
+            {
+              "factor": "no_context_date",
+              "weight": -0.3
+            }
+          ]
+        },
+        "attachment_confidence": 0.9998883466593704,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "79576a8c01d54b98",
+            "candidate_id": "c2",
+            "url": "https://github.com/SaarthShah",
+            "snippet": "Sixtyfour AI",
+            "retrieved_at": "2026-09-04T05:19:58.815490Z",
+            "source_class": "code_host",
+            "extraction_method": "github_api"
+          }
+        ]
+      },
+      {
+        "id": "934de4d7e075df6a",
+        "predicate": "employment",
+        "value": "stanford’s snyder lab",
+        "value_raw": "Stanford’s Snyder Lab",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.5986876601124521,
+          "logodds": 0.4000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:personal_site",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:prose_llm",
+              "weight": 0.0
+            },
+            {
+              "factor": "no_context_date",
+              "weight": -0.3
+            }
+          ]
+        },
+        "attachment_confidence": 0.9991755753136017,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "615bd604e1899daa",
+            "candidate_id": "c2",
+            "url": "https://www.saarthshah.com/",
+            "snippet": "At Stanford’s Snyder Lab, I helped researchers make sense of wearable health data.",
+            "retrieved_at": "2026-09-04T05:20:03.103425Z",
+            "source_class": "personal_site",
+            "extraction_method": "prose_llm"
+          }
+        ]
+      },
+      {
+        "id": "e85678d8ebd53bca",
+        "predicate": "employment",
+        "value": "san diego supercomputer center",
+        "value_raw": "San Diego Supercomputer Center",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.5986876601124521,
+          "logodds": 0.4000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:personal_site",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:prose_llm",
+              "weight": 0.0
+            },
+            {
+              "factor": "no_context_date",
+              "weight": -0.3
+            }
+          ]
+        },
+        "attachment_confidence": 0.9991755753136017,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "4ffdb5d76a1ecfc5",
+            "candidate_id": "c2",
+            "url": "https://www.saarthshah.com/",
+            "snippet": "At the San Diego Supercomputer Center, I built models to analyze 911 call logs and social media",
+            "retrieved_at": "2026-09-04T05:20:03.103457Z",
+            "source_class": "personal_site",
+            "extraction_method": "prose_llm"
+          }
+        ]
+      },
+      {
+        "id": "238af9a27137c8b9",
+        "predicate": "employment",
+        "value": "uc berkeley",
+        "value_raw": "UC Berkeley",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.5986876601124521,
+          "logodds": 0.4000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:code_host",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:prose_llm",
+              "weight": 0.0
+            },
+            {
+              "factor": "no_context_date",
+              "weight": -0.3
+            }
+          ]
+        },
+        "attachment_confidence": 0.9998883466593704,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "96b6752c86a5eb17",
+            "candidate_id": "c2",
+            "url": "https://github.com/SaarthShah",
+            "snippet": "prev @ UC Berkeley",
+            "retrieved_at": "2026-09-04T05:20:30.924529Z",
+            "source_class": "code_host",
+            "extraction_method": "prose_llm"
+          }
+        ]
+      },
+      {
+        "id": "82dae72a0e7fcc0c",
+        "predicate": "employment",
+        "value": "ucsandiego",
+        "value_raw": "ucsandiego",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.5986876601124521,
+          "logodds": 0.4000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:code_host",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:prose_llm",
+              "weight": 0.0
+            },
+            {
+              "factor": "no_context_date",
+              "weight": -0.3
+            }
+          ]
+        },
+        "attachment_confidence": 0.9998883466593704,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "234084e3ac24f7fa",
+            "candidate_id": "c2",
+            "url": "https://github.com/SaarthShah",
+            "snippet": "@ucsandiego",
+            "retrieved_at": "2026-09-04T05:20:30.924608Z",
+            "source_class": "code_host",
+            "extraction_method": "prose_llm"
+          }
+        ]
+      },
+      {
+        "id": "5a6800d7a9675410",
+        "predicate": "employment",
+        "value": "stanford snyder lab",
+        "value_raw": "Stanford Snyder Lab",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.5986876601124521,
+          "logodds": 0.4000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:code_host",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:prose_llm",
+              "weight": 0.0
+            },
+            {
+              "factor": "no_context_date",
+              "weight": -0.3
+            }
+          ]
+        },
+        "attachment_confidence": 0.9998883466593704,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "c12a898a0e41d3d7",
+            "candidate_id": "c2",
+            "url": "https://github.com/SaarthShah",
+            "snippet": "Stanford Snyder Lab",
+            "retrieved_at": "2026-09-04T05:20:30.924634Z",
+            "source_class": "code_host",
+            "extraction_method": "prose_llm"
+          }
+        ]
+      },
+      {
+        "id": "f91866c4d6105d24",
+        "predicate": "employment",
+        "value": "sdsc",
+        "value_raw": "SDSC",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.5986876601124521,
+          "logodds": 0.4000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:code_host",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:prose_llm",
+              "weight": 0.0
+            },
+            {
+              "factor": "no_context_date",
+              "weight": -0.3
+            }
+          ]
+        },
+        "attachment_confidence": 0.9998883466593704,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "44ffb986436303db",
+            "candidate_id": "c2",
+            "url": "https://github.com/SaarthShah",
+            "snippet": "SDSC",
+            "retrieved_at": "2026-09-04T05:20:30.924660Z",
+            "source_class": "code_host",
+            "extraction_method": "prose_llm"
+          }
+        ]
+      }
+    ],
+    "education": [
+      {
+        "id": "6d70120cc501dc00",
+        "predicate": "education",
+        "value": "uc berkeley",
+        "value_raw": "UC Berkeley",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.6681877721681662,
+          "logodds": 0.7000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:personal_site",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:prose_llm",
+              "weight": 0.0
+            }
+          ]
+        },
+        "attachment_confidence": 0.9991755753136017,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "e21a5f8366cbf678",
+            "candidate_id": "c2",
+            "url": "https://www.saarthshah.com/",
+            "snippet": "graduated from UC Berkeley with a degree in Data Science",
+            "retrieved_at": "2026-09-04T05:20:03.103369Z",
+            "source_class": "personal_site",
+            "extraction_method": "prose_llm"
+          }
+        ]
+      },
+      {
+        "id": "5b49fd2a7a133fbd",
+        "predicate": "education",
+        "value": "ucsd’s halıcıoğlu data science institute",
+        "value_raw": "UCSD’s Halıcıoğlu Data Science Institute",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.6681877721681662,
+          "logodds": 0.7000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:personal_site",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:prose_llm",
+              "weight": 0.0
+            }
+          ]
+        },
+        "attachment_confidence": 0.9991755753136017,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "9dcba71d1e180e63",
+            "candidate_id": "c2",
+            "url": "https://www.saarthshah.com/",
+            "snippet": "transferring from UCSD’s Halıcıoğlu Data Science Institute",
+            "retrieved_at": "2026-09-04T05:20:03.103397Z",
+            "source_class": "personal_site",
+            "extraction_method": "prose_llm"
+          }
+        ]
+      }
+    ],
+    "location": {
+      "id": "fe65ee7da3118a6b",
+      "predicate": "location",
+      "value": "san francisco",
+      "value_raw": "San Francisco, CA",
+      "temporal": {
+        "start": null,
+        "end": null,
+        "end_state": "unknown",
+        "precision": "year",
+        "context_date": null
+      },
+      "confidence": {
+        "score": 0.8320183851339245,
+        "logodds": 1.6,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "source_tier:code_host",
+            "weight": 2.2
+          },
+          {
+            "factor": "extraction:github_api",
+            "weight": 0.0
+          },
+          {
+            "factor": "corroboration:2src",
+            "weight": 1.2
+          },
+          {
+            "factor": "no_context_date",
+            "weight": -0.3
+          }
+        ]
+      },
+      "attachment_confidence": 0.9998883466593704,
+      "identity_link": "anchor_match:employer",
+      "evidence": [
+        {
+          "evidence_id": "a7f6b15c215e9241",
+          "candidate_id": "c2",
+          "url": "https://github.com/SaarthShah",
+          "snippet": "San Francisco, CA",
+          "retrieved_at": "2026-09-04T05:19:58.815563Z",
+          "source_class": "code_host",
+          "extraction_method": "github_api"
+        },
+        {
+          "evidence_id": "edd588a3a33c7656",
+          "candidate_id": "c2",
+          "url": "https://www.linkedin.com/in/saarthshah",
+          "snippet": "San Francisco, California, United States (US)",
+          "retrieved_at": "2026-09-04T05:20:17.545199Z",
+          "source_class": "professional_network",
+          "extraction_method": "prose_llm"
+        }
+      ]
+    },
+    "contact": [
+      {
+        "id": "643ba25a7f739ccf",
+        "predicate": "handle",
+        "value": "https://x.com/saarth",
+        "value_raw": "https://x.com/saarth_",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.8320183851339245,
+          "logodds": 1.6,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:code_host",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:github_api",
+              "weight": 0.0
+            },
+            {
+              "factor": "corroboration:2src",
+              "weight": 1.2
+            },
+            {
+              "factor": "no_context_date",
+              "weight": -0.3
+            }
+          ]
+        },
+        "attachment_confidence": 0.9991755753136017,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "34786c97414a39c5",
+            "candidate_id": "c2",
+            "url": "https://github.com/SaarthShah",
+            "snippet": "https://x.com/saarth_",
+            "retrieved_at": "2026-09-04T05:19:58.815630Z",
+            "source_class": "code_host",
+            "extraction_method": "github_api"
+          },
+          {
+            "evidence_id": "86609ae9bfdf05da",
+            "candidate_id": "c2",
+            "url": "https://www.saarthshah.com/",
+            "snippet": "https://x.com/saarth_",
+            "retrieved_at": "2026-09-04T05:20:03.104747Z",
+            "source_class": "personal_site",
+            "extraction_method": "link"
+          }
+        ]
+      },
+      {
+        "id": "ffeffaf7366d656a",
+        "predicate": "handle",
+        "value": "https://github.com/saarthshah",
+        "value_raw": "https://github.com/saarthshah",
+        "temporal": {
+          "start": "2020-08-07",
+          "end": null,
+          "end_state": "unknown",
+          "precision": "day",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.6681877721681662,
+          "logodds": 0.7000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:code_host",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:username_probe",
+              "weight": 0.0
+            }
+          ]
+        },
+        "attachment_confidence": 0.9836975006285591,
+        "identity_link": "anchor_match:domain,employer,handle",
+        "evidence": [
+          {
+            "evidence_id": "b2d879d92a3ae6f6",
+            "candidate_id": "c2",
+            "url": "https://github.com/saarthshah",
+            "snippet": "username match; same-person test 0.98",
+            "retrieved_at": "2026-09-04T05:19:59.383132Z",
+            "source_class": "code_host",
+            "extraction_method": "username_probe"
+          }
+        ]
+      },
+      {
+        "id": "46f0e4fe4fcadfcb",
+        "predicate": "handle",
+        "value": "https://dev.to/saarthshah",
+        "value_raw": "https://dev.to/saarthshah",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.5986876601124521,
+          "logodds": 0.4000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:personal_site",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:username_probe",
+              "weight": 0.0
+            },
+            {
+              "factor": "no_context_date",
+              "weight": -0.3
+            }
+          ]
+        },
+        "attachment_confidence": 0.8455347349164652,
+        "identity_link": "anchor_match:handle",
+        "evidence": [
+          {
+            "evidence_id": "540864e9a92be926",
+            "candidate_id": "c2",
+            "url": "https://dev.to/saarthshah",
+            "snippet": "username match; same-person test 0.85",
+            "retrieved_at": "2026-09-04T05:19:59.478266Z",
+            "source_class": "personal_site",
+            "extraction_method": "username_probe"
+          }
+        ]
+      },
+      {
+        "id": "d7ce141b86bce014",
+        "predicate": "website",
+        "value": "www.saarthshah.com",
+        "value_raw": "www.saarthshah.com",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.5986876601124521,
+          "logodds": 0.4000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:code_host",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:github_api",
+              "weight": 0.0
+            },
+            {
+              "factor": "no_context_date",
+              "weight": -0.3
+            }
+          ]
+        },
+        "attachment_confidence": 0.9998883466593704,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "f2ec85e758bb57eb",
+            "candidate_id": "c2",
+            "url": "https://github.com/SaarthShah",
+            "snippet": "www.saarthshah.com",
+            "retrieved_at": "2026-09-04T05:19:58.815588Z",
+            "source_class": "code_host",
+            "extraction_method": "github_api"
+          }
+        ]
+      },
+      {
+        "id": "bab3d811441bd161",
+        "predicate": "email",
+        "value": "saarth@berkeley.edu",
+        "value_raw": "saarth@berkeley.edu",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.5986876601124521,
+          "logodds": 0.4000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:code_host",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:github_code",
+              "weight": 0.0
+            },
+            {
+              "factor": "no_context_date",
+              "weight": -0.3
+            }
+          ]
+        },
+        "attachment_confidence": 0.8455347349164652,
+        "identity_link": "anchor_match:handle",
+        "evidence": [
+          {
+            "evidence_id": "c2a134899bdf79e5",
+            "candidate_id": "c2",
+            "url": "https://github.com/Stanford-Health/wearipedia/blob/28ad9261337ef9ffe3b52121b3b1b597414b022d/CONTRIBUTORS.md",
+            "snippet": "saarth@berkeley.edu",
+            "retrieved_at": "2026-09-04T05:20:12.999561Z",
+            "source_class": "code_host",
+            "extraction_method": "github_code"
+          }
+        ]
+      },
+      {
+        "id": "e6d4f1a9974211ec",
+        "predicate": "handle",
+        "value": "saarth",
+        "value_raw": "@saarth_",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.5986876601124521,
+          "logodds": 0.4000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:code_host",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:prose_llm",
+              "weight": 0.0
+            },
+            {
+              "factor": "no_context_date",
+              "weight": -0.3
+            }
+          ]
+        },
+        "attachment_confidence": 0.9998883466593704,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "9eda4d9aed488fe2",
+            "candidate_id": "c2",
+            "url": "https://github.com/SaarthShah",
+            "snippet": "@saarth_",
+            "retrieved_at": "2026-09-04T05:20:30.924486Z",
+            "source_class": "code_host",
+            "extraction_method": "prose_llm"
+          }
+        ]
+      },
+      {
+        "id": "2a10f162d7f9ae31",
+        "predicate": "handle",
+        "value": "https://twitter.com/saarth",
+        "value_raw": "https://twitter.com/saarth_",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.5986876601124521,
+          "logodds": 0.4000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:code_host",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:link",
+              "weight": 0.0
+            },
+            {
+              "factor": "no_context_date",
+              "weight": -0.3
+            }
+          ]
+        },
+        "attachment_confidence": 0.9998883466593704,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "3a996374c8dc6b52",
+            "candidate_id": "c2",
+            "url": "https://github.com/SaarthShah",
+            "snippet": "https://twitter.com/saarth_",
+            "retrieved_at": "2026-09-04T05:20:30.931511Z",
+            "source_class": "code_host",
+            "extraction_method": "link"
+          }
+        ]
+      },
+      {
+        "id": "0788262832ccc195",
+        "predicate": "handle",
+        "value": "https://www.linkedin.com/in/saarthshah",
+        "value_raw": "https://www.linkedin.com/in/saarthshah/",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.5986876601124521,
+          "logodds": 0.4000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:code_host",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:link",
+              "weight": 0.0
+            },
+            {
+              "factor": "no_context_date",
+              "weight": -0.3
+            }
+          ]
+        },
+        "attachment_confidence": 0.9998883466593704,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "155c07a42fb694e9",
+            "candidate_id": "c2",
+            "url": "https://github.com/SaarthShah",
+            "snippet": "https://www.linkedin.com/in/saarthshah/",
+            "retrieved_at": "2026-09-04T05:20:30.931544Z",
+            "source_class": "code_host",
+            "extraction_method": "link"
+          }
+        ]
+      },
+      {
+        "id": "16451bda4f72e6d2",
+        "predicate": "handle",
+        "value": "https://www.youtube.com/@saarthshah",
+        "value_raw": "https://www.youtube.com/@saarthshah",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.401312339887548,
+          "logodds": -0.4000000000000001,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:social",
+              "weight": 1.4
+            },
+            {
+              "factor": "extraction:username_probe",
+              "weight": 0.0
+            },
+            {
+              "factor": "no_context_date",
+              "weight": -0.3
+            }
+          ]
+        },
+        "attachment_confidence": 0.8455347349164652,
+        "identity_link": "anchor_match:handle",
+        "evidence": [
+          {
+            "evidence_id": "0748d06a42170533",
+            "candidate_id": "c2",
+            "url": "https://www.youtube.com/@saarthshah",
+            "snippet": "username match; same-person test 0.85",
+            "retrieved_at": "2026-09-04T05:20:00.004571Z",
+            "source_class": "social",
+            "extraction_method": "username_probe"
+          }
+        ]
+      },
+      {
+        "id": "13d22d969190f4de",
+        "predicate": "handle",
+        "value": "saarthshah",
+        "value_raw": "SaarthShah",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.401312339887548,
+          "logodds": -0.4000000000000001,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:professional_network",
+              "weight": 1.4
+            },
+            {
+              "factor": "extraction:prose_llm",
+              "weight": 0.0
+            },
+            {
+              "factor": "no_context_date",
+              "weight": -0.3
+            }
+          ]
+        },
+        "attachment_confidence": 0.998498817743263,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "ad71c4cae0c32491",
+            "candidate_id": "c2",
+            "url": "https://www.linkedin.com/in/saarthshah",
+            "snippet": "Username: SaarthShah",
+            "retrieved_at": "2026-09-04T05:20:17.570411Z",
+            "source_class": "professional_network",
+            "extraction_method": "prose_llm"
+          }
+        ]
+      },
+      {
+        "id": "6ed124b2d70a3304",
+        "predicate": "handle",
+        "value": "https://huggingface.co/saarthshah",
+        "value_raw": "https://huggingface.co/saarthshah",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.2689414213699951,
+          "logodds": -1.0,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:unknown",
+              "weight": 0.8
+            },
+            {
+              "factor": "extraction:username_probe",
+              "weight": 0.0
+            },
+            {
+              "factor": "no_context_date",
+              "weight": -0.3
+            }
+          ]
+        },
+        "attachment_confidence": 0.8455347349164652,
+        "identity_link": "anchor_match:handle",
+        "evidence": [
+          {
+            "evidence_id": "9960aaa2c2b835d2",
+            "candidate_id": "c2",
+            "url": "https://huggingface.co/saarthshah",
+            "snippet": "username match; same-person test 0.85",
+            "retrieved_at": "2026-09-04T05:19:59.598162Z",
+            "source_class": "unknown",
+            "extraction_method": "username_probe"
+          }
+        ]
+      }
+    ],
+    "accounts": [],
+    "public_output": [
+      {
+        "id": "397b984a29f86b8f",
+        "predicate": "repo",
+        "value": "https://github.com/saarthshah/blog",
+        "value_raw": "https://github.com/SaarthShah/blog",
+        "temporal": {
+          "start": "2026-06-22",
+          "end": null,
+          "end_state": "unknown",
+          "precision": "day",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.6681877721681662,
+          "logodds": 0.7000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:code_host",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:github_api",
+              "weight": 0.0
+            }
+          ]
+        },
+        "attachment_confidence": 0.9991755753136017,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "e8476846de1d95d2",
+            "candidate_id": "c2",
+            "url": "https://github.com/SaarthShah/blog",
+            "snippet": "SaarthShah/blog: New website + Blog",
+            "retrieved_at": "2026-09-04T05:19:59.006546Z",
+            "source_class": "code_host",
+            "extraction_method": "github_api"
+          }
+        ]
+      },
+      {
+        "id": "b450ebfd307a59f7",
+        "predicate": "repo",
+        "value": "https://github.com/saarthshah/mac-meetings-reminder",
+        "value_raw": "https://github.com/SaarthShah/mac-meetings-reminder",
+        "temporal": {
+          "start": "2025-11-16",
+          "end": null,
+          "end_state": "unknown",
+          "precision": "day",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.6681877721681662,
+          "logodds": 0.7000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:code_host",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:github_api",
+              "weight": 0.0
+            }
+          ]
+        },
+        "attachment_confidence": 0.9991755753136017,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "311a9eaaaffb5d83",
+            "candidate_id": "c2",
+            "url": "https://github.com/SaarthShah/mac-meetings-reminder",
+            "snippet": "SaarthShah/mac-meetings-reminder: Quickly built something i wished existed",
+            "retrieved_at": "2026-09-04T05:19:59.006657Z",
+            "source_class": "code_host",
+            "extraction_method": "github_api"
+          }
+        ]
+      },
+      {
+        "id": "b31415960f6aa289",
+        "predicate": "repo",
+        "value": "https://github.com/saarthshah/notetaker",
+        "value_raw": "https://github.com/SaarthShah/notetaker",
+        "temporal": {
+          "start": "2025-01-25",
+          "end": null,
+          "end_state": "unknown",
+          "precision": "day",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.6681877721681662,
+          "logodds": 0.7000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:code_host",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:github_api",
+              "weight": 0.0
+            }
+          ]
+        },
+        "attachment_confidence": 0.9991755753136017,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "8202d062e2b38f48",
+            "candidate_id": "c2",
+            "url": "https://github.com/SaarthShah/notetaker",
+            "snippet": "SaarthShah/notetaker",
+            "retrieved_at": "2026-09-04T05:19:59.006707Z",
+            "source_class": "code_host",
+            "extraction_method": "github_api"
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "id": "7d7ae5f321ccf942",
+        "predicate": "relationship",
+        "value": "collaborator: Saathvik Dirisala",
+        "value_raw": "collaborator: Saathvik Dirisala",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.6681877721681662,
+          "logodds": 0.7000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:code_host",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:github_code",
+              "weight": 0.0
+            }
+          ]
+        },
+        "attachment_confidence": 0.8455347349164652,
+        "identity_link": "anchor_match:handle",
+        "evidence": [
+          {
+            "evidence_id": "482465a9d4679463",
+            "candidate_id": "c2",
+            "url": "https://github.com/saathvikpd/PowerOutageCausePrediction/blob/5de208cabbb1ac3b8bf47bfd4ee8835fc49197a6/README.md",
+            "snippet": "Contributors: Saathvik Dirisala & Saarth Shah",
+            "retrieved_at": "2026-09-04T05:20:18.025761Z",
+            "source_class": "code_host",
+            "extraction_method": "github_code"
+          }
+        ]
+      }
+    ],
+    "notable": [
+      {
+        "id": "1b1ceece87bc32e2",
+        "predicate": "founded",
+        "value": "sixtyfour.ai",
+        "value_raw": "Sixtyfour",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.8698915256370021,
+          "logodds": 1.9000000000000001,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:personal_site",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:prose_llm",
+              "weight": 0.0
+            },
+            {
+              "factor": "corroboration:2src",
+              "weight": 1.2
+            }
+          ]
+        },
+        "attachment_confidence": 0.9998883466593704,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "20b65017970cbe2f",
+            "candidate_id": "c2",
+            "url": "https://www.saarthshah.com/",
+            "snippet": "co-founder and CEO of Sixtyfour",
+            "retrieved_at": "2026-09-04T05:20:03.103250Z",
+            "source_class": "personal_site",
+            "extraction_method": "prose_llm"
+          },
+          {
+            "evidence_id": "1d2e57dc9fa0dea2",
+            "candidate_id": "c2",
+            "url": "https://github.com/SaarthShah",
+            "snippet": "Co-Founder & CEO @ Sixtyfour",
+            "retrieved_at": "2026-09-04T05:20:30.924378Z",
+            "source_class": "code_host",
+            "extraction_method": "prose_llm"
+          }
+        ]
+      },
+      {
+        "id": "7075b9a1a53e269c",
+        "predicate": "other",
+        "value": "co-founder & ceo @ sixtyfour (yc x25) | prev @ uc berkeley @whatnot-inc @deepgram @ucsandiego @ stanford snyder lab & @ sdsc",
+        "value_raw": "Co-Founder & CEO @ Sixtyfour (YC X25) | prev @ UC Berkeley @Whatnot-Inc @deepgram @UCSanDiego  @ Stanford Snyder Lab &  @ SDSC",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.6681877721681662,
+          "logodds": 0.7000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:code_host",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:github_api",
+              "weight": 0.0
+            }
+          ]
+        },
+        "attachment_confidence": 0.9991755753136017,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "abe90c354bd0328f",
+            "candidate_id": "c2",
+            "url": "https://github.com/SaarthShah",
+            "snippet": "Co-Founder & CEO @ Sixtyfour (YC X25) | prev @ UC Berkeley @Whatnot-Inc @deepgram @UCSanDiego  @ Stanford Snyder Lab &  @ SDSC",
+            "retrieved_at": "2026-09-04T05:19:58.815674Z",
+            "source_class": "code_host",
+            "extraction_method": "github_api"
+          }
+        ]
+      },
+      {
+        "id": "db16f9f09401641f",
+        "predicate": "founded",
+        "value": "socale",
+        "value_raw": "Socale",
+        "temporal": {
+          "start": null,
+          "end": null,
+          "end_state": "unknown",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.6681877721681662,
+          "logodds": 0.7000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:personal_site",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:prose_llm",
+              "weight": 0.0
+            }
+          ]
+        },
+        "attachment_confidence": 0.9991755753136017,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "a9d53bd0eb50b9ef",
+            "candidate_id": "c2",
+            "url": "https://www.saarthshah.com/",
+            "snippet": "I also launched Socale, a college social network at UCSD",
+            "retrieved_at": "2026-09-04T05:20:03.103496Z",
+            "source_class": "personal_site",
+            "extraction_method": "prose_llm"
+          }
+        ]
+      },
+      {
+        "id": "e4594b1adbfb7a35",
+        "predicate": "founded",
+        "value": "dart",
+        "value_raw": "Dart",
+        "temporal": {
+          "start": "2024-01-01",
+          "end": "2024-12-31",
+          "end_state": "ended",
+          "precision": "year",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.6681877721681662,
+          "logodds": 0.7000000000000002,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:personal_site",
+              "weight": 2.2
+            },
+            {
+              "factor": "extraction:prose_llm",
+              "weight": 0.0
+            }
+          ]
+        },
+        "attachment_confidence": 0.9991755753136017,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "abd8fda9b44b8bac",
+            "candidate_id": "c2",
+            "url": "https://www.saarthshah.com/",
+            "snippet": "In 2024, I also started Dart",
+            "retrieved_at": "2026-09-04T05:20:03.103598Z",
+            "source_class": "personal_site",
+            "extraction_method": "prose_llm"
+          }
+        ]
+      },
+      {
+        "id": "98edd20d97ad2b8b",
+        "predicate": "award",
+        "value": "provost honors",
+        "value_raw": "Provost Honors",
+        "temporal": {
+          "start": "2022-01-01",
+          "end": "2022-01-31",
+          "end_state": "ended",
+          "precision": "month",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.47502081252106,
+          "logodds": -0.10000000000000009,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:professional_network",
+              "weight": 1.4
+            },
+            {
+              "factor": "extraction:prose_llm",
+              "weight": 0.0
+            }
+          ]
+        },
+        "attachment_confidence": 0.998498817743263,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "c3a3bbdcf0978c14",
+            "candidate_id": "c2",
+            "url": "https://www.linkedin.com/in/saarthshah",
+            "snippet": "Provost Honors\n\nIssued by: University Of California, San Diego\n\nJan 2022",
+            "retrieved_at": "2026-09-04T05:20:17.570128Z",
+            "source_class": "professional_network",
+            "extraction_method": "prose_llm"
+          }
+        ]
+      },
+      {
+        "id": "4800f6c411c89e12",
+        "predicate": "award",
+        "value": "hack harvard 2021 (most useless hack",
+        "value_raw": "Hack Harvard 2021 (Most Useless Hack)",
+        "temporal": {
+          "start": "2021-10-01",
+          "end": "2021-10-31",
+          "end_state": "ended",
+          "precision": "month",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.47502081252106,
+          "logodds": -0.10000000000000009,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:professional_network",
+              "weight": 1.4
+            },
+            {
+              "factor": "extraction:prose_llm",
+              "weight": 0.0
+            }
+          ]
+        },
+        "attachment_confidence": 0.998498817743263,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "014921406cf96312",
+            "candidate_id": "c2",
+            "url": "https://www.linkedin.com/in/saarthshah",
+            "snippet": "Hack Harvard 2021 (Most Useless Hack)\n\nIssued by: Harvard University\n\nOct 2021",
+            "retrieved_at": "2026-09-04T05:20:17.570203Z",
+            "source_class": "professional_network",
+            "extraction_method": "prose_llm"
+          }
+        ]
+      },
+      {
+        "id": "7dc538fb46bc1e9a",
+        "predicate": "award",
+        "value": "ap scholar",
+        "value_raw": "AP Scholar",
+        "temporal": {
+          "start": "2020-07-01",
+          "end": "2020-07-31",
+          "end_state": "ended",
+          "precision": "month",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.47502081252106,
+          "logodds": -0.10000000000000009,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:professional_network",
+              "weight": 1.4
+            },
+            {
+              "factor": "extraction:prose_llm",
+              "weight": 0.0
+            }
+          ]
+        },
+        "attachment_confidence": 0.998498817743263,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "509cd8223b72eefe",
+            "candidate_id": "c2",
+            "url": "https://www.linkedin.com/in/saarthshah",
+            "snippet": "AP Scholar\n\nJul 2020",
+            "retrieved_at": "2026-09-04T05:20:17.570268Z",
+            "source_class": "professional_network",
+            "extraction_method": "prose_llm"
+          }
+        ]
+      },
+      {
+        "id": "32a0fac6639cd1ee",
+        "predicate": "award",
+        "value": "prmo qualifier",
+        "value_raw": "PRMO Qualifier",
+        "temporal": {
+          "start": "2019-09-01",
+          "end": "2019-09-30",
+          "end_state": "ended",
+          "precision": "month",
+          "context_date": null
+        },
+        "confidence": {
+          "score": 0.47502081252106,
+          "logodds": -0.10000000000000009,
+          "terms": [
+            {
+              "factor": "prior",
+              "weight": -1.5
+            },
+            {
+              "factor": "source_tier:professional_network",
+              "weight": 1.4
+            },
+            {
+              "factor": "extraction:prose_llm",
+              "weight": 0.0
+            }
+          ]
+        },
+        "attachment_confidence": 0.998498817743263,
+        "identity_link": "anchor_match:employer",
+        "evidence": [
+          {
+            "evidence_id": "2cd21fc3d4d5b0be",
+            "candidate_id": "c2",
+            "url": "https://www.linkedin.com/in/saarthshah",
+            "snippet": "PRMO Qualifier\n\nIssued by: Mathematics Teachers' Association (India)\n\nSep 2019",
+            "retrieved_at": "2026-09-04T05:20:17.570344Z",
+            "source_class": "professional_network",
+            "extraction_method": "prose_llm"
+          }
+        ]
+      }
+    ]
+  },
+  "unverified": [],
+  "graph": {
+    "nodes": [
+      {
+        "id": "person:c2",
+        "type": "person",
+        "label": "Saarth Shah",
+        "depth": 0,
+        "attachment_confidence": 0.9878715650157257
+      },
+      {
+        "id": "account:github.com:https://github.com/saarthshah",
+        "type": "account",
+        "label": "https://github.com/saarthshah",
+        "depth": 1,
+        "attachment_confidence": 0.9836975006285591
+      },
+      {
+        "id": "account:dev.to:https://dev.to/saarthshah",
+        "type": "account",
+        "label": "https://dev.to/saarthshah",
+        "depth": 1,
+        "attachment_confidence": 0.8455347349164652
+      },
+      {
+        "id": "account:huggingface.co:https://huggingface.co/saarthshah",
+        "type": "account",
+        "label": "https://huggingface.co/saarthshah",
+        "depth": 1,
+        "attachment_confidence": 0.8455347349164652
+      },
+      {
+        "id": "account:youtube.com:https://www.youtube.com/@saarthshah",
+        "type": "account",
+        "label": "https://www.youtube.com/@saarthshah",
+        "depth": 1,
+        "attachment_confidence": 0.8455347349164652
+      },
+      {
+        "id": "company:sixtyfour ai",
+        "type": "company",
+        "label": "Sixtyfour AI",
+        "depth": 1,
+        "attachment_confidence": 0.9998883466593704
+      },
+      {
+        "id": "account:www.saarthshah.com:www.saarthshah.com",
+        "type": "account",
+        "label": "www.saarthshah.com",
+        "depth": 1,
+        "attachment_confidence": 0.9998883466593704
+      },
+      {
+        "id": "account:x.com:https://x.com/saarth",
+        "type": "account",
+        "label": "https://x.com/saarth_",
+        "depth": 1,
+        "attachment_confidence": 0.9991755753136017
+      },
+      {
+        "id": "company:sixtyfour.ai",
+        "type": "company",
+        "label": "Sixtyfour",
+        "depth": 1,
+        "attachment_confidence": 0.9998883466593704
+      },
+      {
+        "id": "company:stanford’s snyder lab",
+        "type": "company",
+        "label": "Stanford’s Snyder Lab",
+        "depth": 1,
+        "attachment_confidence": 0.9991755753136017
+      },
+      {
+        "id": "company:san diego supercomputer center",
+        "type": "company",
+        "label": "San Diego Supercomputer Center",
+        "depth": 1,
+        "attachment_confidence": 0.9991755753136017
+      },
+      {
+        "id": "company:socale",
+        "type": "company",
+        "label": "Socale",
+        "depth": 1,
+        "attachment_confidence": 0.9991755753136017
+      },
+      {
+        "id": "company:deepgram",
+        "type": "company",
+        "label": "Deepgram",
+        "depth": 1,
+        "attachment_confidence": 0.9998883466593704
+      },
+      {
+        "id": "company:dart",
+        "type": "company",
+        "label": "Dart",
+        "depth": 1,
+        "attachment_confidence": 0.9991755753136017
+      },
+      {
+        "id": "company:whatnot",
+        "type": "company",
+        "label": "Whatnot",
+        "depth": 1,
+        "attachment_confidence": 0.9998883466593704
+      },
+      {
+        "id": "person:unresolved:saathvik-dirisala:5e5f0b00",
+        "type": "person",
+        "label": "Saathvik Dirisala",
+        "depth": 1,
+        "attachment_confidence": 0.8455347349164652
+      },
+      {
+        "id": "account:saarthshah:saarthshah",
+        "type": "account",
+        "label": "SaarthShah",
+        "depth": 1,
+        "attachment_confidence": 0.998498817743263
+      },
+      {
+        "id": "account:saarth:saarth",
+        "type": "account",
+        "label": "@saarth_",
+        "depth": 1,
+        "attachment_confidence": 0.9998883466593704
+      },
+      {
+        "id": "company:uc berkeley",
+        "type": "company",
+        "label": "UC Berkeley",
+        "depth": 1,
+        "attachment_confidence": 0.9998883466593704
+      },
+      {
+        "id": "company:ucsandiego",
+        "type": "company",
+        "label": "ucsandiego",
+        "depth": 1,
+        "attachment_confidence": 0.9998883466593704
+      },
+      {
+        "id": "company:stanford snyder lab",
+        "type": "company",
+        "label": "Stanford Snyder Lab",
+        "depth": 1,
+        "attachment_confidence": 0.9998883466593704
+      },
+      {
+        "id": "company:sdsc",
+        "type": "company",
+        "label": "SDSC",
+        "depth": 1,
+        "attachment_confidence": 0.9998883466593704
+      },
+      {
+        "id": "account:twitter.com:https://twitter.com/saarth",
+        "type": "account",
+        "label": "https://twitter.com/saarth_",
+        "depth": 1,
+        "attachment_confidence": 0.9998883466593704
+      },
+      {
+        "id": "account:linkedin.com:https://www.linkedin.com/in/saarthshah",
+        "type": "account",
+        "label": "https://www.linkedin.com/in/saarthshah/",
+        "depth": 1,
+        "attachment_confidence": 0.9998883466593704
+      }
+    ],
+    "edges": [
+      {
+        "id": "b2106dda5da92fd1",
+        "src": "person:c2",
+        "dst": "account:github.com:https://github.com/saarthshah",
+        "type": "affiliation",
+        "mechanism": "username_probe on github.com",
+        "evidence_ids": [
+          "b2d879d92a3ae6f6"
+        ]
+      },
+      {
+        "id": "fbb69267daf89f46",
+        "src": "person:c2",
+        "dst": "account:dev.to:https://dev.to/saarthshah",
+        "type": "affiliation",
+        "mechanism": "username_probe on dev.to",
+        "evidence_ids": [
+          "540864e9a92be926"
+        ]
+      },
+      {
+        "id": "3e7172339f3e8592",
+        "src": "person:c2",
+        "dst": "account:huggingface.co:https://huggingface.co/saarthshah",
+        "type": "affiliation",
+        "mechanism": "username_probe on huggingface.co",
+        "evidence_ids": [
+          "9960aaa2c2b835d2"
+        ]
+      },
+      {
+        "id": "0c550b35b3c52a72",
+        "src": "person:c2",
+        "dst": "account:youtube.com:https://www.youtube.com/@saarthshah",
+        "type": "affiliation",
+        "mechanism": "username_probe on youtube.com",
+        "evidence_ids": [
+          "0748d06a42170533"
+        ]
+      },
+      {
+        "id": "07f69d1a48b1466d",
+        "src": "person:c2",
+        "dst": "company:sixtyfour ai",
+        "type": "employment",
+        "mechanism": "github_api on github.com",
+        "evidence_ids": [
+          "79576a8c01d54b98"
+        ]
+      },
+      {
+        "id": "5dbeb27cb75da3f4",
+        "src": "person:c2",
+        "dst": "account:www.saarthshah.com:www.saarthshah.com",
+        "type": "affiliation",
+        "mechanism": "github_api on github.com",
+        "evidence_ids": [
+          "f2ec85e758bb57eb"
+        ]
+      },
+      {
+        "id": "ab9b24a0901ece84",
+        "src": "person:c2",
+        "dst": "account:x.com:https://x.com/saarth",
+        "type": "affiliation",
+        "mechanism": "github_api on github.com",
+        "evidence_ids": [
+          "34786c97414a39c5"
+        ]
+      },
+      {
+        "id": "5eb2fe6aa67bb98f",
+        "src": "person:c2",
+        "dst": "company:sixtyfour.ai",
+        "type": "ownership",
+        "mechanism": "prose_llm on saarthshah.com",
+        "evidence_ids": [
+          "20b65017970cbe2f"
+        ]
+      },
+      {
+        "id": "08954f5983cc5907",
+        "src": "person:c2",
+        "dst": "company:stanford’s snyder lab",
+        "type": "employment",
+        "mechanism": "prose_llm on saarthshah.com",
+        "evidence_ids": [
+          "615bd604e1899daa"
+        ]
+      },
+      {
+        "id": "3bb6ff6faa8674b1",
+        "src": "person:c2",
+        "dst": "company:san diego supercomputer center",
+        "type": "employment",
+        "mechanism": "prose_llm on saarthshah.com",
+        "evidence_ids": [
+          "4ffdb5d76a1ecfc5"
+        ]
+      },
+      {
+        "id": "15be67a8d237da0f",
+        "src": "person:c2",
+        "dst": "company:socale",
+        "type": "ownership",
+        "mechanism": "prose_llm on saarthshah.com",
+        "evidence_ids": [
+          "a9d53bd0eb50b9ef"
+        ]
+      },
+      {
+        "id": "e3d7a8a21a372d12",
+        "src": "person:c2",
+        "dst": "company:deepgram",
+        "type": "employment",
+        "mechanism": "prose_llm on saarthshah.com",
+        "evidence_ids": [
+          "4be6ecfa612201b9"
+        ]
+      },
+      {
+        "id": "af978aae96388579",
+        "src": "person:c2",
+        "dst": "company:dart",
+        "type": "ownership",
+        "mechanism": "prose_llm on saarthshah.com",
+        "evidence_ids": [
+          "abd8fda9b44b8bac"
+        ]
+      },
+      {
+        "id": "88de2916095637bb",
+        "src": "person:c2",
+        "dst": "company:whatnot",
+        "type": "employment",
+        "mechanism": "prose_llm on saarthshah.com",
+        "evidence_ids": [
+          "6e3001378f378a4d"
+        ]
+      },
+      {
+        "id": "5f24f20a59bcc55c",
+        "src": "person:c2",
+        "dst": "account:x.com:https://x.com/saarth",
+        "type": "affiliation",
+        "mechanism": "link on saarthshah.com",
+        "evidence_ids": [
+          "86609ae9bfdf05da"
+        ]
+      },
+      {
+        "id": "e0c536a81829b07e",
+        "src": "person:c2",
+        "dst": "person:unresolved:saathvik-dirisala:5e5f0b00",
+        "type": "relationship",
+        "mechanism": "collaborator",
+        "evidence_ids": [
+          "482465a9d4679463"
+        ]
+      },
+      {
+        "id": "2b86dde9bdc384c3",
+        "src": "person:c2",
+        "dst": "company:whatnot",
+        "type": "employment",
+        "mechanism": "prose_llm on linkedin.com",
+        "evidence_ids": [
+          "d7821f690ac81c9f"
+        ]
+      },
+      {
+        "id": "439f88610d834ee0",
+        "src": "person:c2",
+        "dst": "account:saarthshah:saarthshah",
+        "type": "affiliation",
+        "mechanism": "prose_llm on linkedin.com",
+        "evidence_ids": [
+          "ad71c4cae0c32491"
+        ]
+      },
+      {
+        "id": "f201170cbac146c1",
+        "src": "person:c2",
+        "dst": "company:sixtyfour.ai",
+        "type": "employment",
+        "mechanism": "prose_llm on github.com",
+        "evidence_ids": [
+          "1d2e57dc9fa0dea2"
+        ]
+      },
+      {
+        "id": "f6365c6676de07e5",
+        "src": "person:c2",
+        "dst": "account:saarth:saarth",
+        "type": "affiliation",
+        "mechanism": "prose_llm on github.com",
+        "evidence_ids": [
+          "9eda4d9aed488fe2"
+        ]
+      },
+      {
+        "id": "5483d9406730f912",
+        "src": "person:c2",
+        "dst": "company:uc berkeley",
+        "type": "employment",
+        "mechanism": "prose_llm on github.com",
+        "evidence_ids": [
+          "96b6752c86a5eb17"
+        ]
+      },
+      {
+        "id": "1db91c3d7689e8e5",
+        "src": "person:c2",
+        "dst": "company:whatnot",
+        "type": "employment",
+        "mechanism": "prose_llm on github.com",
+        "evidence_ids": [
+          "a909ba18e72fc51b"
+        ]
+      },
+      {
+        "id": "b6e16915020a4bf1",
+        "src": "person:c2",
+        "dst": "company:deepgram",
+        "type": "employment",
+        "mechanism": "prose_llm on github.com",
+        "evidence_ids": [
+          "69ddfb1ab17a01f6"
+        ]
+      },
+      {
+        "id": "c92bdf004cf6b488",
+        "src": "person:c2",
+        "dst": "company:ucsandiego",
+        "type": "employment",
+        "mechanism": "prose_llm on github.com",
+        "evidence_ids": [
+          "234084e3ac24f7fa"
+        ]
+      },
+      {
+        "id": "f347b1e6806c9743",
+        "src": "person:c2",
+        "dst": "company:stanford snyder lab",
+        "type": "employment",
+        "mechanism": "prose_llm on github.com",
+        "evidence_ids": [
+          "c12a898a0e41d3d7"
+        ]
+      },
+      {
+        "id": "cbc1e9c3fb40f731",
+        "src": "person:c2",
+        "dst": "company:sdsc",
+        "type": "employment",
+        "mechanism": "prose_llm on github.com",
+        "evidence_ids": [
+          "44ffb986436303db"
+        ]
+      },
+      {
+        "id": "5d5f2af71bd87ad4",
+        "src": "person:c2",
+        "dst": "account:twitter.com:https://twitter.com/saarth",
+        "type": "affiliation",
+        "mechanism": "link on github.com",
+        "evidence_ids": [
+          "3a996374c8dc6b52"
+        ]
+      },
+      {
+        "id": "289a5aa29045b570",
+        "src": "person:c2",
+        "dst": "account:linkedin.com:https://www.linkedin.com/in/saarthshah",
+        "type": "affiliation",
+        "mechanism": "link on github.com",
+        "evidence_ids": [
+          "155c07a42fb694e9"
+        ]
+      }
+    ]
+  },
+  "conflicts": [],
+  "negative_findings": [
+    {
+      "predicate": "coverage",
+      "sought": "relationships (co-founders, co-authors, colleagues)",
+      "slot": "social_graph",
+      "found": 1,
+      "target": 3,
+      "status": "partial"
+    }
+  ],
+  "identity_resolution": {
+    "candidates": [
+      {
+        "cid": "c2",
+        "score": 0.9878715650157257,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "anchored_one_way",
+            "weight": 1.5
+          },
+          {
+            "factor": "anchor:employer:personal_site",
+            "weight": 2.0
+          },
+          {
+            "factor": "corroboration:employer:4src",
+            "weight": 0.6
+          },
+          {
+            "factor": "surname:uncommon",
+            "weight": 1.0
+          },
+          {
+            "factor": "uniqueness",
+            "weight": 0.8
+          }
+        ],
+        "urls": [
+          "https://www.saarthshah.com/",
+          "https://github.com/SaarthShah",
+          "https://x.com/saarth_?lang=en",
+          "https://www.linkedin.com/in/saarthshah"
+        ]
+      }
+    ],
+    "rejected": [],
+    "what_would_disambiguate": []
+  },
+  "specialization_payoff": [
+    "ffeffaf7366d656a",
+    "7d7ae5f321ccf942",
+    "46f0e4fe4fcadfcb",
+    "bab3d811441bd161",
+    "16451bda4f72e6d2",
+    "6ed124b2d70a3304"
+  ],
+  "timeline": [
+    {
+      "date": "2019-09",
+      "text": "award: PRMO Qualifier (ended 2019)",
+      "claim_id": "32a0fac6639cd1ee",
+      "url": "https://www.linkedin.com/in/saarthshah"
+    },
+    {
+      "date": "2020-07",
+      "text": "award: AP Scholar (ended 2020)",
+      "claim_id": "7dc538fb46bc1e9a",
+      "url": "https://www.linkedin.com/in/saarthshah"
+    },
+    {
+      "date": "2020-08",
+      "text": "handle: https://github.com/saarthshah",
+      "claim_id": "ffeffaf7366d656a",
+      "url": "https://github.com/saarthshah"
+    },
+    {
+      "date": "2021-10",
+      "text": "award: Hack Harvard 2021 (Most Useless Hack) (ended 2021)",
+      "claim_id": "4800f6c411c89e12",
+      "url": "https://www.linkedin.com/in/saarthshah"
+    },
+    {
+      "date": "2022-01",
+      "text": "award: Provost Honors (ended 2022)",
+      "claim_id": "98edd20d97ad2b8b",
+      "url": "https://www.linkedin.com/in/saarthshah"
+    },
+    {
+      "date": "2024",
+      "text": "founded: Dart (ended 2024)",
+      "claim_id": "e4594b1adbfb7a35",
+      "url": "https://www.saarthshah.com/"
+    },
+    {
+      "date": "2025-01",
+      "text": "employment: Whatnot (ended 2025)",
+      "claim_id": "268db53c69b84602",
+      "url": "https://www.saarthshah.com/"
+    },
+    {
+      "date": "2025-01",
+      "text": "repo: https://github.com/SaarthShah/notetaker",
+      "claim_id": "b31415960f6aa289",
+      "url": "https://github.com/SaarthShah/notetaker"
+    },
+    {
+      "date": "2025-01",
+      "text": "title: Software Engineer (ended 2025)",
+      "claim_id": "e2cb69c3e230c275",
+      "url": "https://www.linkedin.com/in/saarthshah"
+    },
+    {
+      "date": "2025-11",
+      "text": "repo: https://github.com/SaarthShah/mac-meetings-reminder",
+      "claim_id": "b450ebfd307a59f7",
+      "url": "https://github.com/SaarthShah/mac-meetings-reminder"
+    },
+    {
+      "date": "2026-06",
+      "text": "repo: https://github.com/SaarthShah/blog",
+      "claim_id": "397b984a29f86b8f",
+      "url": "https://github.com/SaarthShah/blog"
+    }
+  ],
+  "run_metadata": {
+    "job_id": "saarth-shah-4",
+    "budget": {
+      "tool_calls": 35,
+      "llm_calls": 28,
+      "usd": 0.1735715,
+      "cache_hits": 0,
+      "resolve": {
+        "tool_calls": 6,
+        "cap": 16
+      },
+      "seconds": 118.2
+    },
+    "stop_reason": "S2",
+    "models": {
+      "T1": "anthropic/claude-sonnet-5",
+      "T2": "anthropic/claude-sonnet-5",
+      "T3": "google/gemini-3.8-flash",
+      "T4": "google/gemini-3.8-flash",
+      "T5": "google/gemini-3.8-flash"
+    },
+    "timings": {
+      "seconds": 118.18070679200173
+    }
+  }
+}

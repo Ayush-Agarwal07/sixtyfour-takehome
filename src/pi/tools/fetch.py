@@ -9,8 +9,6 @@ from ..sources import classify, is_unfetchable
 
 
 class Fetch(Tool):
-    name = "fetch"
-
     @traced("fetch", provider="fetch", timeout=10)
     async def get(self, url: str) -> dict:
         if is_unfetchable(url):

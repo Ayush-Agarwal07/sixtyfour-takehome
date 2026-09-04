@@ -1,0 +1,4 @@
+**Matching Candidate Profiles**
+
+I'm currently evaluating candidate `c2`. Initial comparisons indicate a strong alignment with the seed profile, specifically regarding the name "Saarth Shah" and current employer "Sixtyfour." Further analysis of source [1] confirms the co-founder and CEO role at Sixtyfour, and source [2] reiterates the co-founder title. This is a promising early match.
+

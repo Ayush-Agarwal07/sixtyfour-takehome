@@ -47,7 +47,7 @@ collision · non-Latin script. Each returns a valid envelope with an appropriate
 - `test_synth_citation.py` — a summary sentence with no `claim_id` is dropped; no unconfirmed-evidence claim reaches the output.
 - `test_concurrency.py` — 5 concurrent `POST`s all complete with **≤3 running at once** (verifiable via timing/trace); submissions beyond `MAX_INFLIGHT` return `429`.
 
-## Checkpoints (binary)
+## Checkpoints (binary) — 2026-09-02: built via SDD (tasks 5, 6). API smoke: queue→running→confirmed, SSE stream, invalid JSON 422, unknown job 404. Edge inputs (empty, gibberish, famous, common bare name, non-Latin) all typed, no 500.
 
 - [ ] Output validates against the `Output` envelope for a real run.
 - [ ] **No unconfirmed evidence in output** — every claim's evidence is under `confirmed_cid`; `test_synth_citation` green.

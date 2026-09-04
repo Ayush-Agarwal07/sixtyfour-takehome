@@ -1,0 +1,1 @@
+The text only refers to 'Sad Shah' in the transcript (likely an ASR error for Saarth Shah) and mentions Sixtyfour, but strict verbatim extraction rules require avoiding inferences on misspelled/mismatched names.

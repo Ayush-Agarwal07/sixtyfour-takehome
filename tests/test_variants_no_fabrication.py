@@ -54,5 +54,5 @@ def test_nickname_name_no_fabrication_order_swap_and_expansion():
     # nickname expansion produced at least one extra form for "Bob"
     assert any("robert" in f.casefold() for f in forms)
 
-    # every Variant is origin="parsed" with weight 0.0 — scoring is downstream
-    assert all(v.origin == "parsed" and v.weight == 0.0 for v in variants)
+    # every Variant carries weight 0.0 — scoring is downstream
+    assert all(v.weight == 0.0 for v in variants)

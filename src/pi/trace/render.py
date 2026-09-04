@@ -78,8 +78,11 @@ def render_trace(run_dir: str | Path) -> str:
 
         elif et == "planner_decision":
             lines.append("### Planner decision")
-            ftop = ", ".join(str(x.get("id") or x.get("action")) for x in e.get("formula_top", [])[:4])
-            chosen = ", ".join(str(x.get("id") or x.get("action")) for x in e.get("chosen", []))
+            def _label(x: dict) -> str:   # "fetch https://henrywa.ng/", not a frontier-item hash
+                arg = next(iter((x.get("args") or {}).values()), None)
+                return f"{x.get('action') or x.get('id')} {arg}".strip() if arg is not None else str(x.get("action") or x.get("id"))
+            ftop = "; ".join(_label(x) for x in e.get("formula_top", [])[:4])
+            chosen = "; ".join(_label(x) + (" (pivot)" if x.get("origin") == "pivot" else "") for x in e.get("chosen", []))
             lines.append(f"  - formula top: {ftop or '—'}")
             lines.append(f"  - **chosen**: {chosen or '—'}")
             for na in e.get("new_actions", []):
@@ -111,6 +114,13 @@ def render_trace(run_dir: str | Path) -> str:
         elif et == "conflict_detected":
             lines.append(f"- **conflict** ({e['kind']}) on {e['predicate']}: "
                          f"{e.get('values')} severity={e.get('severity')}")
+
+        elif et == "attachment_test":
+            anchors_s = ", ".join(e.get("matched") or []) or "-"
+            t4_s = f" t4={e['t4']}" if e.get("t4") else ""
+            rescore_s = " (re-score)" if e.get("note") else ""
+            lines.append(f"- **same-person test** {e['url']} → {e['score']:.2f} [{e.get('band', '')}] "
+                         f"name={'yes' if e.get('name_present') else 'no'} anchors={anchors_s}{t4_s}{rescore_s}")
 
         elif et == "slot_update":
             state = "closed" if e["closed"] else "open"

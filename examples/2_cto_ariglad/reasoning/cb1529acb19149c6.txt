@@ -1,0 +1,1 @@
+Combined claims about identity, employment history, and timeline into cited sentences. No conflicts were present in the data, only varying confidence levels, so no conflict framing was needed. Title/employer claims for Ariglad were merged since they describe the same role without contradiction.

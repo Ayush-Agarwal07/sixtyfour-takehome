@@ -1,0 +1,281 @@
+{
+  "status": "abstained",
+  "input": "sarah chen, product designer, ex-figma",
+  "seed": {
+    "input": "sarah chen, product designer, ex-figma",
+    "regime": "NAME_STRONG",
+    "names": [
+      {
+        "form": "sarah chen",
+        "kind": "as_given",
+        "weight": 0.0
+      },
+      {
+        "form": "s. chen",
+        "kind": "initials",
+        "weight": 0.0
+      },
+      {
+        "form": "chen sarah",
+        "kind": "order_swap",
+        "weight": 0.0
+      },
+      {
+        "form": "Sadie chen",
+        "kind": "nickname",
+        "weight": 0.0
+      },
+      {
+        "form": "Sally chen",
+        "kind": "nickname",
+        "weight": 0.0
+      },
+      {
+        "form": "Sara chen",
+        "kind": "nickname",
+        "weight": 0.0
+      }
+    ],
+    "hard_ids": {},
+    "orgs": [
+      "figma"
+    ],
+    "titles": [
+      "product designer"
+    ],
+    "schools": [],
+    "locations": [],
+    "tense": {
+      "figma": "former"
+    },
+    "role_description": null,
+    "org_domains": {
+      "figma": "figma.com"
+    },
+    "original_regime": null
+  },
+  "regime": "NAME_STRONG",
+  "identity": {
+    "confidence": {
+      "score": 0.0,
+      "logodds": 0.0,
+      "terms": []
+    },
+    "cid": null,
+    "hard_keys": [],
+    "how_confirmed": "gate math not met after evidence cycles",
+    "public_figure": false,
+    "footprint_since": null,
+    "accounts_found": 0
+  },
+  "summary": [],
+  "profile": {
+    "current_role": null,
+    "employment": [],
+    "education": [],
+    "location": null,
+    "contact": [],
+    "accounts": [],
+    "public_output": [],
+    "relationships": [],
+    "notable": []
+  },
+  "unverified": [],
+  "graph": {
+    "nodes": [],
+    "edges": []
+  },
+  "conflicts": [],
+  "negative_findings": [],
+  "identity_resolution": {
+    "candidates": [
+      {
+        "cid": "c3",
+        "score": 0.425557483188341,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "anchor:title:personal_site",
+            "weight": 1.0
+          },
+          {
+            "factor": "surname:common",
+            "weight": 0.2
+          }
+        ],
+        "urls": [
+          "https://sarahchen.design/"
+        ]
+      },
+      {
+        "cid": "c1",
+        "score": 0.2689414213699951,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "anchor:title:professional_network",
+            "weight": 0.3
+          },
+          {
+            "factor": "surname:common",
+            "weight": 0.2
+          }
+        ],
+        "urls": [
+          "https://www.linkedin.com/in/sarahchenn"
+        ]
+      },
+      {
+        "cid": "c6",
+        "score": 0.2141650169574414,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "surname:common",
+            "weight": 0.2
+          }
+        ],
+        "urls": [
+          "https://ca.linkedin.com/in/sarah-chen-604a03290"
+        ]
+      },
+      {
+        "cid": "c9",
+        "score": 0.2141650169574414,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "surname:common",
+            "weight": 0.2
+          }
+        ],
+        "urls": [
+          "https://github.com/sarahchen"
+        ]
+      },
+      {
+        "cid": "c10",
+        "score": 0.2141650169574414,
+        "terms": [
+          {
+            "factor": "prior",
+            "weight": -1.5
+          },
+          {
+            "factor": "surname:common",
+            "weight": 0.2
+          }
+        ],
+        "urls": [
+          "https://github.com/sarahchen6"
+        ]
+      }
+    ],
+    "rejected": [
+      {
+        "cid": "c3",
+        "reason": "Personal site describes a Product Designer in Tech Consulting, SF bay area - no mention of Figma employment."
+      },
+      {
+        "cid": "c1",
+        "reason": "LinkedIn profile shows a UX design student/certificate holder in Columbia, SC - no Figma or senior product designer history."
+      },
+      {
+        "cid": "c6",
+        "reason": "No matched evidence shown beyond common surname; cannot verify any connection to Figma or product design role."
+      },
+      {
+        "cid": "c9",
+        "reason": "below gate margin"
+      },
+      {
+        "cid": "c10",
+        "reason": "below gate margin"
+      },
+      {
+        "cid": "c11",
+        "reason": "below gate margin"
+      },
+      {
+        "cid": "c14",
+        "reason": "below gate margin"
+      },
+      {
+        "cid": "c15",
+        "reason": "below gate margin"
+      },
+      {
+        "cid": "c13",
+        "reason": "below gate margin"
+      },
+      {
+        "cid": "c2",
+        "reason": "below gate margin"
+      },
+      {
+        "cid": "c4",
+        "reason": "below gate margin"
+      },
+      {
+        "cid": "c12",
+        "reason": "below gate margin"
+      },
+      {
+        "cid": "c5",
+        "reason": "below gate margin"
+      },
+      {
+        "cid": "c8",
+        "reason": "below gate margin"
+      },
+      {
+        "cid": "c7",
+        "reason": "below gate margin"
+      }
+    ],
+    "what_would_disambiguate": [
+      "LinkedIn or portfolio URL explicitly listing Figma as past employer",
+      "Dates of employment at Figma",
+      "City/region where seed's Sarah Chen worked",
+      "Current employer or title after leaving Figma"
+    ]
+  },
+  "specialization_payoff": [],
+  "timeline": [],
+  "run_metadata": {
+    "job_id": "sarah-chen-8",
+    "budget": {
+      "tool_calls": 9,
+      "llm_calls": 14,
+      "usd": 0.066468,
+      "cache_hits": 0,
+      "resolve": {
+        "tool_calls": 8
+      },
+      "seconds": 95.8
+    },
+    "stop_reason": "no_expand:abstained",
+    "models": {
+      "T1": "anthropic/claude-sonnet-5",
+      "T2": "anthropic/claude-sonnet-5",
+      "T3": "google/gemini-3.8-flash",
+      "T4": "google/gemini-3.8-flash",
+      "T5": "google/gemini-3.8-flash"
+    },
+    "timings": {
+      "seconds": 95.78050741700281
+    }
+  }
+}

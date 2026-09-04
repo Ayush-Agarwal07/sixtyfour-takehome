@@ -1,0 +1,8 @@
+**Finding Candidate Identifier**
+
+I'm currently trying to locate the candidate identifier within the user's prompt. It seems it was omitted, and I'm digging into the provided text to see if it's present.
+
+**Identifying Candidate ID**
+
+It seems the candidate ID was indeed missing from the input. I've now identified it as "page" based on the literal text provided, where it typically would reside in the prompt's structure.
+

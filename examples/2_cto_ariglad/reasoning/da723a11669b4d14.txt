@@ -1,0 +1,1 @@
+Extract facts about Ali Avci from their LinkedIn profile summary, including current and past employment history, education, awards, and GitHub profile.

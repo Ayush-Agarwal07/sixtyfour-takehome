@@ -28,7 +28,7 @@ class Deps:
     cache: Any = None
     trace: Optional[TraceWriter] = None
     semaphores: dict[str, asyncio.Semaphore] = field(default_factory=dict)
-    counters: dict[str, float] = field(default_factory=lambda: {"tool_calls": 0, "llm_calls": 0, "usd": 0.0})
+    counters: dict[str, float] = field(default_factory=lambda: {"tool_calls": 0, "llm_calls": 0, "usd": 0.0, "cache_hits": 0})
     tools: dict[str, Any] = field(default_factory=dict)   # name -> Tool instance (serper, fetch, exa, company, github…)
 
     @classmethod
@@ -38,12 +38,6 @@ class Deps:
 
     def semaphore(self, name: str) -> asyncio.Semaphore:
         return self.semaphores.setdefault(name, asyncio.Semaphore(constants.SEMAPHORES.get(name, 4)))
-
-    def tool(self, name: str) -> Any:
-        t = self.tools.get(name)
-        if t is None:
-            raise ToolUnavailable(f"tool not configured: {name}")
-        return t
 
     # convenience accessors (tests construct Deps(http=client) and set tools ad hoc)
     def __getattr__(self, name: str) -> Any:
@@ -103,8 +97,9 @@ def traced(
             finally:
                 hit = bool(getattr(self, "_last_cache_hit", False))
                 if deps is not None:
-                    if not hit:
-                        deps.counters["tool_calls"] = deps.counters.get("tool_calls", 0) + 1
+                    deps.counters["tool_calls"] = deps.counters.get("tool_calls", 0) + 1
+                    if hit:
+                        deps.counters["cache_hits"] = deps.counters.get("cache_hits", 0) + 1
                     if deps.trace is not None:
                         deps.trace.emit(ToolCall(
                             event_id=_new_id(), tool=tool_name, args=logged,
@@ -115,15 +110,36 @@ def traced(
     return deco
 
 
+_NONE = {"__none__": True}
+
+
 class Tool:
-    """Base for all tools. Subclasses set `name` and decorate their async
-    entrypoint with @traced. A missing key must raise ToolUnavailable, never 500.
+    """Base for all tools. Subclasses decorate their async entrypoint with
+    @traced (which carries the tool name). A missing key must raise
+    ToolUnavailable, never 500.
     """
-    name: str = "tool"
 
     def __init__(self, deps: Deps):
         self.deps = deps
         self._last_cache_hit = False
+
+    async def cached(self, ns: str, key: str, ttl: float | None, fn: Callable[[], Awaitable[Any]],
+                      *, cache_none: bool = True) -> Any:
+        """Cache-or-compute the 9-site get/check/set shape. A `None` from `fn`
+        (the "not found" result) is cached too, via a sentinel, so replay
+        (PI_OFFLINE=1) doesn't refetch and miss — unless `cache_none=False`
+        (the negative isn't immutable, e.g. a rate-limit or "never archived")."""
+        cache = self.deps.cache
+        if cache is not None:
+            hit = cache.get(ns, key)
+            if hit is not None:
+                self._last_cache_hit = True
+                return None if hit == _NONE else hit
+        val = await fn()
+        if cache is not None and (val is not None or cache_none):
+            cache.set(ns, key, val if val is not None else _NONE, ttl)
+        self._last_cache_hit = False
+        return val
 
 
 class ToolUnavailable(RuntimeError):

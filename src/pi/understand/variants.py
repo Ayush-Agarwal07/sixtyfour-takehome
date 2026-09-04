@@ -28,7 +28,7 @@ def generate_variants(name: str) -> list[Variant]:
         key = form.casefold()
         if form and key not in seen:
             seen.add(key)
-            out.append(Variant(form=form, kind=kind, origin="parsed", weight=0.0))
+            out.append(Variant(form=form, kind=kind, weight=0.0))
 
     add(name, "as_given")
     add(unidecode(name), "diacritic_stripped")
@@ -39,7 +39,7 @@ def generate_variants(name: str) -> list[Variant]:
         add(f"{tokens[1]} {tokens[0]}", "order_swap")
     for i, tok in enumerate(tokens):
         base = unidecode(tok).casefold()
-        for r in _NICKNAMER.nicknames_of(base) | _NICKNAMER.canonicals_of(base):
+        for r in sorted(_NICKNAMER.nicknames_of(base) | _NICKNAMER.canonicals_of(base)):  # sorted: set order is per-process; replay needs identical prompts
             swapped = list(tokens)
             swapped[i] = r.title()
             add(" ".join(swapped), "nickname")

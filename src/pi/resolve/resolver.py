@@ -16,7 +16,7 @@ from ..types import Candidate, Link, Resolution, SourceText
 from ..understand.census import surname_bucket
 from .cluster import attach_floating, candidate_from_floating, cluster
 from .disconfirm import disconfirm, run_actions
-from .enumerate import enumerate_candidates
+from .enumerate import build_queries, enumerate_candidates
 from .gate import gate_decision, math_pass, t1_disambiguate, t1_gate
 from .identity_score import compute_dominant, compute_unique, score_candidate
 from .links import apply_page_links
@@ -50,16 +50,18 @@ def _emit(deps, event) -> None:
 
 
 def _ranked(cands: list[Candidate]):
+    if not cands:
+        raise ValueError("_ranked called with no candidates (all merged/rejected away)")
     r = sorted(cands, key=lambda c: c.score.score, reverse=True)
     top = r[0]
     runner = r[1] if len(r) > 1 else None
     return r, top, runner, top.score.score, (runner.score.score if runner else 0.0)
 
 
-def _score_all(seed, cands: list[Candidate]) -> None:
+def _score_all(seed, cands: list[Candidate], n_results: int) -> None:
     bucket = _surname(seed)
     uniq = compute_unique(cands)
-    dom = compute_dominant(cands, seed.regime)
+    dom = compute_dominant(cands, seed.regime, n_results)
     for c in cands:
         c.score = score_candidate(seed, c, bucket, c.cid in uniq, c.cid in dom)
 
@@ -119,12 +121,14 @@ async def resolve(seed, deps, llm) -> Resolution:
 
     cap = constants.REGIME_CAPS[seed.regime]
     names = [v.form for v in seed.names]
-    anchor_domains = set(seed.org_domains.values()) | {o.lower() for o in seed.orgs if "." in o}
+    anchor_domains = seed.anchor_domains
 
     # ── enumerate + cluster ──────────────────────────────────────────────
+    enum_queries = build_queries(seed)
     results = await enumerate_candidates(seed, deps)
     seen = {r["url"] for r in results}
     results += [r for r in forced if r["url"] not in seen]
+    n_results = len(results)
     cands, floating = cluster(results, seed)
     if not cands:
         c = candidate_from_floating(floating)
@@ -146,13 +150,14 @@ async def resolve(seed, deps, llm) -> Resolution:
 
     # ── match + score on snippets ───────────────────────────────────────
     await match_candidates(seed, cands, llm)
-    _score_all(seed, cands)
+    _score_all(seed, cands, n_results)
     ranked, top, runner, p_top, p_run = _ranked(cands)
     _emit_scores(deps, ranked)
     ok = _gate_test(deps, ranked)
 
     if seed.regime == "BARE_NAME" and _surname(seed) == "common" and len(cands) >= 3 and not ok:
-        return _undecided(seed, ranked, spent(), reason="common bare name with several distinct people")
+        return _undecided(ranked, spent(), reason="common bare name with several distinct people",
+                          force_status="ambiguous")
 
     links: list[Link] = []
     linked: dict[str, set[str]] = {}
@@ -187,7 +192,7 @@ async def resolve(seed, deps, llm) -> Resolution:
                 if page:
                     on_page(page, None)
                     for c in cands:
-                        if any(o.anchored_one_way for o in [c]):
+                        if c.anchored_one_way:
                             c.sources.append(SourceText(url=official.url, kind="page", source_class="company_site",
                                                         tier=identity_tier("company_site"), text=page.get("text", "")[:3000]))
                             touched.add(c.cid)
@@ -195,13 +200,15 @@ async def resolve(seed, deps, llm) -> Resolution:
             for c in _ranked(cands)[0][:constants.FETCH_K]:
                 if spent() >= budget:
                     break
+                if c.cid not in {x.cid for x in cands}:
+                    continue  # merged away by an earlier fetch this cycle
                 url = _best_unfetched(c, fetched, anchor_domains, names, exa_ok)
                 if url and await fetch_into(c, url):
                     touched.add(c.cid)
             if not touched:
                 break
             await match_candidates(seed, cands, llm, only={c.cid for c in cands})
-            _score_all(seed, cands)
+            _score_all(seed, cands, n_results)
             ranked, top, runner, p_top, p_run = _ranked(cands)
             _emit_scores(deps, ranked)
             ok = _gate_test(deps, ranked, note=f"after fetch cycle {cycle}")
@@ -210,9 +217,9 @@ async def resolve(seed, deps, llm) -> Resolution:
         # math passes → try to falsify before trusting it (C5)
         if spent() < budget:
             await disconfirm(seed, top, runner, deps, llm, read_page, spent=spent(), budget=budget,
-                             anchor_domains=anchor_domains, on_page=on_page)
+                             anchor_domains=anchor_domains, on_page=on_page, queries=enum_queries)
             await match_candidates(seed, cands, llm, only={top.cid})
-            _score_all(seed, cands)
+            _score_all(seed, cands, n_results)
             ranked, top, runner, p_top, p_run = _ranked(cands)
             _emit_scores(deps, ranked)
             ok = _gate_test(deps, ranked, note="after disconfirmation")
@@ -220,7 +227,7 @@ async def resolve(seed, deps, llm) -> Resolution:
             break
 
     if not ok:
-        res = _undecided(seed, ranked, spent(), reason="gate math not met after evidence cycles", links=links)
+        res = _undecided(ranked, spent(), reason="gate math not met after evidence cycles", links=links)
         if len(ranked) >= 2:
             try:
                 v = await t1_disambiguate(seed, ranked, links, llm, spent=spent(), budget=budget)
@@ -246,7 +253,7 @@ async def resolve(seed, deps, llm) -> Resolution:
             else {"tool": "search", "args": {"q": verdict.next_evidence}}
         await run_actions([action], top, seed, deps, read_page, anchor_domains=anchor_domains, on_page=on_page)
         await match_candidates(seed, cands, llm, only={top.cid})
-        _score_all(seed, cands)
+        _score_all(seed, cands, n_results)
         ranked, top, runner, p_top, p_run = _ranked(cands)
         ok = _gate_test(deps, ranked, note="after CONTINUE evidence")
         if ok:
@@ -270,9 +277,10 @@ async def resolve(seed, deps, llm) -> Resolution:
             if c is not top and not c.rejected_reason:
                 c.rejected_reason = "below gate margin; not in the top candidates shown to T1"
         how = "; ".join(f"{t.factor}={t.weight:+.1f}" for t in top.score.terms if t.weight > 0)
+        prefix = "public figure: " if any(t.factor == "dominant_cluster" for t in top.score.terms) else ""
         return Resolution(status="confirmed", confirmed_cid=top.cid, candidates=ranked, links=links,
                           budget={"tool_calls": spent(), "cap": budget},
-                          how_confirmed=f"math P={p_top:.3f} margin={p_top - p_run:.2f} [{how}]; T1 CONFIRM")
+                          how_confirmed=f"{prefix}math P={p_top:.3f} margin={p_top - p_run:.2f} [{how}]; T1 CONFIRM")
     for c in ranked:
         if c is not top and not c.rejected_reason:
             c.rejected_reason = "not selected"
@@ -282,11 +290,12 @@ async def resolve(seed, deps, llm) -> Resolution:
                       what_would_disambiguate=verdict.what_would_disambiguate)
 
 
-def _undecided(seed, ranked: list[Candidate], spent: int, *, reason: str, links: list[Link] | None = None) -> Resolution:
+def _undecided(ranked: list[Candidate], spent: int, *, reason: str, links: list[Link] | None = None,
+                force_status: str | None = None) -> Resolution:
     plausible = [c for c in ranked if c.score.score >= 0.3]
     for c in ranked[1:]:
         c.rejected_reason = c.rejected_reason or "below gate margin"
-    status = "ambiguous" if len(plausible) >= 2 else "abstained"
+    status = force_status or ("ambiguous" if len(plausible) >= 2 else "abstained")
     wwd = ["add a current or former employer", "add a city or region", "add a school",
            "give a profile URL (LinkedIn, GitHub) or an email"]
     return Resolution(status=status, candidates=ranked, links=links or [], budget={"tool_calls": spent},

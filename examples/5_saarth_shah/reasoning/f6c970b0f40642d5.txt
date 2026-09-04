@@ -1,0 +1,4 @@
+**Focusing on Categorical Matching**
+
+I'm currently prioritizing categorical matching for candidate `c2`. The objective is to identify potential matches based on the provided seed, specifically focusing on name variants and employer affiliation. The current focus is on evaluating how to handle the unspecified title attribute.
+

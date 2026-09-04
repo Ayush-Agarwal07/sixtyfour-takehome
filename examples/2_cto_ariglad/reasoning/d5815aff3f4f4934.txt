@@ -1,0 +1,4 @@
+**Extracting Claim Tuples**
+
+I'm currently focusing on extracting structured claim tuples for Ali Avci, specifically his title as CTO at Ariglad, directly from the provided text.
+

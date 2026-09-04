@@ -14,7 +14,7 @@ Regime = Literal[
     "HARD_ID_URL", "HARD_ID_EMAIL", "NAME_STRONG",
     "DEFINITE_DESC", "NAME_WEAK", "BARE_NAME",
 ]
-Status = Literal["confirmed", "confirmed_contested", "ambiguous", "abstained", "failed"]
+Status = Literal["confirmed", "ambiguous", "abstained", "failed"]
 
 NodeType = Literal["person", "company", "account", "product", "domain", "event"]
 EdgeType = Literal[
@@ -72,9 +72,7 @@ class Claim(BaseModel):
 # ─────────────────────────────── understand ──────────────────────────────
 class Variant(BaseModel):
     form: str
-    kind: Literal["as_given", "diacritic_stripped", "initials", "order_swap", "nickname", "discovered"] = "as_given"
-    origin: Literal["parsed", "discovered"] = "parsed"
-    evidence_id: Optional[str] = None  # required when origin == "discovered"
+    kind: Literal["as_given", "diacritic_stripped", "initials", "order_swap", "nickname"] = "as_given"
     weight: float = 0.0
 
 
@@ -92,6 +90,10 @@ class Seed(BaseModel):
     org_domains: dict[str, str] = Field(default_factory=dict) # org -> registrable domain (resolve_company)
     original_regime: Optional[Regime] = None                  # set when DEFINITE_DESC is rewritten
 
+    @property
+    def anchor_domains(self) -> set[str]:
+        return set(self.org_domains.values()) | {o.lower() for o in self.orgs if "." in o}
+
 
 # ──────────────────────────────── resolve ────────────────────────────────
 class AttrObservation(BaseModel):
@@ -103,7 +105,7 @@ class AttrObservation(BaseModel):
     source_tier: float                 # identity tier for this source (constants.IDENTITY_TIER)
     url: str
     snippet: str
-    category: str = "exact_match"      # T4 category: exact_match|matches_former|partial
+    category: Literal["exact_match", "matches_former", "partial"] = "exact_match"
     kind: Literal["snippet", "page"] = "snippet"
 
 
@@ -158,7 +160,6 @@ class GraphNode(BaseModel):
     label: str
     depth: int = 0
     attachment_confidence: float = 1.0
-    parent_edge_id: Optional[str] = None
 
 
 class GraphEdge(BaseModel):
@@ -205,7 +206,6 @@ class Findings(BaseModel):
     claims: list[Claim] = Field(default_factory=list)
     slots: list[Slot] = Field(default_factory=list)
     conflicts: list[Conflict] = Field(default_factory=list)
-    identity_contested: bool = False
     stop_reason: Optional[str] = None
 
 
@@ -233,7 +233,8 @@ class Identity(BaseModel):
     hard_keys: list[str] = Field(default_factory=list)
     how_confirmed: str = ""
     public_figure: bool = False
-    identity_contested: bool = False
+    footprint_since: Optional[str] = None   # earliest timeline year, e.g. "2013"
+    accounts_found: int = 0                 # distinct handle claim values, confidence >= 0.5
 
 
 class CandidateResolutionView(BaseModel):
@@ -254,15 +255,16 @@ class IdentityResolution(BaseModel):
     what_would_disambiguate: list[str] = Field(default_factory=list)
 
 
-class Inference(BaseModel):
-    text: str
-    identity_link: Literal["inferred"] = "inferred"
-    basis_claim_ids: list[str] = Field(default_factory=list)
-
-
 class Graph(BaseModel):
     nodes: list[GraphNode] = Field(default_factory=list)
     edges: list[GraphEdge] = Field(default_factory=list)
+
+
+class TimelineEntry(BaseModel):
+    date: str          # "YYYY" or "YYYY-MM" from the claim's temporal precision
+    text: str          # "{predicate}: {value_raw}" (+ " (ended {YYYY})" when ended)
+    claim_id: str
+    url: str           # first evidence url
 
 
 class RunMetadata(BaseModel):
@@ -281,12 +283,14 @@ class Output(BaseModel):
     identity: Optional[Identity] = None
     summary: list[SummarySentence] = Field(default_factory=list)
     profile: Profile = Field(default_factory=Profile)
+    # attachment_confidence < ATTACH_PROFILE: real claims about a possibly different person
+    unverified: list[Claim] = Field(default_factory=list)
     graph: Graph = Field(default_factory=Graph)
     conflicts: list[Conflict] = Field(default_factory=list)
     negative_findings: list[dict[str, Any]] = Field(default_factory=list)
-    inferences: list[Inference] = Field(default_factory=list)
     identity_resolution: IdentityResolution = Field(default_factory=IdentityResolution)
     specialization_payoff: list[str] = Field(default_factory=list)
+    timeline: list[TimelineEntry] = Field(default_factory=list)
     run_metadata: Optional[RunMetadata] = None
 
 

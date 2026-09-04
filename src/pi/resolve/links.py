@@ -49,14 +49,15 @@ def _key_index(cands: list[Candidate]) -> dict[str, Candidate]:
 
 
 def merge(into: Candidate, other: Candidate, cands: list[Candidate], reason: str, deps) -> None:
+    if other is into or other.cid not in [c.cid for c in cands]:
+        return  # self-merge or already merged away this cycle — nothing to do
     into.urls += [u for u in other.urls if u not in into.urls]
     into.identity_keys += [k for k in other.identity_keys if k not in into.identity_keys]
     into.handles.update(other.handles)
     into.sources += other.sources
     into.merged_from.append(other.cid)
     into.merged_from += other.merged_from
-    if other.cid in [c.cid for c in cands]:
-        cands.remove(other)
+    cands.remove(other)
     if deps.trace:
         deps.trace.emit(Merge(event_id=uuid.uuid4().hex[:16], phase="resolve",
                               from_cid=other.cid, to_cid=into.cid, reason=reason))
@@ -67,6 +68,15 @@ def apply_page_links(page: dict, owner: Candidate | None, cands: list[Candidate]
     """Process one fetched page. `owner` is the candidate whose page this is, or
     None for a floating page. `linked[cid]` accumulates keys linked from each
     candidate's own pages for the reciprocal test."""
+    into = owner
+    if owner is not None and owner.cid not in [c.cid for c in cands]:
+        # owner was merged into another candidate earlier this fetch cycle (two
+        # candidates can link each other before either page is done being read) —
+        # attach this page's links to the survivor instead of the stale object.
+        into = next((c for c in cands if owner.cid in c.merged_from
+                     or set(c.identity_keys) & set(owner.identity_keys)), None)
+        if into is None:
+            owner = None  # its whole cluster is gone; treat the page as floating
     page_url = page.get("final_url") or page["url"]
     page_cls = classify(page_url, anchor_domains=anchor_domains, names=names)
     idx = _key_index(cands)
@@ -78,16 +88,20 @@ def apply_page_links(page: dict, owner: Candidate | None, cands: list[Candidate]
         ks = f"{key[0]}:{key[1]}"
         target = idx.get(ks)
         if owner is not None:
-            if target is None or target is owner or ks in owner.identity_keys:
+            if target is None:
+                continue
+            if target is into or ks in owner.identity_keys:
+                if target is into and owner is not into and owner.cid in into.merged_from:
+                    into.reciprocal = True  # owner's own page links back to what it was already merged into
                 continue
             linked.setdefault(owner.cid, set()).add(ks)
             links.append(Link(from_url=page_url, to_url=url, mechanism="one_way", section=section))
             if page_cls in ("personal_site", "code_host"):
                 # a self-published page names its owner's other profile
                 mutual = any(k in linked.get(target.cid, set()) for k in owner.identity_keys)
-                owner.reciprocal = owner.reciprocal or mutual
-                owner.anchored_one_way = True
-                merge(owner, target, cands, f"{'reciprocal' if mutual else 'self-published'} link {page_url} → {url}", deps)
+                into.reciprocal = into.reciprocal or mutual
+                into.anchored_one_way = True
+                merge(into, target, cands, f"{'reciprocal' if mutual else 'self-published'} link {page_url} → {url}", deps)
                 idx = _key_index(cands)
         else:
             if target is None:

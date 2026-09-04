@@ -18,14 +18,12 @@ class NameHypothesis:
     first: str | None = None
     last: str | None = None
     first_initial: str | None = None
-    pattern: str = ""
     form: str = "exact"        # exact|initials|partial — feeds constants.NAME_FORM
     confidence: float = 0.0
 
 
 @dataclass
 class EmailDerivation:
-    email: str
     domain: str
     hypotheses: list[NameHypothesis] = field(default_factory=list)
 
@@ -40,17 +38,17 @@ def derive_from_email(email: str) -> EmailDerivation:
         a, b = local.split(sep, 1)
         b = _SEP.split(b)[0]                      # keep the first two tokens only
         if len(a) == 1:
-            hyps.append(NameHypothesis(first_initial=a, last=b, pattern="flast",
+            hyps.append(NameHypothesis(first_initial=a, last=b,
                                        form="initials", confidence=0.6))
         else:
-            hyps.append(NameHypothesis(first=a, last=b, pattern="first_last",
+            hyps.append(NameHypothesis(first=a, last=b,
                                        form="exact", confidence=0.9))
     else:
         # no separator: ambiguous. flast (j+smith) and a bare first name are common.
         if len(local) > 2:
             hyps.append(NameHypothesis(first_initial=local[0], last=local[1:],
-                                       pattern="flast", form="initials", confidence=0.4))
-        hyps.append(NameHypothesis(first=local, pattern="first",
+                                       form="initials", confidence=0.4))
+        hyps.append(NameHypothesis(first=local,
                                    form="partial", confidence=0.3))
 
-    return EmailDerivation(email=email, domain=domain, hypotheses=hyps)
+    return EmailDerivation(domain=domain, hypotheses=hyps)

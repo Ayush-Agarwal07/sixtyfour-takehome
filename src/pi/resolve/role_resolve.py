@@ -68,7 +68,8 @@ async def role_resolve(seed: Seed, deps, llm, read_page) -> tuple[Seed, RoleHold
         except Exception:  # noqa: BLE001
             pass
 
-    numbered = "\n".join(f"[{i}] {u}\n{t}" for i, (u, t) in enumerate(sources[:14], 1))
+    shown = sources[:14]
+    numbered = "\n".join(f"[{i}] {u}\n{t}" for i, (u, t) in enumerate(shown, 1))
     prompt = f"Role: {role}\nCompany: {company}\n\nSources:\n{numbered}"
     holder = await llm.complete("T5", prompt, RoleHolder, phase="resolve", system=_PROMPT)
 
@@ -80,8 +81,8 @@ async def role_resolve(seed: Seed, deps, llm, read_page) -> tuple[Seed, RoleHold
                                        note=(f"competing: {holder.competing}; " if holder.competing else "")
                                             + holder.reasoning[:200]))
 
-    cited = [dict(serp[sources[i - 1][0]], force=True) for i in holder.sources
-             if 1 <= i <= len(sources) and sources[i - 1][0] in serp]
+    cited = [dict(serp[shown[i - 1][0]], force=True) for i in holder.sources
+             if 1 <= i <= len(shown) and shown[i - 1][0] in serp]
     if not holder.name or holder.competing:
         return seed, holder, cited
     new = seed.model_copy(update={
@@ -90,6 +91,6 @@ async def role_resolve(seed: Seed, deps, llm, read_page) -> tuple[Seed, RoleHold
         "titles": [role] if role else seed.titles,
         "role_description": None,
         "original_regime": "DEFINITE_DESC",
-        "tense": {**seed.tense, company.lower(): "current"},
+        "tense": {**seed.tense, company.lower(): "former" if holder.is_current is False else "current"},
     })
     return new, holder, cited

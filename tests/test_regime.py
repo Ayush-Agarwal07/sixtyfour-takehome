@@ -1,6 +1,7 @@
 """Regime′ classification — pure function, no I/O, no network."""
 from __future__ import annotations
 
+from pi.understand.parse import _clean_tense
 from pi.understand.regime import classify, is_definite_role
 
 
@@ -32,3 +33,7 @@ def test_name_regimes():
     assert _classify(name="Jane Doe", org="Nobody Can Find", company_resolved=False) == "NAME_WEAK"
     assert _classify(name="Jane Doe", org="Google", company_resolved=True, org_is_huge=True) == "NAME_WEAK"
     assert _classify(name="Jane Doe") == "BARE_NAME"
+
+
+def test_clean_tense_recognizes_previously_as_former():
+    assert _clean_tense({"figma": "previously"}, ["figma"]) == {"figma": "former"}

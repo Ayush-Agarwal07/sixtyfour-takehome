@@ -42,3 +42,17 @@ def test_matches_former_downgraded_when_seed_tense_is_current():
     s.tense = {"figma": "current"}
     _apply(c, MatchRow(cid="c1", employer=AttrCat(category="matches_former", sources=[1])), seed_anchors(s), s)
     assert c.attrs["employer"][0].category == "partial"
+
+
+def test_citation_beyond_shown_prefix_is_ignored():
+    """The model is shown only sources[:6]; a citation of index 8 must not be
+    trusted (it would index into a source never rendered to the model)."""
+    s = _seed()
+    c = Candidate(cid="c1", urls=["https://www.linkedin.com/in/sarah-che"],
+                 sources=[SourceText(url=f"https://x.com/{i}", kind="snippet",
+                                     source_class="professional_network", tier=1.0, text=f"src {i}")
+                          for i in range(8)],
+                 score=Confidence(score=0, logodds=0))
+    row = MatchRow(cid="c1", employer=AttrCat(category="exact_match", sources=[8]))
+    _apply(c, row, seed_anchors(s), s)
+    assert "employer" not in c.attrs

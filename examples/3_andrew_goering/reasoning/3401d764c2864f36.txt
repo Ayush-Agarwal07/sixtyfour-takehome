@@ -1,0 +1,1 @@
+Ramp employment+artifact query targets employment_history and notable_artifacts; cofounder pivot query targets social_graph with load-bearing names Manore/Euliano; anchor org page fetch grounds current_role/employment_history with a controlled source.

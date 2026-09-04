@@ -1,0 +1,35 @@
+[
+  {
+    "input": "andrew.goering@ramp.com",
+    "expect": "confirmed",
+    "must_contain": "ramp"
+  },
+  {
+    "input": "Henry wang, sixtyfour ai",
+    "expect": "confirmed",
+    "must_contain": "sixtyfour"
+  },
+  {
+    "input": "sarah chen, product designer, ex-figma",
+    "expect": [
+      "abstained",
+      "ambiguous"
+    ],
+    "must_contain": null
+  },
+  {
+    "input": "do deep research on the CTO of Ariglad",
+    "expect": "confirmed",
+    "must_contain": "ariglad"
+  },
+  {
+    "input": "asdfgh qwerty zxcvb",
+    "expect": "abstained",
+    "must_contain": null
+  },
+  {
+    "input": "",
+    "expect": "abstained",
+    "must_contain": null
+  }
+]

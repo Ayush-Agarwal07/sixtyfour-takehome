@@ -1,0 +1,8 @@
+**Processing Candidate Information**
+
+I am currently analyzing candidate `c1`, focusing on matching their details against the provided seed information. The seed specifies an email, name, and current employer, but lacks details on title, education, or location.
+
+**Refining Candidate Details**
+
+My focus is on c1's employment at Ramp, which aligns perfectly with the seed's "ramp.com" and the candidate's profile. I'm considering how to handle missing title, education, and location based on schema specifications, leaning towards null or omission.
+

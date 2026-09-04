@@ -1,0 +1,1 @@
+Anchor org page (sixtyfour.ai) and confirmed GitHub can resolve current_role and social_graph via bios/commit emails. Targeted search on role title closes current_role slot. Skip duplicate wayback/YouTube links with low yield.

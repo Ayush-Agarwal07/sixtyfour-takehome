@@ -9,29 +9,22 @@ from ..deps import Tool, ToolUnavailable, traced
 
 
 class Serper(Tool):
-    name = "serper.search"
-
     @traced("serper.search", provider="serper", timeout=15)
     async def search(self, q: str, num: int = 10) -> list[dict]:
         key = os.getenv("SERPER_API_KEY")
         if not key:
             raise ToolUnavailable("SERPER_API_KEY")
         ck = f"{q}\x00{num}"
-        cache = self.deps.cache
-        if cache is not None:
-            hit = cache.get("search", ck)
-            if hit is not None:
-                self._last_cache_hit = True
-                return hit
-        r = await self.deps.http.post(
-            "https://google.serper.dev/search",
-            headers={"X-API-KEY": key, "Content-Type": "application/json"},
-            json={"q": q, "num": num},
-        )
-        r.raise_for_status()
-        organic = r.json().get("organic", [])
-        out = [{"url": o["link"], "title": o.get("title", ""), "snippet": o.get("snippet", ""), "query": q}
-               for o in organic if o.get("link")]
-        if cache is not None:
-            cache.set("search", ck, out, CACHE_TTL_S["search"])
-        return out
+
+        async def _fetch() -> list[dict]:
+            r = await self.deps.http.post(
+                "https://google.serper.dev/search",
+                headers={"X-API-KEY": key, "Content-Type": "application/json"},
+                json={"q": q, "num": num},
+            )
+            r.raise_for_status()
+            organic = r.json().get("organic", [])
+            return [{"url": o["link"], "title": o.get("title", ""), "snippet": o.get("snippet", ""), "query": q}
+                    for o in organic if o.get("link")]
+
+        return await self.cached("search", ck, CACHE_TTL_S["search"], _fetch)

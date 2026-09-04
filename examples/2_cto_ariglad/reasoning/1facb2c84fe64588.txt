@@ -1,0 +1,1 @@
+social_graph and notable_artifacts remain open; frontier is weak (avatar/status/aggregator/low-score links). Prioritize target-controlled sources: GitHub and personal domain avci.ca for bio/social links, GitLab for cross-account verification, and a pivot query on co-founder to seed social_graph.

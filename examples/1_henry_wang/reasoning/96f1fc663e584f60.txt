@@ -1,0 +1,1 @@
+GitHub login link pulls commit emails and repos for contact/artifacts/social_graph. Personal site and resume page are target-controlled, likely closing identity/education/employment slots. Anchor org page confirms current_role and employment_history cheaply.

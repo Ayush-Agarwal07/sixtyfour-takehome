@@ -76,7 +76,7 @@ def _clean_tense(tense: dict[str, str], orgs: list[str]) -> dict[str, str]:
     out: dict[str, str] = {}
     lower = {o.lower(): o.lower() for o in orgs}
     for k, v in (tense or {}).items():
-        v = "former" if str(v).lower().startswith("form") or "ex" == str(v).lower() else "current"
+        v = "former" if re.search(r"\b(ex|form\w*|past|previous\w*|formerly)\b", str(v).lower()) else "current"
         key = k.lower().strip()
         if key in lower:
             out[key] = v
@@ -117,6 +117,7 @@ async def understand(text: str, deps, llm) -> Seed:
         hard_ids=seed.hard_ids,
         company_resolved=company_resolved,
         org_is_huge=org_is_huge,
+        weak_anchor=bool(parsed.schools or parsed.locations or parsed.titles),
     )
 
     names: list[Variant] = []

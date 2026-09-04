@@ -1,0 +1,4 @@
+**Extracting Claims**
+
+I'm currently focusing on isolating specific factual assertions from the provided text, aiming to pinpoint Saarth Shah's email address and associated educational affiliations. My recent efforts involve refining the extraction parameters to ensure accurate capture of these details.
+

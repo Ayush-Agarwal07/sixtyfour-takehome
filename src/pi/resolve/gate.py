@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Optional
+from typing import Literal, Optional
 
 from pydantic import BaseModel, Field
 
@@ -14,7 +14,7 @@ _PROMPT = (Path(__file__).resolve().parent.parent / "llm" / "prompts" / "gate.md
 
 
 class GateVerdict(BaseModel):
-    decision: str = "ABSTAIN"                    # CONFIRM | ABSTAIN | CONTINUE
+    decision: Literal["CONFIRM", "ABSTAIN", "CONTINUE"] = "ABSTAIN"
     cid: Optional[str] = None
     reasoning: str = ""
     rejected: list[dict] = Field(default_factory=list)

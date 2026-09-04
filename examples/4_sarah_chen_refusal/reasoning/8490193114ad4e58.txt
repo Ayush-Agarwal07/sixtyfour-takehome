@@ -1,0 +1,12 @@
+**Completing JSON Output**
+
+My current focus is on ensuring the complete and accurate generation of the JSON object, avoiding any abrupt terminations. I'm refining the candidate identification, particularly the "Title" field, to better align with the seed term "product designer" while acknowledging partial matches like "Google UX Design Professional Certificate."
+
+**Refining Candidate Identification**
+
+I'm currently cross-referencing employment details to confirm Figma as a former employer, as snippet [1] only mentions it in conjunction with "Co-President. Math Attack Society," possibly indicating a skill or project rather than direct employment. This is crucial for accurately identifying relevant candidates.
+
+**Verifying Candidate Attributes**
+
+I'm reviewing the latest candidates against our schema, specifically focusing on mismatches and partial matches for employer and title attributes. My goal is to ensure all `AttrCat` entries are correctly populated and validated.
+

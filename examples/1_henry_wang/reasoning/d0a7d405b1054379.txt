@@ -1,0 +1,8 @@
+**Analyzing LinkedIn Profile**
+
+I'm currently processing Henry Wang's LinkedIn profile, specifically noting his role as a Founding Engineer at Sixtyfour AI, based in the San Francisco Bay Area. The data indicates he's been in this position for six months, starting in February 2026.
+
+**Refining Employment Data**
+
+I'm now focusing on extracting and verifying employment details, specifically noting the start date of February 2026 for my Founding Engineer role at Sixtyfour AI. I'm also incorporating my advisor position with the Highlander Builders Initiative, effective December 2025.
+

@@ -3,8 +3,8 @@ end-to-end arithmetic for the run that used to confirm the wrong Sarah Chen."""
 from __future__ import annotations
 
 from pi.constants import GATE_MARGIN, GATE_P_THRESHOLD
-from pi.resolve.identity_score import compute_unique, score
-from pi.types import AttrObservation, Candidate, Confidence, Term
+from pi.resolve.identity_score import compute_dominant, compute_unique, score
+from pi.types import AttrObservation, Candidate, Confidence, SourceText, Term
 
 
 def obs(tier: float, host: str, cls: str = "", cat: str = "exact_match", kind: str = "snippet") -> AttrObservation:
@@ -81,3 +81,19 @@ def test_uniqueness_ignores_page_level_evidence():
     b = Candidate(cid="b", attrs={"employer": [obs(1.2, "linkedin.com")]}, score=Confidence(score=0, logodds=0))
     assert compute_unique([a, b]) == {"b"}
     assert compute_unique([a]) == set()
+
+
+def _cand_with_sources(cid: str, n_sources: int) -> Candidate:
+    sources = [SourceText(url=f"https://example.com/{i}") for i in range(n_sources)]
+    return Candidate(cid=cid, sources=sources, score=Confidence(score=0, logodds=0))
+
+
+def test_compute_dominant_bare_name_one_candidate_most_sources():
+    c = _cand_with_sources("a", 20)
+    assert compute_dominant([c], "BARE_NAME", 25) == {"a"}
+
+
+def test_compute_dominant_two_candidates_never_dominant():
+    a = _cand_with_sources("a", 20)
+    b = _cand_with_sources("b", 5)
+    assert compute_dominant([a, b], "BARE_NAME", 25) == set()

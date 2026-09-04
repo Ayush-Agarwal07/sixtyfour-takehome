@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from pi.deps import Deps
 from pi.resolve.links import apply_page_links, extract_links
-from pi.types import Candidate, Confidence, Link
+from pi.types import Candidate, Confidence
 
 TEAM_HTML = """<html><body><main><h2>Team</h2>
 <p>Henry Wang, founding engineer — <a href="https://www.linkedin.com/in/henry00c">LinkedIn</a>
@@ -47,3 +47,24 @@ def test_self_published_page_links_own_profiles_reciprocal():
     apply_page_links({"url": "https://henrywa.ng/", "html": SITE_HTML}, site, cands, links, linked, Deps(),
                      names=["Henry Wang"], anchor_domains=set())
     assert cands == [site] and site.reciprocal and set(site.merged_from) == {"c2", "c3"}
+
+
+def test_reciprocal_merge_with_stale_owner_from_sequential_fetch():
+    """Two candidates fetched in one cycle: A's page links B (merges B into A), then
+    B's *stale* pre-merge object is passed as owner for B's own page, which links
+    back to A. Must not empty `cands`, and must still record the reciprocal."""
+    a = _c("c1", "https://saarthshah.com/", "site:saarthshah.com")
+    b = _c("c2", "https://github.com/SaarthShah", "github:saarthshah")
+    b_stale = b  # the reference resolver.py's fetch loop still holds after A's merge
+    cands, links, linked = [a, b], [], {}
+    page_a = {"url": "https://saarthshah.com/",
+              "html": '<html><body><a href="https://github.com/SaarthShah">GitHub</a></body></html>'}
+    page_b = {"url": "https://github.com/SaarthShah",
+              "html": '<html><body><a href="https://saarthshah.com/">site</a></body></html>'}
+
+    apply_page_links(page_a, a, cands, links, linked, Deps(), names=["Saarth Shah"], anchor_domains=set())
+    apply_page_links(page_b, b_stale, cands, links, linked, Deps(), names=["Saarth Shah"], anchor_domains=set())
+
+    assert cands == [a]
+    assert a.reciprocal
+    assert "c2" in a.merged_from
